@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 43 43">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f11d72;
+      }
+
+      .cls-2 {
+        filter: url(#Path_6);
+      }
+
+      .cls-3 {
+        filter: url(#Ellipse_3);
+      }
+    </style>
+    <filter id="Ellipse_3" x="6.211" y="0" width="30.578" height="30.578" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_6" x="0" y="15.566" width="43" height="27.434" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1567" data-name="Group 1567" transform="translate(9 9)">
+    <g class="cls-3" transform="matrix(1, 0, 0, 1, -9, -9)">
+      <circle id="Ellipse_3-2" data-name="Ellipse 3" class="cls-1" cx="6.289" cy="6.289" r="6.289" transform="translate(15.21 9)"/>
+    </g>
+    <g class="cls-2" transform="matrix(1, 0, 0, 1, -9, -9)">
+      <path id="Path_6-2" data-name="Path 6" class="cls-1" d="M12.5,10C5.625,10,0,12.83,0,16.289v3.145H25V16.289C25,12.83,19.375,10,12.5,10Z" transform="translate(9 14.57)"/>
+    </g>
+  </g>
+</svg>

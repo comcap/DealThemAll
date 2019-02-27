@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.024 17.024">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="clock-circular-outline" transform="translate(0)">
+    <g id="Group_157" data-name="Group 157">
+      <path id="Path_163" data-name="Path 163" class="cls-1" d="M8.512,0a8.512,8.512,0,1,0,8.512,8.512A8.522,8.522,0,0,0,8.512,0Zm0,15.213a6.7,6.7,0,1,1,6.7-6.7A6.708,6.708,0,0,1,8.512,15.213Z"/>
+      <path id="Path_164" data-name="Path 164" class="cls-1" d="M49.293,22.13H45.468v-4.6a.7.7,0,1,0-1.4,0v5.3a.7.7,0,0,0,.7.7h4.526a.7.7,0,1,0,0-1.4Z" transform="translate(-36.345 -13.881)"/>
+    </g>
+  </g>
+</svg>

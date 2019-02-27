@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 99.108 99.108">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f11d72;
+      }
+
+      .cls-2 {
+        filter: url(#Path_404);
+      }
+
+      .cls-3 {
+        filter: url(#Path_403);
+      }
+    </style>
+    <filter id="Path_403" x="0" y="0" width="99.108" height="99.108" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_404" x="17.688" y="17.688" width="63.733" height="63.733" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1588" data-name="Group 1588" transform="translate(-16196 -1850.65)">
+    <g class="cls-3" transform="matrix(1, 0, 0, 1, 16196, 1850.65)">
+      <path id="Path_403-2" data-name="Path 403" class="cls-1" d="M40.554,0A40.554,40.554,0,1,0,81.108,40.554,40.579,40.579,0,0,0,40.554,0Zm0,77.59A37.036,37.036,0,1,1,77.59,40.554,37.076,37.076,0,0,1,40.554,77.59Z" transform="translate(9 9)"/>
+    </g>
+    <g class="cls-2" transform="matrix(1, 0, 0, 1, 16196, 1850.65)">
+      <path id="Path_404-2" data-name="Path 404" class="cls-1" d="M116.374,86.472H104.061V74.159A1.752,1.752,0,0,0,102.3,72.4H88.231a1.752,1.752,0,0,0-1.759,1.759V86.472H74.159A1.752,1.752,0,0,0,72.4,88.231V102.3a1.752,1.752,0,0,0,1.759,1.759H86.472v12.313a1.752,1.752,0,0,0,1.759,1.759H102.3a1.752,1.752,0,0,0,1.759-1.759V104.062h12.313a1.752,1.752,0,0,0,1.759-1.759V88.231A1.89,1.89,0,0,0,116.374,86.472Zm-1.661,14.072H102.3a1.752,1.752,0,0,0-1.759,1.759v12.313H89.99V102.3a1.752,1.752,0,0,0-1.759-1.759H75.918V89.99H88.231a1.752,1.752,0,0,0,1.759-1.759V75.918h10.652V88.231A1.752,1.752,0,0,0,102.4,89.99h12.313Z" transform="translate(-45.71 -45.71)"/>
+    </g>
+  </g>
+</svg>

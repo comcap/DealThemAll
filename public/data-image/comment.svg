@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 37.006 37.006">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #f11d72;
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        filter: url(#Chat);
+      }
+    </style>
+    <filter id="Chat" x="0" y="0" width="37.006" height="37.006" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g class="cls-2" transform="matrix(1, 0, 0, 1, 0, 0)">
+    <path id="Chat-2" data-name="Chat" class="cls-1" d="M5.627,9a1.063,1.063,0,0,0,1.125,1.125h4.5A1.128,1.128,0,0,0,12.379,9a1.063,1.063,0,0,0-1.125-1.125h-4.5A1.128,1.128,0,0,0,5.627,9ZM0,5.627A5.572,5.572,0,0,1,5.627,0h6.752a5.572,5.572,0,0,1,5.627,5.627V16.881a1.063,1.063,0,0,1-1.125,1.125H5.627A5.572,5.572,0,0,1,0,12.379Z" transform="translate(9.5 9.5)"/>
+  </g>
+</svg>

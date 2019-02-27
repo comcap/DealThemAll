@@ -1,0 +1,450 @@
+@font-face {
+    font-family: "GT Walsheim Pro Trial Bold";
+    src: url("../font/GT-Walsheim-Pro-Trial-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: "GT Walsheim Pro Trial Condensed Bold";
+    src: url("../font/GT-Walsheim-Pro-Trial-Condensed-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: "GT Walsheim Pro Trial Condensed Regular";
+    src: url("../font/GT-Walsheim-Pro-Trial-Condensed-Regular.otf") format("opentype");
+}
+@font-face {
+    font-family: "GT Walsheim Pro Trial Condensed Thin";
+    src: url("../font/GT-Walsheim-Pro-Trial-Condensed-Thin.otf") format("opentype");
+}
+@font-face {
+    font-family: "GT Walsheim Pro Trial Light";
+    src: url("../font/GT-Walsheim-Pro-Trial-Light.otf") format("opentype");
+}
+@font-face {
+    font-family: "GT Walsheim Pro Trial Regular";
+    src: url("../font/GT-Walsheim-Pro-Trial-Regular.otf") format("opentype");
+}
+@font-face {
+    font-family: "GT Walsheim Pro Trial Thin";
+    src: url("../font/GT-Walsheim-Pro-Trial-Thin.otf") format("opentype");
+}
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='18' height='18' viewBox='0 0 24 24'><path fill='grey' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>") #fff;
+    background-position: 98% 50%;
+    background-repeat: no-repeat;
+}
+textarea:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: transparent;
+    box-shadow: transparent;
+    outline: 0 none;
+}
+input[type="text"]:focus{
+    box-shadow: transparent;
+    outline: 0 none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+body.modal-open .supreme-container{
+    -webkit-filter: blur(8px);
+    -moz-filter: blur(8px);
+    -o-filter: blur(8px);
+    -ms-filter: blur(8px);
+    filter: blur(8px);
+}
+.nav-link.active  {
+    border-right: 2px #f11d72 solid;
+    color: #f11d72 !important;
+    text-shadow: 0px 0px 8px rgba(241,29,114,1);
+}
+svg {width: auto; height: 20px;}
+svg path{fill: #CCCCCC !important;}
+svg circle{fill: #CCCCCC !important;}
+
+svg.active path{
+    fill: #f11d72 !important;
+}
+svg.active circle{
+    fill: #f11d72 !important;
+}
+.nav-text{
+    color: #CCCCCC;
+}
+.item-menu-left a{
+    height: 76px;
+    font-size: 10px;
+    text-align: center;
+    white-space: nowrap;
+    border-right: 2px solid transparent;
+    flex-direction: column;
+    -webkit-transition: border 0.1s linear; /* Saf3.2+, Chrome */
+    -moz-transition: border 0.1s linear; /* FF3.7+ */
+    -o-transition: border 0.1s linear; /* Opera 10.5 */
+    transition: border 0.1s linear;
+}
+.item-menu-left a:hover{
+    border-right: 2px #f11d72 solid;
+    color: #f11d72 !important;
+    text-shadow: 0px 0px 8px rgba(241,29,114,1);
+    -webkit-transition: border 0.1s linear; /* Saf3.2+, Chrome */
+    -moz-transition: border 0.1s linear; /* FF3.7+ */
+    -o-transition: border 0.1s linear; /* Opera 10.5 */
+    transition: border 0.1s linear;
+    /*box-shadow: 0px 0px 8px 1px rgba(241,29,114,1);*/
+}
+
+.item-menu-left a:hover svg path{
+    fill: #f11d72 !important;
+    -webkit-transition: path 0.1s linear; /* Saf3.2+, Chrome */
+    -moz-transition: path 0.1s linear; /* FF3.7+ */
+    -o-transition: path 0.1s linear; /* Opera 10.5 */
+    transition: path 0.1s linear;
+}
+.nav-item a:hover svg path{
+    fill: #f11d72 !important;
+    -webkit-transition: path 0.1s linear; /* Saf3.2+, Chrome */
+    -moz-transition: path 0.1s linear; /* FF3.7+ */
+    -o-transition: path 0.1s linear; /* Opera 10.5 */
+    transition: path 0.1s linear;
+}
+.nav-item a:hover svg circle{
+    fill: #f11d72 !important;
+    -webkit-transition: circle 0.1s linear; /* Saf3.2+, Chrome */
+    -moz-transition: circle 0.1s linear; /* FF3.7+ */
+    -o-transition: circle 0.1s linear; /* Opera 10.5 */
+    transition: circle 0.1s linear;
+}
+
+.text-input{
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(0,0,0,0.25);
+    width: 100%;
+    color: #ffffff;
+}
+.text-select{
+    height: 34px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(0,0,0,0.25);
+    width: 100%;
+    color: #ffffff;
+}
+.select-game{
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    padding-right: 30px;
+    background-color: rgba(255,255,255,0.1);
+    width: 100%;
+    color: #ffffff;
+}
+.text-input-label{
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+.red-btn{
+    width: 100%;
+    height: 40px;
+    color: #ffffff;
+    border-radius: 4px;
+    border: none;
+    font-size: 10px;
+    background: rgba(255,129,75,1);
+    background: -moz-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    box-shadow: none;
+    -webkit-transition: box-shadow 0.2s linear; /* Saf3.2+, Chrome */
+    -moz-transition: box-shadow 0.2s linear; /* FF3.7+ */
+    -o-transition: box-shadow 0.2s linear; /* Opera 10.5 */
+    transition: box-shadow 0.2s linear;
+}
+.red-btn:hover{
+    box-shadow: 0px 0px 10px 2px #F11D72;
+    -webkit-transition: box-shadow 0.2s linear; /* Saf3.2+, Chrome */
+    -moz-transition: box-shadow 0.2s linear; /* FF3.7+ */
+    -o-transition: box-shadow 0.2s linear; /* Opera 10.5 */
+    transition: box-shadow 0.2s linear;
+}
+.light-btn{
+    width: 100%;
+    height: 40px;
+    color: #ffffff;
+    border-radius: 4px;
+    border: none;
+    font-size: 10px;
+    background-color: rgba(255,255,255,0.1);
+}
+.label-font-Regular{
+    font-family: "GT Walsheim Pro Trial Regular","Sukhumvit set";
+}
+.label-font-Bold{
+    font-family: "GT Walsheim Pro Trial Bold","Sukhumvit set";
+}
+.label-font-Light{
+    font-family: "GT Walsheim Pro Trial Light","Sukhumvit set";
+}
+.label-font-Thin{
+    font-family: "GT Walsheim Pro Trial Thin","Sukhumvit set";
+}
+.label-font-Condensed-Regular{
+    font-family: "GT Walsheim Pro Trial Condensed Regular","Sukhumvit set";
+}
+.label-font-Condensed-Bold{
+    font-family: "GT Walsheim Pro Trial Condensed Bold","Sukhumvit set";
+}
+.label-font-Condensed-Thin{
+    font-family: "GT Walsheim Pro Trial Condensed Thin","Sukhumvit set";
+}
+.box-role{
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-family: "GT Walsheim Pro Trial Condensed Bold";
+    font-size: 12px;
+}
+.radio-active{
+    border: 1px solid #FBC226 !important;
+    font-family: "GT Walsheim Pro Trial Bold";
+    -webkit-transition: border-color 0.2s linear; /* Saf3.2+, Chrome */
+    -moz-transition: border-color 0.2s linear; /* FF3.7+ */
+    -o-transition: border-color 0.2s linear; /* Opera 10.5 */
+    transition: border-color 0.2s linear;
+}
+.member-only{
+    font-family: "GT Walsheim Pro Trial Bold";
+    font-size: 8px;
+    color: #FBC226;
+    text-shadow: 0px 0px 6px #FBC226;
+}
+.fillter-box{
+    width: 80px;height: 34px;background: rgba(0,0,0,0.25);border-radius: 20px; border-color: rgba(0,0,0,0);
+}
+.border-bottom-profile-menu{
+    border-bottom: 1px solid #dee2e6!important;
+}
+.border-bottom-profile-menu:hover{
+    text-shadow: 0px 0px 6px #F11D72;
+    border-bottom: 1px solid #F11D72!important;
+}
+
+.border-bottom-profile-menu:hover span{
+    color: #F11D72;
+}
+.border-bottom-profile-hover{
+    border-bottom: 1px solid #F11D72!important;
+}
+.player-box:hover{
+    background-color: rgba(255,255,255,0.15)!important;
+    -webkit-transition: background-color 0.2s linear; /* Saf3.2+, Chrome */
+    -moz-transition: background-color 0.2s linear; /* FF3.7+ */
+    -o-transition: background-color 0.2s linear; /* Opera 10.5 */
+    transition: background-color 0.2s linear;
+}
+.btn-role-update{
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    border-color: rgba(0,0,0,0);
+    width: 100%;
+    height: 200px;
+}
+.text-pink{
+    color: #F11D72;
+    text-shadow: 0px 0px 8px rgba(241,29,114,1);
+}
+.text-pink:hover{
+    color: #F11D72;
+    text-shadow: 0px 0px 8px rgba(241,29,114,1);
+}
+.text-green{
+    color: #1DF177;
+    text-shadow: 0px 0px 8px rgb(0, 243, 113);
+}
+.pick-player{
+    color: #ffffff;
+}
+.pick-player:hover{
+    color: #F11D72;
+    text-shadow: 0px 0px 8px rgba(241,29,114,1);
+}
+.selectGameTeam{
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    padding-right: 30px;
+    background-color: rgba(255,255,255,0.1);
+    width: 100%;
+    color: #ffffff;
+}
+.member-btn{
+    width: 100%;
+    height: 60px;
+    color: #ffffff;
+    border-radius: 8px 0 0 0;
+    border: none;
+    font-size: 18px;
+    background: transparent;
+    cursor: pointer;
+    box-shadow: none;
+    -webkit-transition: box-shadow 0.2s linear; /* Saf3.2+, Chrome */
+    -moz-transition: box-shadow 0.2s linear; /* FF3.7+ */
+    -o-transition: box-shadow 0.2s linear; /* Opera 10.5 */
+    transition: box-shadow 0.2s linear;
+}
+.following-btn{
+    width: 100%;
+    height: 60px;
+    color: #ffffff;
+    border-radius: 0 8px 0 0;
+    border: none;
+    font-size: 18px;
+    background: transparent;
+    cursor: pointer;
+    box-shadow: none;
+    -webkit-transition: box-shadow 0.2s linear; /* Saf3.2+, Chrome */
+    -moz-transition: box-shadow 0.2s linear; /* FF3.7+ */
+    -o-transition: box-shadow 0.2s linear; /* Opera 10.5 */
+    transition: box-shadow 0.2s linear;
+}
+.team-active{
+    background: rgba(255,129,75,1);
+    background: -moz-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+}
+.threeDot{
+    overflow:hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+#myProgress1 {
+    width: 100%;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+#myProgress2 {
+    width: 100%;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+#myProgress3 {
+    width: 100%;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+#myProgress4 {
+    width: 100%;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+
+#myBar1 {
+    width: 1%;
+    height: 6px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 8px 1px rgba(241,29,114,1);
+    background: rgba(255,129,75,1);
+    background: -moz-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -o-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -ms-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: linear-gradient(to right, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+}
+#myBar2 {
+    width: 1%;
+    height: 6px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 8px 1px rgba(241,29,114,1);
+    background: rgba(255,129,75,1);
+    background: -moz-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -o-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -ms-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: linear-gradient(to right, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+}
+#myBar3 {
+    width: 1%;
+    height: 6px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 8px 1px rgba(241,29,114,1);
+    background: rgba(255,129,75,1);
+    background: -moz-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -o-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -ms-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: linear-gradient(to right, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+}
+#myBar4 {
+    width: 1%;
+    height: 6px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 8px 1px rgba(241,29,114,1);
+    background: rgba(255,129,75,1);
+    background: -moz-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -o-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -ms-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: linear-gradient(to right, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+}
+.red-bg{
+    background: rgba(255,129,75,1);
+    background: -moz-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -o-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: -ms-linear-gradient(left, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+    background: linear-gradient(to right, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
+}
+.triangle-div{
+    background-image: url("../data-image/bg_red.svg");
+    background-repeat: no-repeat;
+}
+
+.port-box-input{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom:1px solid #ffffff;
+    font-size: 18px;
+
+    -webkit-transition: border-color 0.1s linear,font-size 0.1s linear,color 0.1s linear; /* Saf3.2+, Chrome */
+    -moz-transition: border-color 0.1s linear,font-size 0.1s linear,color 0.1s linear; /* FF3.7+ */
+    -o-transition: border-color 0.1s linear,font-size 0.1s linear,color 0.1s linear; /* Opera 10.5 */
+    transition: border-color 0.1s linear,font-size 0.1s linear,color 0.1s linear;
+}
+
+.port-box-input:focus{
+    border-color: transparent;
+    font-size: 24px;
+}
+
+.port-box-input::placeholder{
+    color: #CCCCCC;
+}
+
+.port-box-input:focus::placeholder {
+    color: #999999;
+}

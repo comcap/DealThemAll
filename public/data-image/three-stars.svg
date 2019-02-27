@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 67.4 57.124">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f11d72;
+      }
+
+      .cls-2 {
+        filter: url(#Path_393);
+      }
+
+      .cls-3 {
+        filter: url(#Path_392);
+      }
+
+      .cls-4 {
+        filter: url(#Path_391);
+      }
+    </style>
+    <filter id="Path_391" x="13.319" y="0" width="40.747" height="39.77" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_392" x="26.648" y="17.354" width="40.752" height="39.77" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_393" x="0" y="17.354" width="40.746" height="39.77" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="three-stars" transform="translate(9 9)">
+    <g id="Group_362" data-name="Group 362" transform="translate(13.319)">
+      <g id="Group_361" data-name="Group 361">
+        <g class="cls-4" transform="matrix(1, 0, 0, 1, -22.32, -9)">
+          <path id="Path_391-2" data-name="Path 391" class="cls-1" d="M159.683,61.065a1.386,1.386,0,0,0-1.108-.933l-6.193-.9-2.771-5.61a1.376,1.376,0,0,0-2.469,0l-2.771,5.61-6.193.9a1.386,1.386,0,0,0-1.108.933,1.363,1.363,0,0,0,.35,1.41L141.9,66.84l-1.06,6.174a1.384,1.384,0,0,0,.544,1.342,1.37,1.37,0,0,0,1.449.107l5.542-2.917,5.542,2.917a1.537,1.537,0,0,0,1.449-.107,1.357,1.357,0,0,0,.544-1.342l-1.06-6.174,4.482-4.365A1.4,1.4,0,0,0,159.683,61.065Zm-7.243,4.317a1.4,1.4,0,0,0-.4,1.215l.71,4.142-3.724-1.954a1.344,1.344,0,0,0-1.274,0l-3.714,1.954.71-4.142a1.356,1.356,0,0,0-.4-1.215l-3-2.936,4.161-.6a1.378,1.378,0,0,0,1.031-.749l1.857-3.762,1.857,3.762a1.349,1.349,0,0,0,1.031.749l4.161.6Z" transform="translate(-114.68 -43.85)"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_364" data-name="Group 364" transform="translate(26.648 17.354)">
+      <g id="Group_363" data-name="Group 363">
+        <g class="cls-3" transform="matrix(1, 0, 0, 1, -35.65, -26.35)">
+          <path id="Path_392-2" data-name="Path 392" class="cls-1" d="M296.783,239.565a1.386,1.386,0,0,0-1.108-.933l-6.193-.9-2.771-5.61a1.376,1.376,0,0,0-2.469,0l-2.771,5.61-6.193.9a1.386,1.386,0,0,0-1.108.933,1.363,1.363,0,0,0,.35,1.41L279,245.34l-1.06,6.174a1.384,1.384,0,0,0,.544,1.342,1.37,1.37,0,0,0,1.449.107l5.542-2.917,5.542,2.917a1.536,1.536,0,0,0,1.449-.107,1.357,1.357,0,0,0,.544-1.342l-1.06-6.174,4.482-4.365A1.363,1.363,0,0,0,296.783,239.565Zm-7.262,4.307a1.4,1.4,0,0,0-.4,1.215l.71,4.142-3.714-1.954a1.344,1.344,0,0,0-1.274,0l-3.714,1.954.71-4.142a1.356,1.356,0,0,0-.4-1.215l-3-2.926,4.161-.6a1.378,1.378,0,0,0,1.031-.749l1.857-3.762,1.857,3.762a1.349,1.349,0,0,0,1.031.749l4.161.6Z" transform="translate(-238.45 -205)"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_366" data-name="Group 366" transform="translate(0 17.354)">
+      <g id="Group_365" data-name="Group 365">
+        <g class="cls-2" transform="matrix(1, 0, 0, 1, -9, -26.35)">
+          <path id="Path_393-2" data-name="Path 393" class="cls-1" d="M22.683,239.565a1.37,1.37,0,0,0-1.108-.933l-6.193-.9-2.771-5.61a1.376,1.376,0,0,0-2.469,0l-2.771,5.61-6.193.9a1.386,1.386,0,0,0-1.108.933,1.363,1.363,0,0,0,.35,1.41L4.9,245.34l-1.06,6.174a1.384,1.384,0,0,0,.544,1.342,1.37,1.37,0,0,0,1.449.107l5.542-2.917,5.542,2.917a1.536,1.536,0,0,0,1.449-.107,1.357,1.357,0,0,0,.544-1.342l-1.06-6.174,4.482-4.365A1.4,1.4,0,0,0,22.683,239.565Zm-7.262,4.307a1.4,1.4,0,0,0-.4,1.215l.71,4.142-3.714-1.954a1.344,1.344,0,0,0-1.274,0L7.03,249.229l.71-4.142a1.356,1.356,0,0,0-.4-1.215l-3.014-2.926,4.161-.6a1.378,1.378,0,0,0,1.031-.749l1.857-3.762,1.857,3.762a1.349,1.349,0,0,0,1.031.749l4.161.6Z" transform="translate(9 -205)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

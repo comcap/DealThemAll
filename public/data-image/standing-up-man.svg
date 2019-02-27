@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 84.68 175.787">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f11d72;
+      }
+
+      .cls-2 {
+        filter: url(#Path_1026);
+      }
+
+      .cls-3 {
+        filter: url(#Ellipse_116);
+      }
+    </style>
+    <filter id="Ellipse_116" x="19.803" y="0" width="44.563" height="44.563" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_1026" x="0" y="32.417" width="84.68" height="143.37" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="standing-up-man-_1_" data-name="standing-up-man- (1)" transform="translate(-6.459 9)">
+    <g id="Group_1143" data-name="Group 1143" transform="translate(15.459 0)">
+      <g class="cls-3" transform="matrix(1, 0, 0, 1, -9, -9)">
+        <circle id="Ellipse_116-2" data-name="Ellipse 116" class="cls-1" cx="13.281" cy="13.281" r="13.281" transform="translate(28.8 9)"/>
+      </g>
+      <g class="cls-2" transform="matrix(1, 0, 0, 1, -9, -9)">
+        <path id="Path_1026-2" data-name="Path 1026" class="cls-1" d="M53.17,11.479a24.179,24.179,0,0,0-10.158.124C20.931,14.19,13.762,39.748,15.786,59.236c.878,8.425,14.16,8.513,13.273,0-.737-7.1-.421-17.819,3.353-25.437V61.573c0,.327.032.634.047.949-.009.15-.044.277-.044.43,0,22.039-.038,44.07-.949,66.091-.4,9.789,14.775,9.751,15.176,0,.713-17.26.893-34.528.934-51.8a17.56,17.56,0,0,0,2.157.006c.044,17.271.218,34.54.925,51.793.4,9.751,15.583,9.789,15.176,0-.911-22.022-.943-44.052-.943-66.091a8.317,8.317,0,0,0-.23-1.9c-.021-9.568-.386-19.146-.274-28.708,4.52,7.653,4.933,19.325,4.149,26.89-.89,8.507,12.394,8.422,13.273,0C83.881,39.339,76.367,13.118,53.17,11.479Z" transform="translate(-6.46 30.42)"/>
+      </g>
+    </g>
+  </g>
+</svg>

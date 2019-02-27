@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46.79 46.79">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2699fb;
+      }
+    </style>
+  </defs>
+  <g id="clock" transform="translate(0 0)">
+    <path id="Path_211" data-name="Path 211" class="cls-1" d="M23.4,0a23.4,23.4,0,1,0,23.4,23.4A23.422,23.422,0,0,0,23.4,0Zm0,45.23A21.835,21.835,0,1,1,45.23,23.4,21.86,21.86,0,0,1,23.4,45.23Z"/>
+    <path id="Path_212" data-name="Path 212" class="cls-1" d="M28.138,23.568V15.659a.78.78,0,1,0-1.56,0v7.909A3.115,3.115,0,0,0,24.349,25.8H18.78a.78.78,0,1,0,0,1.56h5.57a3.113,3.113,0,1,0,3.788-3.788Zm-.78,4.568a1.56,1.56,0,1,1,1.56-1.56A1.561,1.561,0,0,1,27.358,28.136Z" transform="translate(-3.963 -3.276)"/>
+    <path id="Path_213" data-name="Path 213" class="cls-1" d="M29.78,9.218a.78.78,0,0,0,.78-.78v-.78a.78.78,0,0,0-1.56,0v.78A.78.78,0,0,0,29.78,9.218Z" transform="translate(-6.385 -1.515)"/>
+    <path id="Path_214" data-name="Path 214" class="cls-1" d="M29.78,49.879a.78.78,0,0,0-.78.78v.78a.78.78,0,0,0,1.56,0v-.78A.78.78,0,0,0,29.78,49.879Z" transform="translate(-6.385 -10.982)"/>
+    <path id="Path_215" data-name="Path 215" class="cls-1" d="M51.56,28.879h-.78a.78.78,0,1,0,0,1.56h.78a.78.78,0,1,0,0-1.56Z" transform="translate(-11.008 -6.358)"/>
+    <path id="Path_216" data-name="Path 216" class="cls-1" d="M8.56,28.879H7.78a.78.78,0,1,0,0,1.56h.78a.78.78,0,1,0,0-1.56Z" transform="translate(-1.541 -6.358)"/>
+    <path id="Path_217" data-name="Path 217" class="cls-1" d="M44.629,13.551l-.551.551a.78.78,0,1,0,1.1,1.1l.551-.551a.78.78,0,1,0-1.1-1.1Z" transform="translate(-9.654 -2.933)"/>
+    <path id="Path_218" data-name="Path 218" class="cls-1" d="M14.224,43.957l-.551.551a.78.78,0,1,0,1.1,1.1l.551-.551a.78.78,0,1,0-1.1-1.1Z" transform="translate(-2.96 -9.628)"/>
+    <path id="Path_219" data-name="Path 219" class="cls-1" d="M45.18,43.956a.78.78,0,0,0-1.1,1.1l.551.551a.78.78,0,0,0,1.1-1.1Z" transform="translate(-9.654 -9.627)"/>
+    <path id="Path_220" data-name="Path 220" class="cls-1" d="M14.775,13.55a.78.78,0,0,0-1.1,1.1l.551.551a.78.78,0,1,0,1.1-1.1Z" transform="translate(-2.96 -2.933)"/>
+  </g>
+</svg>

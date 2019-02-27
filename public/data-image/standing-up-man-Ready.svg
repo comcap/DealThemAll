@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 36.683 62.211">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1df177;
+      }
+
+      .cls-2 {
+        filter: url(#Path_1026);
+      }
+
+      .cls-3 {
+        filter: url(#Ellipse_116);
+      }
+    </style>
+    <filter id="Ellipse_116" x="5.549" y="0" width="25.443" height="25.443" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#1df177"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_1026" x="0" y="9.083" width="36.683" height="53.128" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#1df177"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1587" data-name="Group 1587" transform="translate(-7954.892 339)">
+    <g class="cls-3" transform="matrix(1, 0, 0, 1, 7954.89, -339)">
+      <circle id="Ellipse_116-2" data-name="Ellipse 116" class="cls-1" cx="3.721" cy="3.721" r="3.721" transform="translate(14.55 9)"/>
+    </g>
+    <g class="cls-2" transform="matrix(1, 0, 0, 1, 7954.89, -339)">
+      <path id="Path_1026-2" data-name="Path 1026" class="cls-1" d="M26.025,11.135a6.775,6.775,0,0,0-2.846.035c-6.187.725-8.2,7.886-7.628,13.346.246,2.361,3.967,2.385,3.719,0a14.173,14.173,0,0,1,.94-7.127V25.17c0,.092.009.178.013.266,0,.042-.012.078-.012.121,0,6.175-.011,12.348-.266,18.518-.113,2.743,4.14,2.732,4.252,0,.2-4.836.25-9.675.262-14.514a4.92,4.92,0,0,0,.6,0c.012,4.839.061,9.678.259,14.512.113,2.732,4.366,2.743,4.252,0-.255-6.17-.264-12.343-.264-18.518a2.33,2.33,0,0,0-.064-.533c-.006-2.681-.108-5.364-.077-8.044,1.267,2.144,1.382,5.415,1.163,7.534-.249,2.384,3.473,2.36,3.719,0C34.631,18.941,32.525,11.594,26.025,11.135Z" transform="translate(-6.46 7.08)"/>
+    </g>
+  </g>
+</svg>
