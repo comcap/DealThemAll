@@ -13,6 +13,7 @@ use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic;
 
 class CreateTeamController extends Controller
 {

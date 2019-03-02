@@ -57,8 +57,8 @@
         </li>
 
         <li class="nav-item item-menu-left">
-            <a class="nav-link nav-text pt-4" href="#">
-                <img class="svg" src="{{asset('/data-image/noti.svg') }}" width="auto" height="20px">
+            <a class="nav-link nav-text pt-4 {{Request::is('notifications') ? 'active' : '' }}" href="/notifications">
+                <img class="svg {{Request::is('notifications') ? 'active' : '' }}" src="{{asset('/data-image/noti.svg') }}" width="auto" height="20px">
                 <p class="pt-1 label-font-Regular" style="font-size: 10px;">NOTIFICATION</p>
             </a>
         </li>

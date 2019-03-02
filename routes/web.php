@@ -32,6 +32,7 @@ Route::resource('/Apiupdate','UpdateProfileController')->middleware('auth');
 Route::post('/deleteProfile','UpdateProfileController@deleteStat')->middleware('auth');
 Route::post('/selectrole','UpdateProfileController@selectrole')->middleware('auth');
 Route::resource('/createteam','CreateTeamController')->middleware('auth');
+Route::resource('/notifications','NotificationController')->middleware('auth');
 
 Route::resource('/team','TeamManagerController')->middleware('auth');
 

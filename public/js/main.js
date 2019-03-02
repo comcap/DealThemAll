@@ -418,9 +418,9 @@ function renderInviteList() {
             "                <img onclick=\"deletePlayer("+item['user_ID']+")\" src="+image_cancel+" width=\"18px\" height=\"18px\" style=\"cursor: pointer;position: absolute;right: 25px;top: -3px;\">\n"+
             "            </div>\n" +
             "        </div>\n" +
-            "        <div class=\"row pt-2\">\n" +
+            "        <div class=\"row mx-0 pt-2\">\n" +
             "            <div class=\"col d-flex justify-content-center\">\n" +
-            "                <h5 class=\"text-white label-font-Condensed-Bold\">"+item['user_name']+"</h5>\n" +
+            "                <h5 class=\"text-white label-font-Condensed-Bold threeDot\">"+item['user_name']+"</h5>\n" +
             "            </div>\n" +
             "        </div>\n"+
             "        <div class=\"row mx-0 mb-2 justify-content-center\">\n"
@@ -629,9 +629,9 @@ function renderMemberList() {
             "                <img onclick=\"deletePlayer("+item['user_ID']+")\" src="+image_cancel+" width=\"18px\" height=\"18px\" style=\"cursor: pointer;position: absolute;right: 25px;top: -3px;\">\n"+
             "            </div>\n" +
             "        </div>\n" +
-            "        <div class=\"row pt-2\">\n" +
+            "        <div class=\"row mx-0 pt-2\">\n" +
             "            <div class=\"col d-flex justify-content-center\">\n" +
-            "                <h5 class=\"text-white label-font-Condensed-Bold\">"+item['user_name']+"</h5>\n" +
+            "                <h5 class=\"text-white label-font-Condensed-Bold threeDot\">"+item['user_name']+"</h5>\n" +
             "            </div>\n" +
             "        </div>\n"+
             "        <div class=\"row mx-0 mb-2 justify-content-center\">\n"

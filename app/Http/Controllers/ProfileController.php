@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Game;
 use App\StatsPlayer;
 use App\Team;
+use App\TeamManager;
 use App\User;
 use App\UserRole;
 use GuzzleHttp\Client;
@@ -48,7 +49,33 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userID = Auth::user()->user_ID;
+        $teamManager = TeamManager::where('user_ID','=',$userID)->get();
+
+        $invilte = $request->invilte;
+        $follow = $request->follow;
+        $userInvite = $request->userInvite;
+
+        if ($invilte="1"){
+            if ($teamManager->count() <= 0){
+                return redirect('createteam');
+            }else{
+                $TeamManager = new TeamManager();
+                $TeamManager->teamID = $teamManager->team_ID;
+                $TeamManager->user_ID = $userInvite;
+                $TeamManager->user_verify = 0;
+
+                $TeamManager->save();
+
+                return redirect('profile/'.$userInvite);
+            }
+        }else{
+            if ($follow="1"){
+
+            }else{
+
+            }
+        }
     }
 
     /**
@@ -74,13 +101,17 @@ class ProfileController extends Controller
         $userRole = UserRole::join('tbl_Game','tbl_User_Role.game_ID','=','tbl_Game.game_ID')
             ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
             ->where('user_ID','=',$id)
+            ->orderby('tbl_User_Role.game_ID','asc')
+            ->orderby('tbl_User_Role.stateRole','desc')
             ->limit(10)
             ->get();
+
 
         $getTeam = Team::where('team_owner','=',$id)
             ->first();
 
         $gameList = Game::get();
+
 
         return view("pages.profile",compact('myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList'));
     }

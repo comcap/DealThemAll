@@ -83,20 +83,18 @@
                                                         </div>
                                                     @endif
                                                 @else
-                                                    <div class="col-4 pl-0" style="height: 30px">
-                                                        <a href="#">
-                                                            <div class="red-btn text-center pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">
-                                                                <p>INVITE</p>
+                                                    <form class="col-12 " style="height: auto" action="/profile" method="post">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-4 pl-0">
+                                                                <button type="submit" name="invilte" value=1 class="btn red-btn pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">INVITE</button>
                                                             </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-4" style="height: 30px">
-                                                        <a href="#">
-                                                            <div class="light-btn text-center pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">
-                                                                <p>Follow</p>
+                                                            <div class="col-4">
+                                                                <button type="submit" name="follow" value=1 class="btn light-btn pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">Follow</button>
                                                             </div>
-                                                        </a>
-                                                    </div>
+                                                            <input type="text" name="userInvite" hidden value={{$id}}>
+                                                        </div>
+                                                    </form>
                                                 @endif
                                             @else
                                                 <div class="col-6 pl-0 pr-4" style="height: 30px">
