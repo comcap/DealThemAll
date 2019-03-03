@@ -448,3 +448,13 @@ svg.active circle{
 .port-box-input:focus::placeholder {
     color: #999999;
 }
+.overlay{
+    background-image: url("../data-image/overlay.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 98px;
+    width: 100%;
+    bottom: 88px;
+    border: none;
+    border-radius: 0px 0px 8px 8px;
+}

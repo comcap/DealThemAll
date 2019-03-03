@@ -29,7 +29,17 @@ class NotificationController extends Controller
 
         $countStats= StatsPlayer::where('user_ID','=',Auth::user()->user_ID)->count();
 
-        return view('pages.notifications',compact('gameList','userRole','countStats'));
+        $notication = Notification::select('tbl_notificaiton.notificationID','tbl_notificaiton.created_at','teamID','team_name','team_logo','user_ID','user_name','user_image','typeDetail')
+            ->join('tbl_notificaiton_detail','tbl_notificaiton_detail.notificaitonID','=','tbl_notificaiton.notificationID')
+            ->join('tbl_notificaiton_type','tbl_notificaiton_type.typeID','=','tbl_notificaiton.notification_type')
+            ->join('tbl_User','tbl_User.user_ID','=','tbl_notificaiton_detail.senderID')
+            ->join('tbl_team','tbl_team.team_ID','=','tbl_notificaiton_detail.teamID')
+            ->get();
+
+        $countNoti = $notication->count();
+
+//        return [$notication,$countNoti];
+        return view('pages.notifications',compact('gameList','userRole','countStats','notication','countNoti'));
     }
 
     /**

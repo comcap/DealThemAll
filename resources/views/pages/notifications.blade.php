@@ -13,39 +13,69 @@
                             </div>
                             <div class="col-12 py-3">
                                 <div class="row">
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">test
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
+                                    {{--@for($i=0;$i<3;$i++)--}}
+                                        {{--<div class="col-12">--}}
+                                        {{--<div class="row">--}}
+                                            {{--<div class="col-8 py-2 px-4 ">--}}
+                                                {{--<div class="row mx-0 align-items-center">--}}
+                                                    {{--<img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">--}}
+                                                    {{--<div>--}}
+                                                        {{--<h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">test--}}
+                                                            {{--<span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>--}}
+                                                        {{--</h3>--}}
+                                                        {{--<span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-4 py-2 px-0 pt-3">--}}
+                                                {{--<div class="row mx-0">--}}
+                                                    {{--<div class="col-6">--}}
+                                                        {{--<button class="btn red-btn">ACCEPT</button>--}}
+                                                    {{--</div>--}}
+                                                    {{--<div class="col-6">--}}
+                                                        {{--<button class="btn light-btn">DECLINE</button>--}}
+                                                    {{--</div>--}}
+
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--@endfor--}}
+
+                                    @foreach($notication as $item)
+                                        <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-1 px-4">
+                                                        <a href="profile/{{$item->user_ID}}"><img src="{{asset('/data-image/userImage/'.$item->user_image)}}" width="60px" height="60px" style="border-radius: 30px"></a>
+                                                    </div>
+                                                    <div class="col-7 py-2 px-4 ">
+                                                        <div class="row mx-0">
+                                                            <div class="col p-0">
+                                                                <div class="row align-items-center">
+                                                                    <a href="profile/{{$item->user_ID}}"><h3 class="text-white label-font-Bold ml-3 mb-0" style="font-size: 16px">{{$item->user_name}}</h3></a>
+                                                                    <span class="label-font-Condensed-Regular mx-1" style="color: #AAAAAA">{{$item->typeDetail}}</span>
+                                                                    <a href="team/{{$item->teamID}}"><span class="label-font-Bold" style="color: #eeeeee;">{{$item->team_name}}</span></a>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">{{$item->created_at}}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 py-2 px-0 pt-3">
+                                                        <div class="row mx-0">
+                                                            <div class="col-6">
+                                                                <button class="btn red-btn">ACCEPT</button>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <button class="btn light-btn">DECLINE</button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -62,94 +92,34 @@
                             </div>
                             <div class="col-12 py-3">
                                 <div class="row">
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
+                                    @for($i=0;$i<6;$i++)
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-8 py-2 px-4 ">
+                                                    <div class="row mx-0 align-items-center">
+                                                        <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
+                                                        <div>
+                                                            <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">test
+                                                                <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
+                                                            </h3>
+                                                            <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4 py-2 px-0 pt-3">
+                                                    <div class="row mx-0">
+                                                        <div class="col-6">
+                                                            <button class="btn red-btn">ACCEPT</button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <button class="btn light-btn">DECLINE</button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 py-2 px-4">
-                                        <div class="row mx-0 align-items-center">
-                                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                            <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                                </h3>
-                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endfor
                                 </div>
                             </div>
                         </div>

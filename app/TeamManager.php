@@ -14,6 +14,7 @@ class TeamManager extends Model
         'teamID',
         'game_ID',
         'user_ID',
-        'user_verify'
+        'user_verify',
+        'expired_invite'
     ];
 }

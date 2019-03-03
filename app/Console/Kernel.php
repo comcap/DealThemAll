@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\TeamManager;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +26,23 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $seconds = 5;
+
+        $schedule->call(function () use ($seconds) {
+            $dt = Carbon::now();
+
+            $x=60/$seconds;
+
+            do{
+                TeamManager::where('user_verify','=',0)
+                    ->where('expired_invite','<=',$dt)
+                    ->delete();
+
+                time_sleep_until($dt->addSeconds($seconds)->timestamp);
+
+            } while($x-- > 0);
+
+        })->everyMinute();
     }
 
     /**

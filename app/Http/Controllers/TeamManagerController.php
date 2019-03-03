@@ -53,7 +53,20 @@ class TeamManagerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $playerID = $request->playerID;
+        $teamID = $request->teamID;
+        $gameID = $request->gameID;
+
+        $TeamManager = new TeamManager();
+        $TeamManager->teamID = $teamID;
+        $TeamManager->game_ID = $gameID;
+        $TeamManager->user_ID = $playerID;
+        $TeamManager->user_verify = 0;
+        $TeamManager->expired_invite = Carbon::now()->addMinutes(5)->toDateTimeString();
+        $TeamManager->save();
+
+//        return $request;
+        return redirect('team');
     }
 
     /**
@@ -72,6 +85,7 @@ class TeamManagerController extends Controller
 
         $listPlayer = TeamManager::join('tbl_User','tbl_User.user_ID','=','tbl_team_manager.user_ID')
                         ->where('tbl_team_manager.teamID','=',$teamManager)
+                        ->where('tbl_team_manager.user_verify','=',1)
                         ->get();
 
         $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_name','tbl_User_Role.stateRole','tbl_Game.game_logo','tbl_Role.role_color')
@@ -169,9 +183,16 @@ class TeamManagerController extends Controller
      * @param  \App\TeamManager  $teamManager
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TeamManager $teamManager)
+    public function destroy(Request $request,$teamManager)
     {
-        //
+        $kickID = $request->inputUser_ID;
+
+            TeamManager::where('teamID','=',$teamManager)
+                ->where('user_ID','=',$kickID)
+                ->delete();
+
+//        return $kickID;
+        return redirect('team');
     }
 
     function logSQL(){

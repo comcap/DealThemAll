@@ -34,7 +34,6 @@ class CreateTeamController extends Controller
 
             return view("pages.createteam",compact('language','gameList'));
         }
-
     }
 
     /**
@@ -100,6 +99,7 @@ class CreateTeamController extends Controller
             $TeamManager->game_ID = $game;
             $TeamManager->user_ID = $value;
             $TeamManager->user_verify = 0;
+            $TeamManager->expired_invite = Carbon::now()->addMinutes(5)->toDateTimeString();
             $TeamManager->save();
         }
 //        return $strLanguage;

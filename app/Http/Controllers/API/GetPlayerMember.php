@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\StatsPlayer;
 use App\TeamManager;
 use App\UserRole;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -44,6 +45,7 @@ class GetPlayerMember extends Controller
             ->where('game_ID','=','1')
             ->get();
 
+        $mytime = Carbon::now()->toDateTimeString();
 
         $listPlayer = StatsPlayer::join('tbl_User','tbl_User.user_ID','=','tbl_stats_player.user_ID')
             ->join('tbl_team_manager','tbl_team_manager.user_ID','=','tbl_stats_player.user_ID')
@@ -52,6 +54,11 @@ class GetPlayerMember extends Controller
             ->where('tbl_stats_player.game_ID','=',$game)
             ->orderby('tbl_stats_player.rank_total','desc')
             ->get();
+
+        $listPlayer->map(function ($item){
+            $item->expired_invite = gmdate('i:s', Carbon::now()->diffInSeconds($item->expired_invite));
+            return $item;
+        });
 
         $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_name','tbl_User_Role.stateRole','tbl_Role.role_name','tbl_Game.game_logo','tbl_Role.role_color')
             ->join('tbl_User','tbl_User.user_ID','=','tbl_User_Role.user_ID')
@@ -73,6 +80,7 @@ class GetPlayerMember extends Controller
 
             return $item;
         });
+
 
         return $result;
     }

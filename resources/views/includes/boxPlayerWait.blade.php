@@ -1,5 +1,5 @@
 <div class="col-2">
-    <div style="height: 324px;background-color: rgba(0,0,0,0.25); border-radius: 8px">
+    <div style="height: 340px;background-color: rgba(0,0,0,0.25); border-radius: 8px">
         <div class="row pt-4">
             <div class="col d-flex justify-content-center">
                 <img src="{{asset('data-image/userImage/96ae2ce32b43179be17a085743fa1a91a761e4ba_full.jpg')}}" height="100px" style="border-radius: 50px">
@@ -68,6 +68,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row mx-0">
+            <div class="overlay position-relative text-center" style="padding-top: 60px">
+                <span class="text-white label-font-Condensed-Bold" style="font-size: 20px">TEST</span>
             </div>
         </div>
     </div>
