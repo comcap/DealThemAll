@@ -14,7 +14,7 @@
                                     <div class="">
                                         <div style="background-color: rgba(0,0,0,0.25); width: 200px;height: 200px;">
                                             <img id="imagePreview" src="{{asset("/data-image/nullTeam.svg")}}" height="200" width="200" style="cursor: pointer" onclick="document.getElementById('file').click();">
-                                            <input onchange="previewFile()" type="file" style="display:none;" id="file" name="file" accept="image/*"/>
+                                            <input onchange="previewFile()" type="file" style="display:none;" id="file" name="file" accept="image/*" required/>
                                         </div>
                                     </div>
                                 </div>

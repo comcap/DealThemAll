@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5a01643-3e52-4180-ab30-d18587135a9f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/includes/boxPlayerWait.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/API/GetPlayerMember.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/API/GetPlayerMember.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CreateTeamController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CreateTeamController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeamManagerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TeamManagerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/TeamManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/TeamManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/boxPlayerMember.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/boxPlayerMember.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/notifications.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/notifications.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/team.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/team.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/createteam.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/createteam.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,19 +31,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TeamManagerController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="537">
-              <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/NotificationController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="337">
-              <caret line="41" column="36" lean-forward="true" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+              <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
               <folding>
                 <element signature="e#40#53#0#PHP" expanded="true" />
               </folding>
@@ -65,10 +43,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TeamManagerController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="61" column="38" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CreateTeamController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="83" column="30" selection-start-line="83" selection-start-column="30" selection-end-line="83" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/API/GetPlayerMember.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="463">
-              <caret line="59" column="25" lean-forward="true" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+            <state relative-caret-position="-336">
+              <caret line="51" column="54" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -77,7 +73,7 @@
         <entry file="file://$PROJECT_DIR$/public/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="384">
-              <caret line="948" column="39" lean-forward="true" selection-start-line="948" selection-start-column="39" selection-end-line="948" selection-end-column="39" />
+              <caret line="948" column="39" selection-start-line="948" selection-start-column="39" selection-end-line="948" selection-end-column="39" />
               <folding>
                 <element signature="n#!!block;n#renderPlayerList#0" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -175,23 +171,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/pages/notifications.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="49" column="81" lean-forward="true" selection-start-line="49" selection-start-column="81" selection-end-line="49" selection-end-column="81" />
+            <state relative-caret-position="218">
+              <caret line="58" column="81" selection-start-line="58" selection-start-column="81" selection-end-line="58" selection-end-column="81" />
               <folding>
+                <element signature="e#3608#3635#0#HTML" expanded="true" />
+                <element signature="e#4140#4163#0#HTML" expanded="true" />
+                <element signature="e#4233#4255#0#HTML" expanded="true" />
+                <element signature="e#4493#4516#0#HTML" expanded="true" />
+                <element signature="e#4722#4760#0#HTML" expanded="true" />
                 <element signature="e#3821#5761#0#HTML" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/pages/team.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="382" column="59" lean-forward="true" selection-start-line="382" selection-start-column="59" selection-end-line="382" selection-end-column="59" />
+            <state relative-caret-position="231">
+              <caret line="363" column="103" selection-start-line="363" selection-start-column="91" selection-end-line="363" selection-end-column="103" />
               <folding>
                 <element signature="e#9490#27512#0#HTML" />
                 <element signature="e#27541#29332#0#HTML" />
@@ -201,6 +202,15 @@
                 <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/includes/boxPlayerNull.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="84" selection-start-column="72" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -217,10 +227,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/pages/createteam.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="170" column="116" lean-forward="true" selection-start-line="170" selection-start-column="116" selection-end-line="170" selection-end-column="116" />
+            <state relative-caret-position="-166">
+              <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
               <folding>
                 <element signature="e#2393#2413#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -246,7 +258,6 @@
       <find>exampleModalLabel</find>
       <find>open-AddBookDialog</find>
       <find>article-id</find>
-      <find>exampleModal</find>
       <find>listPlayerModal</find>
       <find>getPlayerList</find>
       <find>renderPlayerList</find>
@@ -255,6 +266,7 @@
       <find>$game</find>
       <find>game</find>
       <find>tbl_notificaiton.notificaitonID</find>
+      <find>exampleModal</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -282,8 +294,12 @@
         <option value="$PROJECT_DIR$/app/Notification.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/NotificationController.php" />
         <option value="$PROJECT_DIR$/resources/views/pages/notifications.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/pages/createteam.blade.php" />
       </list>
     </option>
+  </component>
+  <component name="PhpServers">
+    <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -409,21 +425,6 @@
             <path>
               <item name="gitDealTheamAll" type="b2602c69:ProjectViewProjectNode" />
               <item name="gitDealTheamAll" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gitDealTheamAll" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gitDealTheamAll" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="API" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gitDealTheamAll" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gitDealTheamAll" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -524,12 +525,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1551269229005</updated>
-      <workItem from="1551269230510" duration="34334000" />
+      <workItem from="1551269230510" duration="35909000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34334000" />
+    <option name="totallyTimeSpent" value="35909000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -781,46 +782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/createteam.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="170" column="116" lean-forward="true" selection-start-line="170" selection-start-column="116" selection-end-line="170" selection-end-column="116" />
-          <folding>
-            <element signature="e#2393#2413#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CreateTeamController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/API/GetPlayerListRole.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="75" column="55" selection-start-line="75" selection-start-column="55" selection-end-line="75" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pages/team.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="382" column="59" lean-forward="true" selection-start-line="382" selection-start-column="59" selection-end-line="382" selection-end-column="59" />
-          <folding>
-            <element signature="e#9490#27512#0#HTML" />
-            <element signature="e#27541#29332#0#HTML" />
-            <element signature="e#28294#28317#0#HTML" expanded="true" />
-            <element signature="e#28535#28601#0#HTML" expanded="true" />
-            <element signature="e#28557#28577#0#HTML" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -831,10 +792,27 @@
     <entry file="file://$PROJECT_DIR$/app/RoleType.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="39" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/API/GetPlayerListRole.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1080">
+          <caret line="75" column="55" selection-start-line="75" selection-start-column="55" selection-end-line="75" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/register.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
-          <caret line="948" column="39" lean-forward="true" selection-start-line="948" selection-start-column="39" selection-end-line="948" selection-end-column="39" />
+          <caret line="948" column="39" selection-start-line="948" selection-start-column="39" selection-end-line="948" selection-end-column="39" />
           <folding>
             <element signature="n#!!block;n#renderPlayerList#0" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -931,43 +909,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Notification.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/createteam.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="39" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        <state relative-caret-position="-166">
+          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+          <folding>
+            <element signature="e#2393#2413#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/NotificationController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
-          <caret line="41" column="36" lean-forward="true" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+          <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
           <folding>
             <element signature="e#40#53#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TeamManagerController.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/API/GetPlayerMember.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+        <state relative-caret-position="-336">
+          <caret line="51" column="54" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="54" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/API/GetPlayerMember.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CreateTeamController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="59" column="25" lean-forward="true" selection-start-line="59" selection-start-column="25" selection-end-line="59" selection-end-column="25" />
+        <state relative-caret-position="453">
+          <caret line="83" column="30" selection-start-line="83" selection-start-column="30" selection-end-line="83" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TeamManagerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="61" column="38" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pages/notifications.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="49" column="81" lean-forward="true" selection-start-line="49" selection-start-column="81" selection-end-line="49" selection-end-column="81" />
+        <state relative-caret-position="218">
+          <caret line="58" column="81" selection-start-line="58" selection-start-column="81" selection-end-line="58" selection-end-column="81" />
           <folding>
+            <element signature="e#3608#3635#0#HTML" expanded="true" />
+            <element signature="e#4140#4163#0#HTML" expanded="true" />
+            <element signature="e#4233#4255#0#HTML" expanded="true" />
+            <element signature="e#4493#4516#0#HTML" expanded="true" />
+            <element signature="e#4722#4760#0#HTML" expanded="true" />
             <element signature="e#3821#5761#0#HTML" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/includes/boxPlayerNull.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="84" selection-start-column="72" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pages/team.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="363" column="103" selection-start-line="363" selection-start-column="91" selection-end-line="363" selection-end-column="103" />
+          <folding>
+            <element signature="e#9490#27512#0#HTML" />
+            <element signature="e#27541#29332#0#HTML" />
+            <element signature="e#28294#28317#0#HTML" expanded="true" />
+            <element signature="e#28535#28601#0#HTML" expanded="true" />
+            <element signature="e#28557#28577#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
