@@ -429,7 +429,7 @@
         function updateMember() {
             var xhttp = new XMLHttpRequest();
             var idGame = document.getElementById('gameList').value
-            var url = "http://"+window.location.hostname+":"+window.location.port+'/getPlayerMember/'+idTeam+'/game/'+idGame
+            var url = "https://"+window.location.hostname+":"+window.location.port+'/getPlayerMember/'+idTeam+'/game/'+idGame
 
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
