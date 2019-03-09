@@ -34,15 +34,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-4 pl-0" style="height: 30px">
-                                        <a href="#" data-toggle="modal" data-target="#editTeam">
-                                            <div class="light-btn text-center pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">
-                                                <p>Edit team</p>
-                                            </div>
-                                        </a>
+                                @if($TeamOwner)
+                                    <div class="row">
+                                        <div class="col-4 pl-0" style="height: 30px">
+                                            <a href="#" data-toggle="modal" data-target="#editTeam">
+                                                <div class="light-btn text-center pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">
+                                                    <p>Edit team</p>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

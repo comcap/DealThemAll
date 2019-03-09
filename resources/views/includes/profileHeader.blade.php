@@ -48,6 +48,10 @@
                                             <div class="row mt-2">
                                                 <label class="text-white">Team: <span style="color: #CCCCCC;">{{$getTeam->team_name}}</span></label>
                                             </div>
+                                        @elseif(isset($myTeam))
+                                            <div class="row mt-2">
+                                                <label class="text-white">Team: <span style="color: #CCCCCC;">{{$myTeam->team_name}}</span></label>
+                                            </div>
                                         @else
                                             <div class="row" style="margin-top: 8px">
                                                 <label class="text-white">Team: <span>None</span></label>
@@ -70,6 +74,14 @@
                                                             <a href="/team">
                                                                 <div class="light-btn text-center pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">
                                                                     <p>Update Team</p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @elseif(isset($myTeam))
+                                                        <div class="col-4" style="height: 30px">
+                                                            <a href="/team">
+                                                                <div class="light-btn text-center pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">
+                                                                    <p>My Team</p>
                                                                 </div>
                                                             </a>
                                                         </div>
@@ -119,10 +131,12 @@
                                             <div class="row mt-2">
                                                 <img src="{{asset("/data-image/teamLogos/".$getTeam->team_logo)}}" height="70px" width="70px">
                                             </div>
-                                        @else
+                                        @elseif(isset($myTeam))
                                             <div class="row mt-2">
-                                                <img src="{{asset("/data-image/nullTeam.svg")}}" height="70px" width="70px">
+                                                <img src="{{asset("/data-image/teamLogos/".$myTeam->team_logo)}}" height="70px" width="70px">
                                             </div>
+                                        @else
+                                            <div class="row mt-2"></div>
                                         @endif
                                     </div>
                                 </div>

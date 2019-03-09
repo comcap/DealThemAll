@@ -152,6 +152,13 @@ function selectGameTeam(id) {
     // var url = window.location.hostname+"getGameList"
     document.getElementById('gameListPlayerModal').value = idGame
 
+    document.getElementById('boxManagerTeam').innerHTML = "<div id=\"LoadPlayer\" class=\"col\">\n" +
+        "        <div class=\"row py-4 justify-content-center\">\n" +
+        "        <div class='loader'></div>\n" +
+        "        </div>\n" +
+        "        </div>";
+
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -611,7 +618,7 @@ function previewFile(){
     }
 }
 
-function renderMemberList() {
+function renderMyMember() {
     var i = 0;
     var render = "";
     document.getElementById('boxManagerTeam').innerHTML = "";
@@ -830,6 +837,248 @@ function renderMemberList() {
             "    </div>\n" +
             "</div>"
     }
+
+    console.log(arrInvite,'arrInvite');
+    document.getElementById('boxManagerTeam').innerHTML = render;
+}
+function renderMemberList() {
+    var i = 0;
+    var render = "";
+    document.getElementById('boxManagerTeam').innerHTML = "";
+    document.getElementById('countInvite').innerText = arrInvite.length+"/6"
+
+    var image_rank = "http://"+window.location.hostname+":"+window.location.port+"/data-image/stats_icon/three-stars.svg"
+    var image_won = "http://"+window.location.hostname+":"+window.location.port+"/data-image/stats_icon/trophy.svg"
+    var image_kill = "http://"+window.location.hostname+":"+window.location.port+"/data-image/stats_icon/skull.svg"
+    var image_plus = "http://"+window.location.hostname+":"+window.location.port+"/data-image/plus.svg"
+    var image_cancel = "http://"+window.location.hostname+":"+window.location.port+"/data-image/cancel.svg"
+    var rootPath = "http://"+window.location.hostname+":"+window.location.port
+
+
+    console.log(arrInvite)
+    arrInvite.forEach(function (item) {
+        var image_user = "http://"+window.location.hostname+":"+window.location.port+"/data-image/userImage/"+item['user_image']
+        var userProfile = "/profile/"+item['user_ID']
+        if (item['user_verify'] == 1){
+            render += "<div class=\"col-2\">\n" +
+                "    <div style=\"height: 324px;background-color: rgba(0,0,0,0.25); border-radius: 8px\">\n" +
+                "        <div class=\"row pt-4\">\n" +
+                "            <div class=\"col d-flex justify-content-center\">\n" +
+                "        <a href='/profile/"+item['user_ID']+"'>\n" +
+                "                <img src="+image_user+" height=\"100px\" style=\"border-radius: 50px\">\n" +
+                "            </div>\n" +
+                "        </a>\n" +
+                "        </div>\n" +
+                "        <div class=\"row mx-0 pt-2\">\n" +
+                "            <div class=\"col d-flex justify-content-center\">\n" +
+                "               <a href='/profile/"+item['user_ID']+"'>\n" +
+                "                   <h5 class=\"text-white label-font-Condensed-Bold threeDot\">"+item['user_name']+"</h5>\n" +
+                "               </a>\n" +
+                "            </div>\n" +
+                "        </div>\n"+
+                "        <div class=\"row mx-0 mb-2 justify-content-center\">\n"
+
+            if (item['role'].length > 0){
+                item['role'].forEach(function (role,index,array) {
+                    if (index !== array.length - 1){
+                        render +=
+                            "            <div class=\"box-role d-flex align-items-center mr-2\" style=\"background-color: "+role['role_color']+"\">\n" +
+                            "                <img src="+rootPath+role['game_logo']+" height=\"14px\" width=\"14px\">\n" +
+                            "                <label class=\"text-white ml-1 m-0\">"+role['role_name']+"</label>\n" +
+                            "            </div>\n"
+                    } else{
+                        render +=
+                            "            <div class=\"box-role d-flex align-items-center\" style=\"background-color: "+role['role_color']+"\">\n" +
+                            "                <img src="+rootPath+role['game_logo']+" height=\"14px\" width=\"14px\">\n" +
+                            "                <label class=\"text-white ml-1 m-0\">"+role['role_name']+"</label>\n" +
+                            "            </div>\n"
+                    }
+                })
+            } else {
+                render +=
+                    "            <div style=\"height: 24px\"></div>\n"
+            }
+
+            render += "</div>"+
+                "        <div class=\"row pt-0\">\n" +
+                "           <div class=\"col\">\n" +
+                "               <div class=\"row mx-0 px-4\">\n" +
+                "                    <div class=\"col-6 p-0 pt-1 d-flex justify-content-center\">\n" +
+                "                        <img src="+image_rank+" height=\"30px\">\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-6 p-0\">\n" +
+                "                        <div class=\"label-font-Condensed-Bold pl-2\" style=\"color: #9EA1A5; font-size: 10px\">\n" +
+                "                            <h7>RANKING</h7>\n" +
+                "                        </div>\n" +
+                "                        <div class=\"text-white label-font-Condensed-Regular pl-2\" style=\"font-size: 16px\">\n" +
+                "                            <p class=\"mb-1\">"+item['rank_total']+"</p>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "               </div>\n"+
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"row pt-0\">\n" +
+                "           <div class=\"col\">\n" +
+                "                <div class=\"row mx-0 px-4\">\n" +
+                "                    <div class=\"col-6 p-0 pt-1 d-flex justify-content-center\">\n" +
+                "                        <img src="+image_won+" height=\"30px\">\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-6 p-0\">\n" +
+                "                        <div class=\"label-font-Condensed-Bold pl-2\" style=\"color: #9EA1A5; font-size: 10px\">\n" +
+                "                            <h7>GAME WON</h7>\n" +
+                "                        </div>\n" +
+                "                        <div class=\"text-white label-font-Condensed-Regular pl-2\" style=\"font-size: 16px\">\n" +
+                "                            <p class=\"mb-1\">"+item['won_total']+"</p>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"row pt-0\">\n" +
+                "           <div class=\"col\">\n" +
+                "                <div class=\"row mx-0 px-4\">\n" +
+                "                    <div class=\"col-6 p-0 pt-1 d-flex justify-content-center\">\n" +
+                "                        <img src="+image_kill+" height=\"30px\">\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-6 p-0\">\n" +
+                "                        <div class=\"label-font-Condensed-Bold pl-2\" style=\"color: #9EA1A5; font-size: 10px\">\n" +
+                "                            <h7>KILL</h7>\n" +
+                "                        </div>\n" +
+                "                        <div class=\"text-white label-font-Condensed-Regular pl-2\" style=\"font-size: 16px\">\n" +
+                "                            <p class=\"mb-1\">"+item['kill_total']+"</p>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>\n"+
+                "        </div>\n" +
+                "    </div>\n" +
+                "</div>"
+        }else{
+            render += "<div class=\"col-2\">\n" +
+                "    <div style=\"height: 324px;background-color: rgba(0,0,0,0.25); border-radius: 8px\">\n" +
+                "        <div class=\"row pt-4\">\n" +
+                "            <div class=\"col d-flex justify-content-center\">\n" +
+                "                <img src="+image_user+" height=\"100px\" style=\"border-radius: 50px\">\n" +
+                "                <img id=\"kickMember\" data-article-id="+item['user_ID']+" data-player-name="+item['user_name']+" data-player-img="+image_user+" data-toggle=\"modal\" data-target=\"#kickPlayer\"  src="+image_cancel+" width=\"18px\" height=\"18px\" style=\"cursor: pointer;position: absolute;right: 25px;top: -3px;\">\n"+
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"row mx-0 pt-2\">\n" +
+                "            <div class=\"col d-flex justify-content-center\">\n" +
+                "                <h5 class=\"text-white label-font-Condensed-Bold threeDot\">"+item['user_name']+"</h5>\n" +
+                "            </div>\n" +
+                "        </div>\n"+
+                "        <div class=\"row mx-0 mb-2 justify-content-center\">\n"
+
+            if (item['role'].length > 0){
+                item['role'].forEach(function (role,index,array) {
+                    if (index !== array.length - 1){
+                        render +=
+                            "            <div class=\"box-role d-flex align-items-center mr-2\" style=\"background-color: "+role['role_color']+"\">\n" +
+                            "                <img src="+rootPath+role['game_logo']+" height=\"14px\" width=\"14px\">\n" +
+                            "                <label class=\"text-white ml-1 m-0\">"+role['role_name']+"</label>\n" +
+                            "            </div>\n"
+                    } else{
+                        render +=
+                            "            <div class=\"box-role d-flex align-items-center\" style=\"background-color: "+role['role_color']+"\">\n" +
+                            "                <img src="+rootPath+role['game_logo']+" height=\"14px\" width=\"14px\">\n" +
+                            "                <label class=\"text-white ml-1 m-0\">"+role['role_name']+"</label>\n" +
+                            "            </div>\n"
+                    }
+                })
+            } else {
+                render +=
+                    "            <div style=\"height: 24px\"></div>\n"
+            }
+
+            render += "</div>"+
+                "        <div class=\"row pt-0\">\n" +
+                "           <div class=\"col\">\n" +
+                "               <div class=\"row mx-0 px-4\">\n" +
+                "                    <div class=\"col-6 p-0 pt-1 d-flex justify-content-center\">\n" +
+                "                        <img src="+image_rank+" height=\"30px\">\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-6 p-0\">\n" +
+                "                        <div class=\"label-font-Condensed-Bold pl-2\" style=\"color: #9EA1A5; font-size: 10px\">\n" +
+                "                            <h7>RANKING</h7>\n" +
+                "                        </div>\n" +
+                "                        <div class=\"text-white label-font-Condensed-Regular pl-2\" style=\"font-size: 16px\">\n" +
+                "                            <p class=\"mb-1\">"+item['rank_total']+"</p>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "               </div>\n"+
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"row pt-0\">\n" +
+                "           <div class=\"col\">\n" +
+                "                <div class=\"row mx-0 px-4\">\n" +
+                "                    <div class=\"col-6 p-0 pt-1 d-flex justify-content-center\">\n" +
+                "                        <img src="+image_won+" height=\"30px\">\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-6 p-0\">\n" +
+                "                        <div class=\"label-font-Condensed-Bold pl-2\" style=\"color: #9EA1A5; font-size: 10px\">\n" +
+                "                            <h7>GAME WON</h7>\n" +
+                "                        </div>\n" +
+                "                        <div class=\"text-white label-font-Condensed-Regular pl-2\" style=\"font-size: 16px\">\n" +
+                "                            <p class=\"mb-1\">"+item['won_total']+"</p>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "        <div class=\"row pt-0\">\n" +
+                "           <div class=\"col\">\n" +
+                "                <div class=\"row mx-0 px-4\">\n" +
+                "                    <div class=\"col-6 p-0 pt-1 d-flex justify-content-center\">\n" +
+                "                        <img src="+image_kill+" height=\"30px\">\n" +
+                "                    </div>\n" +
+                "                    <div class=\"col-6 p-0\">\n" +
+                "                        <div class=\"label-font-Condensed-Bold pl-2\" style=\"color: #9EA1A5; font-size: 10px\">\n" +
+                "                            <h7>KILL</h7>\n" +
+                "                        </div>\n" +
+                "                        <div class=\"text-white label-font-Condensed-Regular pl-2\" style=\"font-size: 16px\">\n" +
+                "                            <p class=\"mb-1\">"+item['kill_total']+"</p>\n" +
+                "                        </div>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>\n"+
+                "        </div>\n" +
+                "        <div class=\"row mx-0\">\n" +
+                "            <div class=\"overlay position-relative text-center\" style=\"padding-top: 60px\">\n" +
+                "                <span class=\"text-white label-font-Condensed-Bold \" style=\"font-size: 20px\">"+item['expired_invite']+"</span>\n" +
+                "            </div>\n" +
+                "        </div>\n" +
+                "    </div>\n" +
+                "</div>"
+        }
+        i++;
+    })
+
+    for (i;i<6; i++){
+        render += "<div class=\"col-2\">\n" +
+            "    <div class=\"align-self-center\" style=\"height: 324px;padding-top: 50%;background-color: rgba(255,255,255,0.1); border-radius: 8px\">\n" +
+            "        <div class=\"row\">\n" +
+            "            <div class=\"col-12 d-flex justify-content-center\">\n" +
+            "                <img src=\"../data-image/noneMember.svg\" height=\"100px\" width=\"100px\" style=\"padding: 20px;background-color: rgba(255,255,255,0.1);border-radius: 50px\">\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <div class=\"row\">\n" +
+            "            <div class=\"col-12 text-center\">\n" +
+            "                <span class=\"text-white\">Wait other player…</span>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "    </div>\n" +
+            "</div>";
+    }
+
+    // "<div class=\"open-AddBookDialog col-2\" data-toggle=\"modal\" data-target=\"#exampleModal\" data-article-id={{$i}}>\n" +
+    // "    <div class=\"d-flex align-items-center justify-content-center\" style=\"height: 324px;background-color: rgba(255,255,255,0.1); border-radius: 8px\">\n" +
+    // "        <div class=\"row\">\n" +
+    // "            <div class=\"col-12 \">\n" +
+    // "                <img src="+image_plus+" height=\"100px\" style=\"padding: 20px;background-color: rgba(255,255,255,0.1);border-radius: 50px\">\n" +
+    // "            </div>\n" +
+    // "        </div>\n" +
+    // "    </div>\n" +
+    // "</div>"
 
     console.log(arrInvite,'arrInvite');
     document.getElementById('boxManagerTeam').innerHTML = render;

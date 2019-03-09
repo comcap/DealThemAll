@@ -24,7 +24,7 @@ class CreateTeamController extends Controller
      */
     public function index()
     {
-        $getTeam = Team::where('team_owner','=',Auth::user()->user_ID)->first();
+        $getTeam = TeamManager::where('user_ID','=',Auth::user()->user_ID)->first();
 
         if ($getTeam){
             return redirect('team');

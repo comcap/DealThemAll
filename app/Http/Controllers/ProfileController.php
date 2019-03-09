@@ -106,6 +106,7 @@ class ProfileController extends Controller
             ->limit(10)
             ->get();
 
+        $myTeam = TeamManager::join('tbl_team','tbl_team.team_ID','=','tbl_team_manager.teamID')->where('user_ID','=',$id)->first();
 
         $getTeam = Team::where('team_owner','=',$id)
             ->first();
@@ -113,7 +114,7 @@ class ProfileController extends Controller
         $gameList = Game::get();
 
 
-        return view("pages.profile",compact('myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList'));
+        return view("pages.profile",compact('myTeam','myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList'));
     }
 
     /**

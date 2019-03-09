@@ -27,9 +27,9 @@ class TeamManagerController extends Controller
     {
         $userID = Auth::user()->user_ID;
 
-        $TeamOwner = Team::where('team_owner','=',$userID)->first();
+        $TeamOwner = TeamManager::where('user_ID','=',$userID)->first();
         if (isset($TeamOwner)){
-            return redirect('team/'.$TeamOwner->team_ID)->with('gameList');
+            return redirect('team/'.$TeamOwner->teamID)->with('gameList');
         }else{
             return redirect('createteam');
         }
@@ -77,6 +77,9 @@ class TeamManagerController extends Controller
      */
     public function show($teamManager)
     {
+        $userID = Auth::user()->user_ID;
+        $TeamOwner = Team::where('team_owner','=',$userID)->first();
+
         $gameList = Game::get();
 
         $getTeam = Team::join('tbl_User','tbl_User.user_ID','=','tbl_team.team_owner')
@@ -109,7 +112,7 @@ class TeamManagerController extends Controller
         });
         $language = DB::table('tbl_language')->get();
 
-        return view('pages.team',compact('language','teamManager','gameList','result','getTeam'));
+        return view('pages.team',compact('TeamOwner','language','teamManager','gameList','result','getTeam'));
     }
 
     /**

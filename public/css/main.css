@@ -56,7 +56,19 @@ input[type="text"]:focus{
     box-shadow: transparent;
     outline: 0 none;
 }
-
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: 1px #f11d72 solid;
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+}
 a:hover{
     text-decoration: none;
 }
@@ -421,6 +433,8 @@ svg.active circle{
 .triangle-div{
     background-image: url("../data-image/bg_red.svg");
     background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 99%;
 }
 
 .port-box-input{
@@ -457,4 +471,25 @@ svg.active circle{
     bottom: 88px;
     border: none;
     border-radius: 0px 0px 8px 8px;
+}
+
+.loader {
+    border: 7px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 7px solid #F11D72;
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 1s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

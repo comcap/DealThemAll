@@ -6,6 +6,7 @@ use App\StatsPlayer;
 use App\UserRole;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class GetPlayer extends Controller
 {
@@ -39,7 +40,9 @@ class GetPlayer extends Controller
     public function show($id)
     {
         $listPlayer = StatsPlayer::join('tbl_User','tbl_User.user_ID','=','tbl_stats_player.user_ID')
-            ->where('game_ID','=',$id)
+            ->leftjoin('tbl_team_manager','tbl_team_manager.user_ID','=','tbl_stats_player.user_ID')
+            ->where('tbl_stats_player.game_ID','=',$id)
+            ->whereNull('tbl_team_manager.managerID')
             ->orderby('tbl_stats_player.rank_total','desc')
             ->get();
 

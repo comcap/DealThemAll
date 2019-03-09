@@ -11,7 +11,7 @@
                                 <img id="logoGame" src="{{asset('data-image/game_logo/overwatch/logo.svg')}}" width="40px" height="40px">
                             </div>
                             <div class="col-5 p-0">
-                                <select name="game" id="gameSelect" style="font-size: 24px" class="pl-3 select-game label-font-Bold" onchange="profileSelectGame({{\Illuminate\Support\Facades\Auth::user()->user_ID}})">
+                                <select name="game" id="gameSelect" style="font-size: 24px" class="pl-3 select-game label-font-Bold" onchange="profileSelectGame({{$id}})">
                                     @foreach($gameList as $item)
                                         @if($id == $item->game_ID)
                                             <option value="{{$item->game_ID}}" selected>{{$item->game_name}}</option>
@@ -418,16 +418,20 @@
     </div>
 
     <script>
+        $(document).ready(function () {
+            profileSelectGame({{$id}})
+        })
         function profileSelectGame(id) {
 
             var idGame = document.getElementById('gameSelect').value
             var url = '/getPlayerWithID/'+id+'/game/'+idGame;
             var urlGetGame = '/getGameList/'+idGame;
 
+            console.log(url)
+
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-
                     if (this.responseText != ""){
                         var obj = JSON.parse(this.responseText);
 

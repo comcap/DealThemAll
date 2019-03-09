@@ -38,12 +38,19 @@
                 </div>
             </div>
         </div>
+
         <div class="row mt-4 pb-3" style="height: auto;background-color: rgba(255,255,255,0.1); border-radius: 8px">
             <div class="col-12">
                     <div class="row mt-3" id="boxManagerTeam">
+                        <div id="LoadPlayer" class="col">
+                            <div class="row py-4 justify-content-center">
+                                <div class='loader'></div>
+                            </div>
+                        </div>
                         @for($i=0;$i<6;$i++)
                             {{--@include('includes.boxPlayerMember')--}}
-                            @include('includes.boxPlayerNull')
+                            {{--@include('includes.boxPlayerNull')--}}
+{{--                            @include('includes.boxPlayerNoneMember')--}}
                         @endfor
                     </div>
             </div>
@@ -386,7 +393,8 @@
                         </div>
                         <form action="/team" method="post">
                             @csrf
-                        <div id="listPlayerModal" class="row"></div>
+                            <div id="listPlayerModal" class="row"></div>
+
                             <input type="text" name="teamID" value="{{$teamManager}}" hidden>
                             <input type="text" id="gameListPlayerModal" name="gameID" value="1" hidden>
                         </form>
@@ -398,10 +406,11 @@
 
     <script>
         var idTeam = {!! $teamManager !!}
+        var teamOwner = {!! json_encode($TeamOwner) !!}
+
         $(document).ready(function () {
             setInterval(updateMember, 1000);   // 1000 = 1 second
             // updateMember();
-
             fetchPlayer();
             fetchType();
         })
@@ -429,13 +438,18 @@
         function updateMember() {
             var xhttp = new XMLHttpRequest();
             var idGame = document.getElementById('gameList').value
-            var url = "https://"+window.location.hostname+":"+window.location.port+'/getPlayerMember/'+idTeam+'/game/'+idGame
+            var url = '/getPlayerMember/'+idTeam+'/game/'+idGame
 
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var obj = JSON.parse(this.responseText);
                     arrInvite = obj;
-                    renderMemberList()
+
+                    if (teamOwner) {
+                        renderMyMember()
+                    }else{
+                        renderMemberList()
+                    }
                 }
             };
 
@@ -443,7 +457,7 @@
             xhttp.send();
         }
         function fetchPlayer() {
-            var url2 = '/getPlayerList/1'
+            var url2 = '/getPlayerList/1';
             var xhttp2 = new XMLHttpRequest();
             xhttp2.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {

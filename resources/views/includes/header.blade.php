@@ -37,7 +37,7 @@
         </li>
         <li class="nav-item item-menu-left">
             @if(isset(\Illuminate\Support\Facades\Auth::User()->user_ID))
-                @if(count(\Illuminate\Support\Facades\DB::table('tbl_team')->where('tbl_team.team_owner','=',\Illuminate\Support\Facades\Auth::User()->user_ID)->get())>0)
+                @if(count(\Illuminate\Support\Facades\DB::table('tbl_team_manager')->where('tbl_team_manager.user_ID','=',\Illuminate\Support\Facades\Auth::User()->user_ID)->get())>0)
                     <a class="nav-link nav-text pt-4 {{Request::is('team/*') ? 'active' : '' }}" href="/team">
                         <img class="svg {{Request::is('team/*') ? 'active' : '' }}" src="{{asset('/data-image/team-manager.svg') }}" width="auto" height="20px">
                         <p class="pt-1 label-font-Regular" style="font-size: 10px;">TEAM MANAGER</p>
