@@ -1,7 +1,30 @@
 @extends('layouts.sidebar')
 @section('content')
+    <style>
+        .dropzone{
+            padding: 10px 10px;
+            border: 2px dashed #888888;
+        }
+        .dropzone .dz-preview .dz-image img {
+            width: 100%;
+        }
+        .dropzone .dz-preview{
+            margin: 10px;
+        }
+        .dropzone .dz-details .dz-size{
+            display: none;
+        }
+        .dropzone .dz-preview .dz-image {
+            border-radius: 0;
+        }
+        .dropzone .dz-preview.dz-image-preview{
+            background: none;
+        }
+        .dropzone .dz-preview.dz-error:hover .dz-error-message {
+            display: none;
+        }
+    </style>
     <div id="box-item" class="container-fluid supreme-container">
-
         <div class="row pt-2">
             <div class="col-9 p-2">
                 <div class="row mx-0" style="height: 130px;">
