@@ -30,7 +30,7 @@
                         <div class="col-1 px-2">
                             <div class="row h-100 justify-content-end">
                                 <div class="text-center"
-                                     style="width: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px;border-color: white">
+                                     style="width: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px;border-color: white;cursor: pointer">
                                     <i class="fas fa-paper-plane text-white"
                                        style="font-size: 16px;position: relative;left: -1px;top: 1px;"></i>
                                 </div>
@@ -39,7 +39,7 @@
                         <div class="col-3 ">
                             <select name="" id=""
                                     class="w-100 border-0 uneditable-input label-font-Light text-white px-4"
-                                    style="height: 40px; background-color: #FBC226;border-radius: 20px">
+                                    style="height: 40px; background-color: #FBC226;border-radius: 20px;cursor: pointer">
                                 <option value="" disabled selected>Tag with game</option>
                                 @foreach($gameList as $item)
                                     <option value={{$item->game_ID}}>{{$item->game_name}}</option>

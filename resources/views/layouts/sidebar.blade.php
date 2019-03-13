@@ -24,6 +24,25 @@
     /*
      * Replace all SVG images with inline SVG
      */
+    $(document).ready(function () {
+        setInterval(updateNoti, 1000);   // 1000 = 1 second
+    })
+
+    function updateNoti() {
+        var xhttp = new XMLHttpRequest();
+        var url = '/updateNoti';
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var obj = JSON.parse(this.responseText);
+                console.log(obj);
+            }
+        };
+
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }
+
     $(function(){
         jQuery('img.svg').each(function(){
             var $img = jQuery(this);

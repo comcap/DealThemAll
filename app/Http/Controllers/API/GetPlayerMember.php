@@ -60,10 +60,15 @@ class GetPlayerMember extends Controller
             return $item;
         });
 
-        $dt = Carbon::now();
-        TeamManager::where('user_verify','=',0)
-            ->where('expired_invite','<=',$dt)
-            ->delete();
+//        $dt = Carbon::now();
+//        $teamManager = TeamManager::where('user_verify','=',0)
+//            ->where('expired_invite','<=',$dt)
+//            ->get();
+//
+//        return $teamManager;
+//        TeamManager::where('user_verify','=',0)
+//            ->where('expired_invite','<=',$dt)
+//            ->delete();
 
         $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_name','tbl_User_Role.stateRole','tbl_Role.role_name','tbl_Game.game_logo','tbl_Role.role_color')
             ->join('tbl_User','tbl_User.user_ID','=','tbl_User_Role.user_ID')

@@ -26,23 +26,23 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $seconds = 5;
-
-        $schedule->call(function () use ($seconds) {
-            $dt = Carbon::now();
-
-            $x=60/$seconds;
-
-            do{
-                TeamManager::where('user_verify','=',0)
-                    ->where('expired_invite','<=',$dt)
-                    ->delete();
-
-                time_sleep_until($dt->addSeconds($seconds)->timestamp);
-
-            } while($x-- > 0);
-
-        })->everyMinute();
+//        $seconds = 5;
+//
+//        $schedule->call(function () use ($seconds) {
+//            $dt = Carbon::now();
+//
+//            $x=60/$seconds;
+//
+//            do{
+//                TeamManager::where('user_verify','=',0)
+//                    ->where('expired_invite','<=',$dt)
+//                    ->delete();
+//
+//                time_sleep_until($dt->addSeconds($seconds)->timestamp);
+//
+//            } while($x-- > 0);
+//
+//        })->everyMinute();
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\Notification;
+use App\NotificationDetail;
 use App\Team;
 use App\TeamManager;
 use App\UserRole;
@@ -56,6 +58,7 @@ class TeamManagerController extends Controller
         $playerID = $request->playerID;
         $teamID = $request->teamID;
         $gameID = $request->gameID;
+        $userID = Auth::user()->user_ID;
 
         $TeamManager = new TeamManager();
         $TeamManager->teamID = $teamID;
@@ -65,7 +68,20 @@ class TeamManagerController extends Controller
         $TeamManager->expired_invite = Carbon::now()->addMinutes(5)->toDateTimeString();
         $TeamManager->save();
 
-//        return $request;
+        $notification = new Notification();
+        $notification->notification_User = $playerID;
+        $notification->notification_isRead = 0;
+        $notification->notification_type = 1;
+        $notification->notificaiton_state = 0;
+        $notification->save();
+
+        $notificationDetail = new NotificationDetail();
+        $notificationDetail->notificaitonID = $notification->notificationID;
+        $notificationDetail->teamID = $teamID;
+        $notificationDetail->senderID = $userID;
+        $notificationDetail->gameID = $gameID;
+        $notificationDetail->save();
+
         return redirect('team');
     }
 
@@ -173,7 +189,6 @@ class TeamManagerController extends Controller
         }
 
         $getTeam->team_language = $languageString;
-
         $getTeam->save();
 
 //        return $teamManager;

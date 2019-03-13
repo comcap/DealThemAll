@@ -23,7 +23,7 @@ class GetPlayer extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -34,27 +34,45 @@ class GetPlayer extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $team)
     {
-        $listPlayer = StatsPlayer::join('tbl_User','tbl_User.user_ID','=','tbl_stats_player.user_ID')
-            ->leftjoin('tbl_team_manager','tbl_team_manager.user_ID','=','tbl_stats_player.user_ID')
-            ->where('tbl_stats_player.game_ID','=',$id)
-            ->whereNull('tbl_team_manager.managerID')
-            ->orderby('tbl_stats_player.rank_total','desc')
+        if ($team == null) {
+            $listPlayer = StatsPlayer::select('*', 'tbl_User.user_ID')
+                ->join('tbl_User', 'tbl_User.user_ID', '=', 'tbl_stats_player.user_ID')
+                ->leftjoin('tbl_team_manager', 'tbl_team_manager.user_ID', '=', 'tbl_stats_player.user_ID')
+                ->where('tbl_stats_player.game_ID', '=', $id)
+                ->where(function ($query) use ($team) {
+                    $query->whereNull('tbl_team_manager.managerID')
+                        ->where('tbl_team_manager.user_verify', '=', 0);
+                })
+                ->orderby('tbl_stats_player.rank_total', 'desc')
+                ->get();
+        } else {
+            $listPlayer = StatsPlayer::select('*', 'tbl_User.user_ID')
+                ->join('tbl_User', 'tbl_User.user_ID', '=', 'tbl_stats_player.user_ID')
+                ->leftjoin('tbl_team_manager', 'tbl_team_manager.user_ID', '=', 'tbl_stats_player.user_ID')
+                ->where('tbl_stats_player.game_ID', '=', $id)
+                ->where(function ($query) use ($team) {
+                    $query->whereNull('tbl_team_manager.managerID')
+                        ->orWhere('tbl_team_manager.teamID', '!=', $team)
+                        ->where('tbl_team_manager.user_verify', '=', 0);
+                })
+                ->orderby('tbl_stats_player.rank_total', 'desc')
+                ->get();
+        }
+
+        $userRole = UserRole::select('tbl_User_Role.user_ID', 'tbl_Role.role_name', 'tbl_User_Role.stateRole')
+            ->join('tbl_User', 'tbl_User.user_ID', '=', 'tbl_User_Role.user_ID')
+            ->join('tbl_Role', 'tbl_User_Role.role_ID', '=', 'tbl_Role.role_ID')
+            ->where('tbl_User_Role.stateRole', '>', 0)
+            ->where('game_ID', '=', $id)
             ->get();
 
-        $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_name','tbl_User_Role.stateRole')
-            ->join('tbl_User','tbl_User.user_ID','=','tbl_User_Role.user_ID')
-            ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
-            ->where('tbl_User_Role.stateRole','>',0)
-            ->where('game_ID','=',$id)
-            ->get();
-
-        $result = $listPlayer->map(function ($item,$key) use ($userRole){
-            $orders = $userRole->filter(function ($value, $key) use ($item){
+        $result = $listPlayer->map(function ($item, $key) use ($userRole) {
+            $orders = $userRole->filter(function ($value, $key) use ($item) {
                 return $value->user_ID == $item->user_ID;
             });
 
@@ -69,8 +87,8 @@ class GetPlayer extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -81,7 +99,7 @@ class GetPlayer extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -33,6 +33,7 @@ Route::post('/deleteProfile','UpdateProfileController@deleteStat')->middleware('
 Route::post('/selectrole','UpdateProfileController@selectrole')->middleware('auth');
 Route::resource('/createteam','CreateTeamController')->middleware('auth');
 Route::resource('/notifications','NotificationController')->middleware('auth');
+Route::resource('/teamList','TeamListController')->middleware('auth');
 
 Route::resource('/team','TeamManagerController')->middleware('auth');
 
@@ -43,9 +44,10 @@ Route::get('/ApiLogout','LoginHomeController@logout');
 Route::resource('/ApiCreateTeam','CreateTeamController');
 
 Route::apiResource('/getGameList', 'API\GetGameList');
-Route::apiResource('/getPlayerList', 'API\GetPlayer');
+Route::apiResource('/getPlayerList.team', 'API\GetPlayer');
 Route::apiResource('/getRoleGame', 'API\GetRoleGame');
 
 Route::apiResource('/getPlayerListRole.role', 'API\GetPlayerListRole');
 Route::apiResource('/getPlayerWithID.game', 'API\getPlayerWithID');
 Route::apiResource('/getPlayerMember.game', 'API\GetPlayerMember');
+Route::apiResource('/updateNoti', 'API\UpdateNoti');

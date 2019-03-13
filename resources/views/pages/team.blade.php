@@ -9,7 +9,7 @@
                         <div class="row">
                             <img class="pl-3" id="gameLogo" src="{{asset('data-image/game_logo/overwatch/logo.svg')}}" height="40px">
                             <div class="col-5 pl-0">
-                                <select class="pl-3 selectGameTeam label-font-Bold ml-3" onchange="selectGameTeam()" name="game" id="gameList" style="font-size: 24px">
+                                <select class="pl-3 selectGameTeam label-font-Bold ml-3" onchange="selectGameTeam({{\Illuminate\Support\Facades\Auth::user()->user_ID}},{{$teamManager}})" name="game" id="gameList" style="font-size: 24px">
                                     @foreach($gameList as $item)
                                         <option value="{{$item->game_ID}}">{{$item->game_name}}</option>
                                     @endforeach
@@ -457,14 +457,15 @@
             xhttp.send();
         }
         function fetchPlayer() {
-            var url2 = '/getPlayerList/1';
+            var url2 = '/getPlayerList/1/team/'+idTeam;
+            // console.log(url2)
             var xhttp2 = new XMLHttpRequest();
             xhttp2.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var obj = JSON.parse(this.responseText);
                     document.getElementById('listPlayerModal').innerHTML = ""
                     obj.forEach(function (item) {
-                        console.log(item)
+                        console.log(item,"getPlayerList")
 
                         var image_user = "http://"+window.location.hostname+":"+window.location.port+"/data-image/userImage/"+item['user_image']
 

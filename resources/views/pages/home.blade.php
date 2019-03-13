@@ -132,192 +132,214 @@
             </div>
             <div class="col-3 p-2 ">
                 @if(\Illuminate\Support\Facades\Auth::User())
-                    <div class="row mx-0">
-                        <div class="col-12 pl-3 pr-3 pt-3" style="background-color: rgba(255,255,255,0.1); height: auto;border-radius: 8px">
-                            <div class="row" style="height: 60px">
-                                <div class="col-3">
-                                    <a href="profile/">
-                                        <img src="{{asset('data-image/userImage/'.Auth::User()->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
-                                    </a>
-                                </div>
-                                <div class="col-9">
-                                    <div class="row mx-0 pl-1">
+                    <div class="sticky-top" style="top: 10px;">
+                        <div class="row mx-0">
+                            <div class="col-12 pl-3 pr-3 pt-3" style="background-color: rgba(255,255,255,0.1); height: auto;border-radius: 8px">
+                                <div class="row" style="height: 60px">
+                                    <div class="col-3">
                                         <a href="profile/">
-                                            <h3 class="label-font-Condensed-Regular text-white" style="font-size: 24px">{{Auth::User()->user_name}}</h3>
+                                            <img src="{{asset('data-image/userImage/'.Auth::User()->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
                                         </a>
-                                        <a href="/ApiLogout"><img src="{{asset('data-image/power-button-off.svg')}}" style="width: 16px;height: 16px;position: absolute;right: 16px;"></a>
                                     </div>
-                                    <div class="row mx-0 pl-1">
-                                        @foreach($userRole as $item)
-                                            <div class="box-role d-flex align-items-center mr-2" style="background-color: {{$item['role_color']}}">
-                                                <img src="{{asset($item->game_logo)}}" height="20px" width="20px">
-                                                <label class="text-white ml-1 m-0">{{$item->role_name}}</label>
-                                            </div>
-                                        @endforeach
+                                    <div class="col-9">
+                                        <div class="row mx-0 pl-1">
+                                            <a href="profile/">
+                                                <h3 class="label-font-Condensed-Regular text-white" style="font-size: 24px">{{Auth::User()->user_name}}</h3>
+                                            </a>
+                                            <a href="/ApiLogout"><img src="{{asset('data-image/power-button-off.svg')}}" style="width: 16px;height: 16px;position: absolute;right: 16px;"></a>
+                                        </div>
+                                        <div class="row mx-0 pl-1">
+                                            @foreach($userRole as $item)
+                                                <div class="box-role d-flex align-items-center mr-2" style="background-color: {{$item['role_color']}}">
+                                                    <img src="{{asset($item->game_logo)}}" height="20px" width="20px">
+                                                    <label class="text-white ml-1 m-0">{{$item->role_name}}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="row mt-4" style="height: 150px;">
+                                    <div class="col-6">
+                                        <img class="position-absolute" src="{{asset('/data-image/gameCount.svg')}}" width="60px" height="60px" style="top: -10px; left: 5px;">
+                                        <div class="row mx-0">
+                                            <div class="d-flex align-items-center justify-content-center" style="height: 110px;width: 120px;border-radius:60px;background-color: rgba(255,255,255,0.1)">
+                                                <div class="d-flex align-items-center justify-content-center" style="height: 96px;width: 96px;border-radius:48px;background-color: rgba(255,255,255,0.1)">
+                                                    <h3 class="text-white label-font-Thin mb-0" style="font-size: 40px">{{$countStats}}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <span class="label-font-Regular" style="font-size: 16px;color:#AAAAAA">Games</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <img class="position-absolute" src="{{asset('/data-image/gameReward.svg')}}" width="60px" height="60px" style="top: -10px; left: 5px;">
+                                        <div class="row mx-0" >
+                                            <div class="d-flex align-items-center justify-content-center" style="height: 110px;width: 120px;border-radius:60px;background-color: rgba(255,255,255,0.1)">
+                                                <div class="d-flex align-items-center justify-content-center" style="height: 96px;width: 96px;border-radius:48px;background-color: rgba(255,255,255,0.1)">
+                                                    <h3 class="text-white label-font-Thin mb-0" style="font-size: 40px">12</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <span class="label-font-Regular" style="font-size: 16px;color:#AAAAAA">Achievements</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--<a href="/ApiLogout"><button type="submit" class="btn btn-primary red-btn" >LOGOUT</button></a>--}}
                             </div>
-                            <div class="row mt-4" style="height: 150px;">
-                                <div class="col-6">
-                                    <img class="position-absolute" src="{{asset('/data-image/gameCount.svg')}}" width="60px" height="60px" style="top: -10px; left: 5px;">
-                                    <div class="row mx-0">
-                                        <div class="d-flex align-items-center justify-content-center" style="height: 110px;width: 120px;border-radius:60px;background-color: rgba(255,255,255,0.1)">
-                                            <div class="d-flex align-items-center justify-content-center" style="height: 96px;width: 96px;border-radius:48px;background-color: rgba(255,255,255,0.1)">
-                                                <h3 class="text-white label-font-Thin mb-0" style="font-size: 40px">{{$countStats}}</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <span class="label-font-Regular" style="font-size: 16px;color:#AAAAAA">Games</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <img class="position-absolute" src="{{asset('/data-image/gameReward.svg')}}" width="60px" height="60px" style="top: -10px; left: 5px;">
-                                    <div class="row mx-0" >
-                                        <div class="d-flex align-items-center justify-content-center" style="height: 110px;width: 120px;border-radius:60px;background-color: rgba(255,255,255,0.1)">
-                                            <div class="d-flex align-items-center justify-content-center" style="height: 96px;width: 96px;border-radius:48px;background-color: rgba(255,255,255,0.1)">
-                                                <h3 class="text-white label-font-Thin mb-0" style="font-size: 40px">12</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col text-center">
-                                            <span class="label-font-Regular" style="font-size: 16px;color:#AAAAAA">Achievements</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{--<a href="/ApiLogout"><button type="submit" class="btn btn-primary red-btn" >LOGOUT</button></a>--}}
                         </div>
-                    </div>
-                    <div class="row mt-3 mx-0">
-                        <div class="col-12 pl-3 pr-3 pt-3 pb-4" style="background-color: rgba(255,255,255,0.1); height: auto;border-radius: 8px">
-                            <div class="row " style="height: auto">
-                                <div class="col-6">
-                                    <span class="text-white label-font-Regular">Achievements</span>
-                                </div>
-                                <div class="col-6 text-right">
-                                    <span class="label-font-Light" style="font-size: 12px;color: #AAAAAA">see more</span>
-                                </div>
-                            </div>
-                            <div class="row mt-3" style="height: auto;">
-                                <div class="col-3">
-                                    <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px" height="64px">
-                                </div>
-                                <div class="col-9 pt-1">
-                                    <div class="row mx-0">
-                                        <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">Blackjack</h5>
+                        <div class="row pt-3 mx-0">
+                            <div class="col-12 pl-3 pr-3 pt-3 pb-4" style="background-color: rgba(255,255,255,0.1); height: auto;border-radius: 8px">
+                                <div class="row " style="height: auto">
+                                    <div class="col-6">
+                                        <span class="text-white label-font-Regular">Achievements</span>
                                     </div>
-                                    <div class="row mr-0">
-                                        <div class="col-8" style="padding-top: 2px">
-                                            <p class="label-font-Thin threeDot mb-0" style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame cards in quick or competitive play.</p>
-                                        </div>
-                                        <div class="col-4 p-0 text-right">
-                                            <span class="text-white label-font-Thin " style="font-size: 12px">100 / 100%</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mx-0 pt-2">
-                                        <div id="myProgress1">
-                                            <div id="myBar1" data-progress-id="1"></div>
-                                        </div>
+                                    <div class="col-6 text-right">
+                                        <span class="label-font-Light" style="font-size: 12px;color: #AAAAAA">see more</span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mt-3" style="height: auto;">
-                                <div class="col-3">
-                                    <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px" height="64px">
-                                </div>
-                                <div class="col-9 pt-1">
-                                    <div class="row mx-0">
-                                        <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">Blackjack</h5>
+                                <div class="row mt-3" style="height: auto;">
+                                    <div class="col-3">
+                                        <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px" height="64px">
                                     </div>
-                                    <div class="row mr-0">
-                                        <div class="col-8" style="padding-top: 2px">
-                                            <p class="label-font-Thin threeDot mb-0" style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame cards in quick or competitive play.</p>
+                                    <div class="col-9 pt-1">
+                                        <div class="row mx-0">
+                                            <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">Blackjack</h5>
                                         </div>
-                                        <div class="col-4 p-0 text-right">
-                                            <span class="text-white label-font-Thin " style="font-size: 12px">100 / 100%</span>
+                                        <div class="row mr-0">
+                                            <div class="col-8" style="padding-top: 2px">
+                                                <p class="label-font-Thin threeDot mb-0" style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame cards in quick or competitive play.</p>
+                                            </div>
+                                            <div class="col-4 p-0 text-right">
+                                                <span class="text-white label-font-Thin " style="font-size: 12px">100 / 100%</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mx-0 pt-2">
-                                        <div id="myProgress2">
-                                            <div id="myBar2" data-progress-id="2"></div>
+                                        <div class="row mx-0 pt-2">
+                                            <div id="myProgress1">
+                                                <div id="myBar1" data-progress-id="1"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row mt-3" style="height: auto;">
-                                <div class="col-3">
-                                    <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px" height="64px">
-                                </div>
-                                <div class="col-9 pt-1">
-                                    <div class="row mx-0">
-                                        <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">Blackjack</h5>
+                                <div class="row mt-3" style="height: auto;">
+                                    <div class="col-3">
+                                        <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px" height="64px">
                                     </div>
-                                    <div class="row mr-0">
-                                        <div class="col-8" style="padding-top: 2px">
-                                            <p class="label-font-Thin threeDot mb-0" style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame cards in quick or competitive play.</p>
+                                    <div class="col-9 pt-1">
+                                        <div class="row mx-0">
+                                            <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">Blackjack</h5>
                                         </div>
-                                        <div class="col-4 p-0 text-right">
-                                            <span class="text-white label-font-Thin " style="font-size: 12px">100 / 100%</span>
+                                        <div class="row mr-0">
+                                            <div class="col-8" style="padding-top: 2px">
+                                                <p class="label-font-Thin threeDot mb-0" style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame cards in quick or competitive play.</p>
+                                            </div>
+                                            <div class="col-4 p-0 text-right">
+                                                <span class="text-white label-font-Thin " style="font-size: 12px">100 / 100%</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mx-0 pt-2">
-                                        <div id="myProgress3">
-                                            <div id="myBar3" data-progress-id="2"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3" style="height: auto;">
-                                <div class="col-3">
-                                    <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px" height="64px">
-                                </div>
-                                <div class="col-9 pt-1">
-                                    <div class="row mx-0">
-                                        <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">Blackjack</h5>
-                                    </div>
-                                    <div class="row mr-0">
-                                        <div class="col-8" style="padding-top: 2px">
-                                            <p class="label-font-Thin threeDot mb-0" style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame cards in quick or competitive play.</p>
-                                        </div>
-                                        <div class="col-4 p-0 text-right">
-                                            <span class="text-white label-font-Thin " style="font-size: 12px">100 / 100%</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mx-0 pt-2">
-                                        <div id="myProgress4">
-                                            <div id="myBar4" data-progress-id="3"></div>
+                                        <div class="row mx-0 pt-2">
+                                            <div id="myProgress2">
+                                                <div id="myBar2" data-progress-id="2"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="row mt-3" style="height: auto;">
+                                    <div class="col-3">
+                                        <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px" height="64px">
+                                    </div>
+                                    <div class="col-9 pt-1">
+                                        <div class="row mx-0">
+                                            <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">Blackjack</h5>
+                                        </div>
+                                        <div class="row mr-0">
+                                            <div class="col-8" style="padding-top: 2px">
+                                                <p class="label-font-Thin threeDot mb-0" style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame cards in quick or competitive play.</p>
+                                            </div>
+                                            <div class="col-4 p-0 text-right">
+                                                <span class="text-white label-font-Thin " style="font-size: 12px">100 / 100%</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-0 pt-2">
+                                            <div id="myProgress3">
+                                                <div id="myBar3" data-progress-id="2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3" style="height: auto;">
+                                    <div class="col-3">
+                                        <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px" height="64px">
+                                    </div>
+                                    <div class="col-9 pt-1">
+                                        <div class="row mx-0">
+                                            <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">Blackjack</h5>
+                                        </div>
+                                        <div class="row mr-0">
+                                            <div class="col-8" style="padding-top: 2px">
+                                                <p class="label-font-Thin threeDot mb-0" style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame cards in quick or competitive play.</p>
+                                            </div>
+                                            <div class="col-4 p-0 text-right">
+                                                <span class="text-white label-font-Thin " style="font-size: 12px">100 / 100%</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mx-0 pt-2">
+                                            <div id="myProgress4">
+                                                <div id="myBar4" data-progress-id="3"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            {{--<button onclick="move()" class="btn btn-primary red-btn" >Move</button>--}}
+                                {{--<button onclick="move()" class="btn btn-primary red-btn" >Move</button>--}}
 
-                        </div>
-                    </div>
-                    {{--banner sponsor--}}
-                    <div class="row mt-3 mx-0">
-                        <div class="col">
-                            <div class="row mx-0" style="height:180px;">
-                                <img class="col-12 p-0" src="{{asset('/data-image/null-ads.png') }}" alt="overwatch">
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-6">
-                                    <p class="text-white">Sponsor By </p>
-                                </div>
-                                <div class="col-6">
-                                    <p class="text-white text-right">xxxxxxxxxxx</p>
-                                </div>
                             </div>
                         </div>
+                        <div class="row mt-3 mx-0">
+                            <div class="col-12" style="height:180px;">
+                                <div class="row mx-0" style="height: auto">
+                                    <img class="col-12 p-0" src="{{asset('/data-image/null-ads.png') }}" alt="overwatch">
+                                </div>
+                                <div class="row mt-3" style="height: auto">
+                                    <div class="col-6">
+                                        <p class="text-white">Sponsor By </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="text-white text-right">xxxxxxxxxxx</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    {{--<p class="text-input-label">user_name : {{Auth::User()->user_name}}</p>--}}
-                    {{--<p class="text-input-label">user_email : {{Auth::User()->user_email}}</p>--}}
-                    {{--<p class="text-input-label">created_at : {{Auth::User()->created_at}}</p>--}}
+
+                    <div class="sticky-top">
+                        {{--banner sponsor--}}
+                        <div class="row mt-3 mx-0">
+                            <div class="col-12" style="height:180px;">
+                                <div class="row mx-0" style="height: auto">
+                                    <img class="col-12 p-0" src="{{asset('/data-image/null-ads.png') }}" alt="overwatch">
+                                </div>
+                                <div class="row mt-3" style="height: auto">
+                                    <div class="col-6">
+                                        <p class="text-white">Sponsor By </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="text-white text-right">xxxxxxxxxxx</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{--<p class="text-input-label">user_name : {{Auth::User()->user_name}}</p>--}}
+                        {{--<p class="text-input-label">user_email : {{Auth::User()->user_email}}</p>--}}
+                        {{--<p class="text-input-label">created_at : {{Auth::User()->created_at}}</p>--}}
+                    </div>
+
+
                 @else
                     <div class="row mx-0">
                         <div class="col-12 pl-3 pr-3 pt-3" style="background-color: rgba(255,255,255,0.1); height: 500px">
