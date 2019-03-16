@@ -81,11 +81,13 @@
     </div>
     <script>
         var token = $("meta[name='csrf-token']").attr("content");
-        var auth = {!! \Illuminate\Support\Facades\Auth::user()->user_ID !!}
+        if ({{\Illuminate\Support\Facades\Auth::check()}}){
+            var auth = {!! \Illuminate\Support\Facades\Auth::user() !!}
+        }
 
         $('#notification').click(function () {
             var xhttp = new XMLHttpRequest();
-            var url = '/updateNoti/'+auth;
+            var url = '/updateNoti/'+auth['user_ID'];
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var obj = JSON.parse(this.responseText);

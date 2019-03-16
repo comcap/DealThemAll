@@ -22,45 +22,68 @@
             </div>
             <div class="row align-items-center" style="padding-top: 20px;padding-bottom: 20px;height: auto;">
                 <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-8 ">
-                            <input type="text" placeholder="Type something…"
-                                   class="bg-transparent w-100 label-font-Light text-white port-box-input">
-                        </div>
-                        <div class="col-1 px-2">
-                            <div class="row h-100 justify-content-end">
-                                <div class="text-center"
-                                     style="width: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px;border-color: white;cursor: pointer">
-                                    <i class="fas fa-paper-plane text-white"
-                                       style="font-size: 16px;position: relative;left: -1px;top: 1px;"></i>
+                    <form action="/post" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-8 ">
+                                    <input type="text" autocomplete="off" name="postDetail" placeholder="Type something…"
+                                           class="bg-transparent w-100 label-font-Light text-white port-box-input" required>
+                                </div>
+                                <div class="col-1 px-2">
+                                    <div class="row h-100 justify-content-end">
+                                        <button class="text-center"
+                                             style="width: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px;border-color: transparent;cursor: pointer">
+                                            <i class="fas fa-paper-plane text-white"
+                                               style="font-size: 16px;position: relative;left: -1px;bottom: 3px;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-3 ">
+                                    <select name="gameID"
+                                            class="w-100 border-0 uneditable-input label-font-Light text-white px-4"
+                                            style="height: 40px; background-color: #FBC226;border-radius: 20px;cursor: pointer" required>
+                                        <option value="" disabled selected>Tag with game</option>
+                                        @foreach($gameList as $item)
+                                            <option value={{$item->game_ID}}>{{$item->game_name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3 ">
-                            <select name="" id=""
-                                    class="w-100 border-0 uneditable-input label-font-Light text-white px-4"
-                                    style="height: 40px; background-color: #FBC226;border-radius: 20px;cursor: pointer">
-                                <option value="" disabled selected>Tag with game</option>
-                                @foreach($gameList as $item)
-                                    <option value={{$item->game_ID}}>{{$item->game_name}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-12 mt-4 mb-2 col-12" id="nav_post2" style="display: none">
+                            <div id="uploadPostImage" class="dropzone w-100 text-center"
+                                 style="background-color: rgba(255,255,255,0.1); border-radius: 8px;">
+                                <div class="dz-message" data-dz-message>
+                                    <i class="fas fa-file-image text-white" style="font-size: 50px"></i>
+                                    <div class="text-white mt-2">Drag files to upload</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-12 mt-4 mb-2 col-12" id="nav_post2" style="display: none">
-                    <div id="uploadPostImage" class="dropzone w-100 text-center"
-                         style="background-color: rgba(255,255,255,0.1); border-radius: 8px;">
-                        <div class="dz-message" data-dz-message>
-                            <i class="fas fa-file-image text-white" style="font-size: 50px"></i>
-                            <div class="text-white mt-2">Drag files to upload</div>
+                        <div class="col-md-12 mt-4 mb-2 col-12" id="nav_post3" style="display: none">
+                            <div class="row mx-0 text-center">
+                                {{--<div class="col" style="max-width: fit-content">--}}
+                                <div id="upload-button" style="padding-top: 34px;padding-bottom: 34px;">
+                                    <div class="mb-2">
+                                        <i class="fas fa-file-video text-white" style="font-size: 50px"></i>
+                                    </div>
+                                    <span>Select Video. Maximum duration 10 sec</span>
+                                </div>
+                                    <input type="file" name="postVideo" id="file-to-upload" accept="video/*" />
+                                    <div class="col h-auto" style="max-width: fit-content">
+                                        <video id="main-video" class="mw-100" controls>
+                                            <source type="video/mp4">
+                                        </video>
+                                        <canvas id="video-canvas"></canvas>
+                                        <img class="d-none" id="deleteVideo" onclick="removeVideo()" src="{{asset('data-image/cancel.svg')}}" width="18px" height="18px" style="cursor: pointer;position: absolute;right: 26px;top: 9px;">
+                                    </div>
+                                {{--</div>--}}
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-12 mt-2 mb-2 col-12" id="nav_post3" style="display: none">
-                    <div class="dropzone border w-100" style="height: 120px">
-                        <div class="text-center">dropfile hear!!.</div>
-                    </div>
+
+                        <input type="text" id="postState" name="stateID" value="1" hidden>
+                        <input type="file" id="postImage" name="postImage[]" value="" multiple hidden/>
+                    </form>
                 </div>
             </div>
         </div>
@@ -87,20 +110,12 @@
 
     myDropzone.on("complete", function (file) {
         // console.log(myDropzone.files[0]);
-        // $('#card_BannerImg')[0].files = new FileListItem(myDropzone.files);
+        $('#postImage')[0].files = new FileListItem(myDropzone.files);
 
         file.previewElement.addEventListener("click", function () {
             myDropzone.removeFile(file);
+            $('#postImage')[0].files = new FileListItem(myDropzone.files);
         });
-
-        // console.log(document.getElementById('card_BannerImg').value);
-        // file.previewElement.addEventListener("click", function() {
-        //     myDropzone.removeFile(file);
-        //     // $('#card_BannerImg')[0].files = new FileListItem(myDropzone.files);
-        //
-        //     // document.getElementById('bannerImg').value = arr;
-        //     // console.log(document.getElementById('bannerImg').value);
-        // });
     });
 
     function selectPost(id) {
@@ -124,6 +139,11 @@
                 $('#text_focus_2').addClass('text-white');
                 $('#text_focus_3').addClass('text-white');
 
+                document.getElementById('postState').value = 1
+                $('#postImage').val('')
+                myDropzone.removeAllFiles();
+                removeVideo()
+
                 break;
             case 2:
                 // $('#nav_post1').hide(250);
@@ -145,6 +165,10 @@
                 $('#text_focus_3').addClass('text-white');
                 $('#text_focus_1').addClass('text-white');
 
+                document.getElementById('postState').value = 2
+                $('#postImage').val('')
+                myDropzone.removeAllFiles();
+                removeVideo()
 
                 break;
             case 3:
@@ -164,9 +188,106 @@
 
                 $('#text_focus_1').addClass('text-white');
                 $('#text_focus_2').addClass('text-white');
-                break;
 
+                document.getElementById('postState').value = 3
+                $('#postImage').val('')
+                myDropzone.removeAllFiles();
+                removeVideo()
+
+                break;
         }
     }
+
+
+    var _CANVAS = document.querySelector("#video-canvas"),
+        _CTX = _CANVAS.getContext("2d"),
+        _VIDEO = document.querySelector("#main-video"),
+        vid = document.createElement('video');
+
+    // Upon click this should should trigger click on the #file-to-upload file input element
+    // This is better than showing the not-good-looking file input element
+    document.querySelector("#upload-button").addEventListener('click', function() {
+        document.querySelector("#file-to-upload").click();
+    });
+
+    // When user chooses a MP4 file
+    document.querySelector("#file-to-upload").addEventListener('change', function() {
+        // Validate whether MP4
+
+        // if(['video/mp4'].indexOf(document.querySelector("#file-to-upload").files[0].type) == -1) {
+        //     alert('Error : Only MP4 format allowed');
+        //     return;
+        // }
+
+        vid.src = URL.createObjectURL(document.querySelector("#file-to-upload").files[0])
+        vid.ondurationchange = function() {
+            if (this.duration < 10){
+                // Hide upload button
+                document.querySelector("#upload-button").style.display = 'none';
+
+                // Object Url as the video source
+                document.querySelector("#main-video source").setAttribute('src', URL.createObjectURL(document.querySelector("#file-to-upload").files[0]));
+
+                // Load the video and show it
+                _VIDEO.load();
+                _VIDEO.style.display = 'inline';
+                $('#deleteVideo').removeClass('d-none')
+
+                // Load metadata of the video to get video duration and dimensions
+                _VIDEO.addEventListener('loadedmetadata', function() { console.log(_VIDEO.duration);
+                    var video_duration = _VIDEO.duration,
+                        duration_options_html = '';
+
+                    // Set options in dropdown at 4 second interval
+                    for(var i=0; i<Math.floor(video_duration); i=i+4) {
+                        duration_options_html += '<option value="' + i + '">' + i + '</option>';
+                    }
+                    document.querySelector("#set-video-seconds").innerHTML = duration_options_html;
+
+                    // Show the dropdown container
+                    document.querySelector("#thumbnail-container").style.display = 'block';
+
+                    // Set canvas dimensions same as video dimensions
+                    _CANVAS.width = _VIDEO.videoWidth;
+                    _CANVAS.height = _VIDEO.videoHeight;
+                });
+            } else{
+                alert("Maximum duration 10 sec. Please try agian.")
+                document.getElementById('file-to-upload').value = ""
+                $('#deleteVideo').addClass('d-none')
+            }
+        };
+    });
+
+    // On changing the duration dropdown, seek the video to that duration
+    document.querySelector("#set-video-seconds").addEventListener('change', function() {
+        _VIDEO.currentTime = document.querySelector("#set-video-seconds").value;
+
+        // Seeking might take a few milliseconds, so disable the dropdown and hide download link
+        document.querySelector("#set-video-seconds").disabled = true;
+        document.querySelector("#get-thumbnail").style.display = 'none';
+    });
+
+    // Seeking video to the specified duration is complete
+    document.querySelector("#main-video").addEventListener('timeupdate', function() {
+        // Re-enable the dropdown and show the Download link
+        document.querySelector("#set-video-seconds").disabled = false;
+        document.querySelector("#get-thumbnail").style.display = 'inline';
+    });
+
+    function removeVideo() {
+        document.getElementById('file-to-upload').value = ""
+        _VIDEO.style.display = 'none';
+        $('#deleteVideo').addClass('d-none')
+        document.querySelector("#upload-button").style.display = 'block';
+    }
+
+    // On clicking the Download button set the video in the canvas and download the base-64 encoded image data
+    // document.querySelector("#get-thumbnail").addEventListener('click', function() {
+    //     _CTX.drawImage(_VIDEO, 0, 0, _VIDEO.videoWidth, _VIDEO.videoHeight);
+    //
+    //     document.querySelector("#get-thumbnail").setAttribute('href', _CANVAS.toDataURL());
+    //     document.querySelector("#get-thumbnail").setAttribute('download', 'thumbnail.png');
+    // });
 
 </script>

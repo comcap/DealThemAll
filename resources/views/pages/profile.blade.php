@@ -417,6 +417,64 @@
         </div>
     </div>
 
+    <!-- AddPlayerModal -->
+    <div class="modal fade" id="invilteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content" style="background-color: rgba(0,0,0,0.85);">
+                <div class="d-flex justify-content-center">
+                    <div class="col-12 p-4">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h3 class="text-white label-font-Bold m-0">SELECT GAME</h3>
+                                <img data-dismiss="modal" src="{{asset('data-image/cancel.svg')}}" width="18px" height="18px" style="cursor: pointer;position: absolute;right: 7px; top: -11px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 text-center mb-2">
+                                <h2 class="text-white label-font-Regular" style="font-size: 20px">Pick game for invite</h2>
+                            </div>
+                        </div>
+
+                        <form action="/team" method="post">
+                            @csrf
+                            <div id="listPlayerModal" class="row">
+                                <div class="col-12 px-4" style="overflow-y: auto; height: 230px;">
+                                    <div class="row" style="height: 60px;">
+                                        <div class="col-12" style=" border-radius: 10px;background-color: rgba(255,255,255,0.15);">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <img src="https://dummyimage.com/50x50/000/fff" alt="">
+                                                </div>
+                                                <div class="col-9">
+                                                    <p class="text-white">Lorem ipsum dolor sit amet, </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto blanditiis culpa eligendi, et, ex excepturi facilis illo, illum in ipsum iste nisi possimus quae ratione sint sit suscipit tenetur!</p>
+                                    </div>
+                                    <div class="row">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto blanditiis culpa eligendi, et, ex excepturi facilis illo, illum in ipsum iste nisi possimus quae ratione sint sit suscipit tenetur!</p>
+                                    </div>
+                                    <div class="row">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto blanditiis culpa eligendi, et, ex excepturi facilis illo, illum in ipsum iste nisi possimus quae ratione sint sit suscipit tenetur!</p>
+                                    </div>
+                                    <div class="row">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto blanditiis culpa eligendi, et, ex excepturi facilis illo, illum in ipsum iste nisi possimus quae ratione sint sit suscipit tenetur!</p>
+                                    </div>
+                                    <div class="row">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci architecto blanditiis culpa eligendi, et, ex excepturi facilis illo, illum in ipsum iste nisi possimus quae ratione sint sit suscipit tenetur!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function () {
             profileSelectGame({{$id}})

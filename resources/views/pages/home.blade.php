@@ -23,6 +23,40 @@
         .dropzone .dz-preview.dz-error:hover .dz-error-message {
             display: none;
         }
+
+        #main-video {
+            display: none;
+            max-height: 300px;
+        }
+
+        #thumbnail-container {
+            display: none;
+        }
+
+        #get-thumbnail {
+            display: none;
+        }
+
+        #video-canvas {
+            display: none;
+        }
+
+        #upload-button {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            display: block;
+            padding: 10px 10px;
+            border: 2px dashed #888888;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: #ffffff;
+        }
+
+        #file-to-upload {
+            display: none;
+        }
+
     </style>
     <div id="box-item" class="container-fluid supreme-container">
         <div class="row pt-2">

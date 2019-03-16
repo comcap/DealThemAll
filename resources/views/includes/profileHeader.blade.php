@@ -99,7 +99,9 @@
                                                         @csrf
                                                         <div class="row">
                                                             <div class="col-4 pl-0">
-                                                                <button type="submit" name="invilte" value=1 class="btn red-btn pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">INVITE</button>
+                                                                <a href="#" data-toggle="modal" data-target="#invilteModal">
+                                                                    <button name="invilte" value=1 class="btn red-btn pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">INVITE</button>
+                                                                </a>
                                                             </div>
                                                             <div class="col-4">
                                                                 <button type="submit" name="follow" value=1 class="btn light-btn pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">Follow</button>

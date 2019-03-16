@@ -34,6 +34,7 @@ Route::post('/selectrole','UpdateProfileController@selectrole')->middleware('aut
 Route::resource('/createteam','CreateTeamController')->middleware('auth');
 Route::resource('/notifications','NotificationController')->middleware('auth');
 Route::resource('/teamList','TeamListController')->middleware('auth');
+Route::resource('/post','FeedController')->middleware('auth');
 
 Route::resource('/team','TeamManagerController')->middleware('auth');
 

@@ -453,7 +453,7 @@
                 }
             };
 
-            xhttp.open("GET", url, true);
+            xhttp.open("PUT", url, true);
             xhttp.send();
         }
         function fetchPlayer() {
