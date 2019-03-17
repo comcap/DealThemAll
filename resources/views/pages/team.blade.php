@@ -407,6 +407,7 @@
     <script>
         var idTeam = {!! $teamManager !!}
         var teamOwner = {!! json_encode($TeamOwner) !!}
+        var token = $("meta[name='csrf-token']").attr("content");
 
         $(document).ready(function () {
             setInterval(updateMember, 1000);   // 1000 = 1 second
@@ -443,8 +444,9 @@
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var obj = JSON.parse(this.responseText);
-                    arrInvite = obj;
+                    console.log(obj,"getPlayerList")
 
+                    arrInvite = obj;
                     if (teamOwner) {
                         renderMyMember()
                     }else{
@@ -452,8 +454,8 @@
                     }
                 }
             };
-
-            xhttp.open("PUT", url, true);
+            xhttp.open("GET", url, true);
+            xhttp.setRequestHeader("x-csrf-token", token);
             xhttp.send();
         }
         function fetchPlayer() {

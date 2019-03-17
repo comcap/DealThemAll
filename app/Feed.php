@@ -12,6 +12,7 @@ class Feed extends Model
     protected $fillable = [
         'user_ID',
         'game_ID',
+        'postType_ID',
         'post_detail'
     ];
 }

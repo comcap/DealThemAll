@@ -26,8 +26,7 @@ class TeamListController extends Controller
             ->where('game_ID','=',$id)
             ->first();
 
-        $listPlayer = StatsPlayer::
-        join('tbl_User','tbl_User.user_ID','=','tbl_stats_player.user_ID')
+        $listPlayer = StatsPlayer::join('tbl_User','tbl_User.user_ID','=','tbl_stats_player.user_ID')
             ->where('game_ID','=',$id)
             ->orderby('tbl_stats_player.rank_total','desc')
             ->get();

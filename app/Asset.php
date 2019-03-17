@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Asset extends Model
 {
-    public $table = "tbl_image";
-    public $primaryKey = "image_ID";
+    public $table = 'tbl_asset';
+    public $primaryKey = 'asset_ID';
 
     protected $fillable = [
         'post_ID',
-        'image_name'
+        'asset_name'
     ];
 }

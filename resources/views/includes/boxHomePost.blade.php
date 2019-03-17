@@ -25,21 +25,12 @@
                     <form action="/post" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="col-md-12">
-                            <div class="row">
+                            <div class="row mr-0">
                                 <div class="col-8 ">
                                     <input type="text" autocomplete="off" name="postDetail" placeholder="Type something…"
                                            class="bg-transparent w-100 label-font-Light text-white port-box-input" required>
                                 </div>
-                                <div class="col-1 px-2">
-                                    <div class="row h-100 justify-content-end">
-                                        <button class="text-center"
-                                             style="width: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px;border-color: transparent;cursor: pointer">
-                                            <i class="fas fa-paper-plane text-white"
-                                               style="font-size: 16px;position: relative;left: -1px;bottom: 3px;"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-3 ">
+                                <div class="col-3 px-0">
                                     <select name="gameID"
                                             class="w-100 border-0 uneditable-input label-font-Light text-white px-4"
                                             style="height: 40px; background-color: #FBC226;border-radius: 20px;cursor: pointer" required>
@@ -48,6 +39,15 @@
                                             <option value={{$item->game_ID}}>{{$item->game_name}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="col-1 p-0">
+                                    <div class="row mx-0 h-100 justify-content-end">
+                                        <button class="text-center"
+                                                style="width: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px;border-color: transparent;cursor: pointer">
+                                            <i class="fas fa-paper-plane text-white"
+                                               style="font-size: 16px;position: relative;left: -1px;bottom: 3px;"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -122,9 +122,9 @@
         console.log(id);
         switch (id) {
             case 1:
-                $('#nav_post1').show(250);
-                $('#nav_post2').hide(250);
-                $('#nav_post3').hide(250);
+                $('#nav_post1').slideDown(250);
+                $('#nav_post2').slideUp(250);
+                $('#nav_post3').slideUp(250);
 
                 $('#post_action_1').addClass('border-danger');
                 $('#text_focus_1').addClass('text-pink');
@@ -147,8 +147,8 @@
                 break;
             case 2:
                 // $('#nav_post1').hide(250);
-                $('#nav_post2').show(250);
-                $('#nav_post3').hide(250);
+                $('#nav_post2').slideDown(250);
+                $('#nav_post3').slideUp(250);
 
 
                 $('#post_action_1').removeClass('border-danger');
@@ -172,9 +172,9 @@
 
                 break;
             case 3:
-                $('#nav_post1').hide(250);
-                $('#nav_post2').hide(250);
-                $('#nav_post3').show(250);
+                $('#nav_post1').slideUp(250);
+                $('#nav_post2').slideUp(250);
+                $('#nav_post3').slideDown(250);
 
                 $('#post_action_1').removeClass('border-danger');
                 $('#text_focus_1').removeClass('text-pink');

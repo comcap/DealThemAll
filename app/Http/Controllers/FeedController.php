@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Asset;
 use App\Feed;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic;
 
 class FeedController extends Controller
 {
@@ -35,7 +39,77 @@ class FeedController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $postDetail = $request->postDetail;
+        $gameID = $request->gameID;
+        $stateID = $request->stateID;
+        $postImage = $request->postImage;
+        $postVideo = $request->postVideo;
+
+        switch ($stateID){
+            case 1:
+                $post = new Feed();
+                $post->user_ID = Auth::user()->user_ID;
+                $post->game_ID = $gameID;
+                $post->post_detail = $postDetail;
+                $post->postType_ID = $stateID;
+                $post->save();
+                break;
+            case 2:
+                $post = new Feed();
+                $post->user_ID = Auth::user()->user_ID;
+                $post->game_ID = $gameID;
+                $post->post_detail = $postDetail;
+                $post->postType_ID = $stateID;
+                $post->save();
+
+                $human_readable_date = Carbon::now()->toTimeString();
+                $timedata = strtotime($human_readable_date) * 1000;
+
+                if(isset($postImage)){
+                    foreach ($postImage as $item){
+                        $asset = new Asset();
+                        $asset->post_ID = $post->post_ID;
+                        $image_resize = ImageManagerStatic::make($item->getRealPath());
+//                    $image_resize->resize(320, 320);
+                        $image_resize->resize(null, 400, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                        $image_resize->save(public_path().'/data-image/post_asset/'. $timedata."_".$item->getclientoriginalname());
+
+                        $asset->asset_name = $timedata."_".$item->getclientoriginalname();
+                        $asset->save();
+                    }
+                }else{
+                    return "error";
+                }
+                break;
+            case 3:
+                $post = new Feed();
+                $post->user_ID = Auth::user()->user_ID;
+                $post->game_ID = $gameID;
+                $post->post_detail = $postDetail;
+                $post->postType_ID = $stateID;
+                $post->save();
+
+                $human_readable_date = Carbon::now()->toTimeString();
+                $timedata = strtotime($human_readable_date) * 1000;
+
+                if(isset($postVideo)){
+                    $asset = new Asset();
+                    $asset->post_ID = $post->post_ID;
+                    $postVideo->move(public_path().'/data-image/post_asset/',$timedata."_".$postVideo->getclientoriginalname());
+                    $asset->asset_name = $timedata."_".$postVideo->getclientoriginalname();
+                    $asset->save();
+                }else{
+                    return "error";
+                }
+
+                break;
+            default:
+                return "error";
+        }
+
+        return redirect("/");
     }
 
     /**

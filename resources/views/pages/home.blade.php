@@ -57,6 +57,28 @@
             display: none;
         }
 
+        .carousel-indicators .active{
+            background-color: rgba(241,29,114,1);
+        }
+        .carousel-indicators li {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: rgba(255,255,255,.8);
+        }
+        .carousel{
+            width:300px;
+        }
+        .item img{
+            object-fit:cover;
+            height:400px !important;
+            width:350px;
+        }
+        .content-image-center{
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
     <div id="box-item" class="container-fluid supreme-container">
         <div class="row pt-2">
@@ -66,45 +88,56 @@
                         @include('includes.boxHomePost')
                     @endif
                     {{--------------------------content--------------------------}}
-                        <div class="col-12 mb-3">
-                            <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
-                                <div class="col-12 p-5">
-                                    <div class="row mx-0 align-items-center">
-                                        <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                        <div>
-                                            <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                            </h3>
-                                            <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-4 mx-0">
-                                        <p class="text-white label-font-Condensed-Regular" style="font-size: 14px">ผลไม้ บอยคอต แม็กกาซีนกราวนด์ปาสกาลบู๊พล็อต มวลชนสติ๊กเกอร์วืดรีสอร์ตนิวส์ พรีเซ็นเตอร์สไตล์อิออนดีมานด์ดาวน์ มาร์ชราชบัณฑิตยสถานสตาร์ คอร์รัปชั่น เรซินอุรังคธาตุลิมูซีนฟลุก วานิลา ชนะเลิศ ซานตาคลอสระโงกไทเฮาเซ็กส์ซีน โฮมศิรินทร์ภควัมปติ คาร์โก้ เซาท์โยเกิร์ตแพนดา จอหงวนสลัม แคป
-
-                                        </p>
-                                    </div>
-
-                                    <div class="row mt-4 mx-0 bg-secondary" style="height: 400px"></div>
-
-                                    <div class="row mt-4 mx-0">
-                                        <div class="col-6">
-                                            <div class="row align-items-center">
-                                                <img src="https://dummyimage.com/40x40/000/fff">
-                                                <h3 class="label-font-Light ml-3 mb-0" style="font-size: 16px;color: #AAAAAA">Playerunknown’s Battlegrounds</h3>
+                        @foreach($feeds as $key => $item)
+                            <div class="col-12 mb-3">
+                                <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
+                                    <div class="col-12 p-4">
+                                        <div class="row mx-0 align-items-center">
+                                            <img src="{{asset('data-image/userImage/'.$item->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                            <div>
+                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">{{$item->user_name}}
+                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a {{$item->game_name}}.</span>
+                                                </h3>
+                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">{{$item->created_at}}</span>
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="row">
-                                                <div class="offset-6"></div>
-                                                <div class="col-6">
-                                                    <div class="row align-items-center justify-content-end" style="height: 40px">
-                                                        <div class="">
-                                                            <img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">
-                                                            <span class="text-pink">609</span>
-                                                        </div>
-                                                        <div class="ml-4">
-                                                            <img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">
-                                                            <span class="text-pink">609</span>
+                                        <div class="row mt-4 mx-0">
+                                            <p class="text-white label-font-Condensed-Regular mb-0" style="font-size: 14px">
+                                                {{$item->post_detail}}
+                                            </p>
+                                        </div>
+                                        @switch($item->postType_ID)
+                                            @case(2)
+                                                @include('includes.imageContentHome')
+                                            @break
+                                            @case(3)
+                                                <div class="row mt-3 mx-0 justify-content-center" style="height: 400px; background-color: rgba(0,0,0,1);">
+                                                    <video class="mw-100" style="max-height: 400px" controls>
+                                                        <source type="video/mp4" src="{{asset('data-image/post_asset/'.$item->imagePath[0]->asset_name)}}">
+                                                    </video>
+                                                </div>
+                                            @break
+                                        @endswitch
+                                        <div class="row mt-4 mx-0">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <img src="{{asset($item->game_logo)}}" width="40px" height="40px">
+                                                    <h3 class="label-font-Light ml-3 mb-0" style="font-size: 16px;color: #AAAAAA">{{$item->game_name}}</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="offset-6"></div>
+                                                    <div class="col-6">
+                                                        <div class="row align-items-center justify-content-end" style="height: 40px">
+                                                            <div class="">
+                                                                <img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">
+                                                                <span class="text-pink">609</span>
+                                                            </div>
+                                                            <div class="ml-4">
+                                                                <img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">
+                                                                <span class="text-pink">609</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -113,55 +146,57 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 mb-3">
-                            <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
-                                <div class="col-12 p-5">
-                                    <div class="row mx-0 align-items-center">
-                                        <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                                        <div>
-                                            <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                                <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                            </h3>
-                                            <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-4 mx-0">
-                                        <p class="text-white label-font-Condensed-Regular" style="font-size: 14px">ผลไม้ บอยคอต แม็กกาซีนกราวนด์ปาสกาลบู๊พล็อต มวลชนสติ๊กเกอร์วืดรีสอร์ตนิวส์ พรีเซ็นเตอร์สไตล์อิออนดีมานด์ดาวน์ มาร์ชราชบัณฑิตยสถานสตาร์ คอร์รัปชั่น เรซินอุรังคธาตุลิมูซีนฟลุก วานิลา ชนะเลิศ ซานตาคลอสระโงกไทเฮาเซ็กส์ซีน โฮมศิรินทร์ภควัมปติ คาร์โก้ เซาท์โยเกิร์ตแพนดา จอหงวนสลัม แคป
+                        @endforeach
 
-                                        </p>
-                                    </div>
 
-                                    <div class="row mt-4 mx-0 bg-secondary" style="height: 400px"></div>
+                        {{--<div class="col-12 mb-3">--}}
+                            {{--<div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">--}}
+                                {{--<div class="col-12 p-5">--}}
+                                    {{--<div class="row mx-0 align-items-center">--}}
+                                        {{--<img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">--}}
+                                        {{--<div>--}}
+                                            {{--<h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix--}}
+                                                {{--<span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>--}}
+                                            {{--</h3>--}}
+                                            {{--<span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="row mt-4 mx-0">--}}
+                                        {{--<p class="text-white label-font-Condensed-Regular" style="font-size: 14px">ผลไม้ บอยคอต แม็กกาซีนกราวนด์ปาสกาลบู๊พล็อต มวลชนสติ๊กเกอร์วืดรีสอร์ตนิวส์ พรีเซ็นเตอร์สไตล์อิออนดีมานด์ดาวน์ มาร์ชราชบัณฑิตยสถานสตาร์ คอร์รัปชั่น เรซินอุรังคธาตุลิมูซีนฟลุก วานิลา ชนะเลิศ ซานตาคลอสระโงกไทเฮาเซ็กส์ซีน โฮมศิรินทร์ภควัมปติ คาร์โก้ เซาท์โยเกิร์ตแพนดา จอหงวนสลัม แคป--}}
 
-                                    <div class="row mt-4 mx-0">
-                                        <div class="col-6">
-                                            <div class="row align-items-center">
-                                                <img src="https://dummyimage.com/40x40/000/fff">
-                                                <h3 class="label-font-Light ml-3 mb-0" style="font-size: 16px;color: #AAAAAA">Playerunknown’s Battlegrounds</h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="row">
-                                                <div class="offset-6"></div>
-                                                <div class="col-6">
-                                                    <div class="row align-items-center justify-content-end" style="height: 40px">
-                                                        <div class="">
-                                                            <img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">
-                                                            <span class="text-pink">609</span>
-                                                        </div>
-                                                        <div class="ml-4">
-                                                            <img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">
-                                                            <span class="text-pink">609</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                        {{--</p>--}}
+                                    {{--</div>--}}
+
+                                    {{--@include('includes.imageContentHome')--}}
+
+                                    {{--<div class="row mt-4 mx-0">--}}
+                                        {{--<div class="col-6">--}}
+                                            {{--<div class="row align-items-center">--}}
+                                                {{--<img src="https://dummyimage.com/40x40/000/fff">--}}
+                                                {{--<h3 class="label-font-Light ml-3 mb-0" style="font-size: 16px;color: #AAAAAA">Playerunknown’s Battlegrounds</h3>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-6">--}}
+                                            {{--<div class="row">--}}
+                                                {{--<div class="offset-6"></div>--}}
+                                                {{--<div class="col-6">--}}
+                                                    {{--<div class="row align-items-center justify-content-end" style="height: 40px">--}}
+                                                        {{--<div class="">--}}
+                                                            {{--<img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">--}}
+                                                            {{--<span class="text-pink">609</span>--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="ml-4">--}}
+                                                            {{--<img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">--}}
+                                                            {{--<span class="text-pink">609</span>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                 </div>
             </div>
             <div class="col-3 p-2 ">

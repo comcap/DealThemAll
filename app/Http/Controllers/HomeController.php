@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Asset;
+use App\Feed;
 use App\Game;
 use App\StatsPlayer;
 use App\Team;
@@ -40,9 +42,36 @@ class HomeController extends Controller
 
             $countStats= StatsPlayer::where('user_ID','=',Auth::user()->user_ID)->count();
 
-            return view('pages.home',compact('gameList','userRole','countStats'));
+            $feeds = Feed::select('*','tbl_feed.updated_at','tbl_feed.created_at')
+                    ->join('tbl_User','tbl_User.user_ID','=','tbl_feed.user_ID')
+                    ->join('tbl_Game','tbl_Game.game_ID','=','tbl_feed.game_ID')
+                    ->orderBy('tbl_feed.created_at','desc')
+                    ->get();
+
+            $asset = Asset::get();
+
+            $result = $feeds->map(function ($item,$key) use ($asset){
+                $orders = $asset->filter(function ($value, $key) use ($item){
+                    return $value->post_ID == $item->post_ID;
+                });
+
+                $item->imagePath = $orders->values();
+
+                return $item;
+            });
+
+//            ->join('tbl_asset','tbl_asset.post_ID','=','tbl_feed.post_ID')
+//            return $result;
+
+            return view('pages.home',compact('gameList','userRole','countStats','feeds'));
         }else{
-            return view('pages.home');
+            $feeds = Feed::select('*','tbl_feed.updated_at','tbl_feed.created_at')
+                ->join('tbl_User','tbl_User.user_ID','=','tbl_feed.user_ID')
+                ->join('tbl_Game','tbl_Game.game_ID','=','tbl_feed.game_ID')
+                ->orderBy('tbl_feed.created_at','desc')
+                ->get();
+
+            return view('pages.home',compact('feeds'));
         }
 
     }
