@@ -28,9 +28,19 @@
                                 @csrf
                                 <input type="text" name="gameSelect" value="{{$id}}" hidden>
                                 @if(isset($StatsPlayer))
-                                    <input type="text" name="username" value="{{$StatsPlayer->userPath}}" placeholder="Search Profile." class="text-input pl-3">
+                                    <input type="text" name="username" value="{{$StatsPlayer->userPath}}" placeholder="Your battletag. Example: test-12345" class="text-input pl-3">
                                 @else
-                                    <input type="text" name="username" placeholder="Search Profile." class="text-input pl-3">
+                                        @switch($id)
+                                            @case(1)
+                                            <input type="text" name="username" placeholder="Your battletag / Example : test-12345" class="text-input pl-3">
+                                            @break
+                                            @case(2)
+                                            <input type="text" name="username" placeholder="Your playernames in game pubg. / Example : test1234" class="text-input pl-3">
+                                            @break
+                                            @case(4)
+                                            <input type="text" name="username" placeholder="Your battletag / Example : test-12345" class="text-input pl-3">
+                                            @break
+                                        @endswitch
                                 @endif
                                 <button type="submit" hidden></button>
                             </form>

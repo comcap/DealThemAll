@@ -47,6 +47,7 @@ Route::resource('/ApiCreateTeam','CreateTeamController');
 Route::apiResource('/getGameList', 'API\GetGameList');
 Route::apiResource('/getPlayerList.team', 'API\GetPlayer');
 Route::apiResource('/getRoleGame', 'API\GetRoleGame');
+Route::get('/checkRole/{arr}/{game}','API\getPlayerWithID@checkRole');
 
 Route::apiResource('/getPlayerListRole.role', 'API\GetPlayerListRole');
 Route::apiResource('/getPlayerWithID.game', 'API\getPlayerWithID');

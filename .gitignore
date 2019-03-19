@@ -9,6 +9,9 @@ app/storage/
 # Laravel 5 & Lumen specific
 public/storage
 public/data-image/post_asset
+public/data-image/userImage
+public/data-image/teamLogos
+
 public/hot
 storage/*.key
 .env.*.php

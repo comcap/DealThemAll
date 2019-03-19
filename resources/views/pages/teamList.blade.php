@@ -1,19 +1,18 @@
 @extends('layouts.sidebar')
 @section('content')
-    <div id="box-item" class="container-fluid">
         <div class="row mx-0">
-            <div class="col-4">
+            <div class="col-3">
                 <div class="sticky-top">
                     <div class="row mt-2">
-                        <div class="col-9 p-2">
-                            <form action="/ApiSearch" method="POST">
+                        <div class="col-12 p-2">
+                            <form action="/ApiSearchTeam" method="POST">
                                 @csrf
-                                <div class="row p-2 py-4" style="background-color: rgba(255,255,255,0.1); height: auto; border-radius: 8px">
+                                <div class="row py-4" style="background-color: rgba(255,255,255,0.1); height: auto; border-radius: 8px">
                                     <div class="d-flex col-12 justify-content-between" style="height: 100%;flex-direction: column">
                                         <div class="row">
                                             <div class="col-12">
                                                 @foreach($gameList as $item)
-                                                    @if($id==$item->game_ID)
+                                                    @if($teamList==$item->game_ID)
                                                         <img src="{{asset($item->game_Img) }}" style="height: 60px;width: 100%">
                                                     @endif
                                                 @endforeach
@@ -25,7 +24,7 @@
                                                     <p class="text-input-label">Game</p>
                                                     <select name="game" id= "game" class="text-select pl-3">
                                                         @foreach($gameList as $item)
-                                                            @if($id==$item->game_ID)
+                                                            @if($teamList==$item->game_ID)
                                                                 <option value="{{$item->game_ID}}" selected>{{$item->game_name}}</option>
                                                             @else
                                                                 <option value="{{$item->game_ID}}">{{$item->game_name}}</option>
@@ -297,7 +296,7 @@
                                                 @endfor
                                             </div>
                                         </div>
-                                        <div class="form-group" style="height: 60px;">
+                                        <div class="form-group background-color: rgba(255,255,255,0.1); height: auto; border-radius: 8px" style="height: 60px;">
                                             <div class="row">
                                                 <h7 class="text-input-label pl-3">Game Won</h7>
                                                 <span class="member-only pt-2 pl-2">Member</span>
@@ -379,9 +378,79 @@
                 </div>
             </div>
 
-            <div class="col-8">
-                <div class="row mt-2 bg-success" style="height: 1200px;">
-                    <div class="bg-success"></div>
+            <div class="col-9">
+                <div class="row ml-3 mr-0 mt-3" style="height: 40px">
+                    <div class="col-7">
+                        <div class="row mt-2 align-items-center">
+                            <a href="#">
+                                <p class="text-white label-font-Thin" style="font-size: 14px">Player <img src="{{asset('/data-image/arrow-rigth.svg')}}"width="6px" height="10px"></p>
+                            </a>
+                            <a href="#" class="ml-2">
+                                <p class="text-white label-font-Thin" style="font-size: 14px">Search Results <img src="{{asset('/data-image/arrow-rigth.svg')}}"width="6px" height="10px"></p>
+                            </a>
+                            <a href="#" class="ml-2">
+                                <p class="text-white label-font-Bold" style="font-size: 16px">
+                                    <img src="{{asset('/data-image/game_logo/overwatch/logo.svg')}}"width="30px" height="30px">
+                                    {{$gameSelect->game_name}}
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="row align-items-center">
+                            <div class="col-12 pt-3 text-right">
+                                <p class="text-white label-font-Bold" style="font-size: 13px">234 Result</p>
+                            </div>
+                            <div class="col-6 px-0 d-none">
+                                <button type="submit" class="btn btn-primary red-btn label-font-Bold " style="font-size: 12px">Create Announce</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mx-0 mt-3" style="height: auto;">
+                    @foreach($fillter as $item)
+                        <div class="col-6 h-100 mb-3 pr-0">
+                            <a href="/team/{{$item->team_ID}}" target="_blank" >
+                                <div class="row mx-0 team-box" style=" border-radius: 8px;height: 130px;">
+                                    <div class="col-12">
+                                        <div class="row h-100 align-items-center">
+                                            <div class="col-4">
+                                                <img src="{{asset('/data-image/teamLogos/'.$item->team_logo)}}" width="100%" height="auto" style="border-radius: 8px">
+                                            </div>
+                                            <div class="col-8 h-100 pt-4">
+                                                <div class="row mr-0">
+                                                    <div class="col-8 pl-1">
+                                                        <h4 for="" class="text-white label-font-Condensed-Bold">{{$item->team_name}}</h4>
+                                                    </div>
+                                                    <div class="col-4 p-0">
+                                                        <div class="row align-items-center justify-content-end mx-0 pb-2">
+                                                            <img id="teamManReady" class="mr-2" src="{{asset('data-image/standing-up-man.svg')}}" height="24px">
+                                                            <p class="label-font-Condensed-Bold text-pink m-0 p-0" id="countInvite" style="font-size: 24px;line-height:0px;">0/6</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mr-0 align-items-end" style="height: 50px;">
+                                                    @foreach($item->role as $role)
+                                                        @if($role->user_ID != null)
+                                                            <div class="col p-0 text-center">
+                                                                <img src="{{asset('/data-image/role/'.$role->type_Image)}}" width="auto" height="100%" style="max-height: 36px">
+                                                                <p class="text-white" style="font-size: 10px">{{$role->typeName}}</p>
+                                                            </div>
+                                                        @else
+                                                            <div class="col p-0 text-center">
+                                                                <img src="https://dummyimage.com/80x80/000/fff" width="auto" height="100%" style="max-height: 40px">
+                                                                <p class="text-white" style="font-size: 10px">NONE</p>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -407,6 +476,5 @@
             {{--<div class="row">--}}
             {{--@include('includes.playerList')--}}
             {{--</div>--}}
-        </div>
     </div>
 @stop

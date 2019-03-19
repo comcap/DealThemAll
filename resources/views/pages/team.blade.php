@@ -5,10 +5,10 @@
         <div class="row border-bottom">
             <div class="col-12 mt-3 ">
                 <div class="row mb-0 align-items-end">
-                    <div class="col-10 p-0" style="height:50px">
+                    <div class="col-5 p-0" style="height:50px">
                         <div class="row">
                             <img class="pl-3" id="gameLogo" src="{{asset('data-image/game_logo/overwatch/logo.svg')}}" height="40px">
-                            <div class="col-5 pl-0">
+                            <div class="col-10 pl-0">
                                 <select class="pl-3 selectGameTeam label-font-Bold ml-3" onchange="selectGameTeam({{\Illuminate\Support\Facades\Auth::user()->user_ID}},{{$teamManager}})" name="game" id="gameList" style="font-size: 24px">
                                     @foreach($gameList as $item)
                                         <option value="{{$item->game_ID}}">{{$item->game_name}}</option>
@@ -17,7 +17,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-5 " style="height:50px">
+                        <div id="warning-box" class="row align-items-end justify-content-end pb-1 h-100">
+                            {{--<div class="col">--}}
+                                {{--<h4><span class="badge badge-warning">Warning</span></h4>--}}
+                            {{--</div>--}}
+                            {{--<div class="col">--}}
+                                {{--<h4><span class="badge badge-warning">Warning</span></h4>--}}
+                            {{--</div>--}}
+                            {{--<div class="col">--}}
+                                {{--<h4><span class="badge badge-warning">Warning</span></h4>--}}
+                            {{--</div>--}}
+                        </div>
+                    </div>
+                    <div class="col-2">
                         <div class="row p-0" style="height: 60px">
                             <div class="col-9 d-flex justify-content-end">
                                 <div class="row">
@@ -99,46 +112,95 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-9 pl-4">
-                <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
-                    <div class="col-12 p-5 mb-3">
-                        <div class="row mx-0 align-items-center">
-                            <img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">
-                            <div>
-                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix
-                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>
-                                </h3>
-                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>
-                            </div>
-                        </div>
-                        <div class="row mt-4 mx-0">
-                            <p class="text-white label-font-Condensed-Regular" style="font-size: 14px">ผลไม้ บอยคอต แม็กกาซีนกราวนด์ปาสกาลบู๊พล็อต มวลชนสติ๊กเกอร์วืดรีสอร์ตนิวส์ พรีเซ็นเตอร์สไตล์อิออนดีมานด์ดาวน์ มาร์ชราชบัณฑิตยสถานสตาร์ คอร์รัปชั่น เรซินอุรังคธาตุลิมูซีนฟลุก วานิลา ชนะเลิศ ซานตาคลอสระโงกไทเฮาเซ็กส์ซีน โฮมศิรินทร์ภควัมปติ คาร์โก้ เซาท์โยเกิร์ตแพนดา จอหงวนสลัม แคป
-
-                            </p>
-                        </div>
-
-                        <div class="row mt-4 mx-0 bg-secondary" style="height: 400px"></div>
-
-                        <div class="row mt-4 mx-0">
-                            <div class="col-6">
-                                <div class="row align-items-center">
-                                    <img src="https://dummyimage.com/40x40/000/fff">
-                                    <h3 class="label-font-Light ml-3 mb-0" style="font-size: 16px;color: #AAAAAA">Playerunknown’s Battlegrounds</h3>
+                <div class="row">
+                    @if(!isset($feeds))
+                        @foreach($feeds as $key => $item)
+                            <div class="col-12 pl-4 mb-3">
+                                <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
+                                    <div class="col-12 p-4">
+                                        <div class="row mx-0 align-items-center">
+                                            <a href="profile/{{$item->user_ID}}">
+                                                <img src="{{asset('data-image/userImage/'.$item->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                            </a>
+                                            <div>
+                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">
+                                                    <a class="label-font-Bold text-white" href="profile/{{$item->user_ID}}">
+                                                        {{$item->user_name}}
+                                                    </a>
+                                                    <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a {{$item->game_name}}.</span>
+                                                </h3>
+                                                <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">{{$item->created_at}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-4 mx-0">
+                                            <p class="text-white label-font-Condensed-Regular mb-0" style="font-size: 14px">
+                                                {{$item->post_detail}}
+                                            </p>
+                                        </div>
+                                        @switch($item->postType_ID)
+                                            @case(2)
+                                            @include('includes.imageContentHome')
+                                            @break
+                                            @case(3)
+                                            <div class="row mt-3 mx-0 justify-content-center" style="height: 400px; background-color: rgba(0,0,0,1);">
+                                                <video class="mw-100" style="max-height: 400px" controls>
+                                                    <source type="video/mp4" src="{{asset('data-image/post_asset/'.$item->imagePath[0]->asset_name)}}">
+                                                </video>
+                                            </div>
+                                            @break
+                                        @endswitch
+                                        <div class="row mt-4 mx-0">
+                                            <div class="col-6">
+                                                <div class="row align-items-center">
+                                                    <img src="{{asset($item->game_logo)}}" width="40px" height="40px">
+                                                    <h3 class="label-font-Light ml-3 mb-0" style="font-size: 16px;color: #AAAAAA">{{$item->game_name}}</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="offset-6"></div>
+                                                    <div class="col-6">
+                                                        <div class="row align-items-center justify-content-end" style="height: 40px">
+                                                            <div class="">
+                                                                <img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">
+                                                                <span class="text-pink">609</span>
+                                                            </div>
+                                                            <div class="ml-4">
+                                                                <img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">
+                                                                <span class="text-pink">609</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="row mx-0">
-                                    <div class="offset-6"></div>
-                                    <div class="col-6">
-                                        <div class="row align-items-center justify-content-end" style="height: 40px">
-                                            <div class="row align-items-center justify-content-end" style="height: 40px">
-                                                <div class="">
-                                                    <img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">
-                                                    <span class="text-pink">609</span>
+                        @endforeach
+                    @else
+                        <div class="col-12">
+                            <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
+                                <div class="col-12 p-5 mb-3">
+                                    <div class="row mt-4 mx-0 " style="height: 300px">
+                                        <div class="col-12 px-4 py-3  ">
+                                            <div class="row">
+                                                <div class="col-12 ">
+                                                    <img src="{{asset('/data-image/nullFeed.svg')}}" height="200px" width="auto">
                                                 </div>
-                                                <div class="ml-4">
-                                                    <img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">
-                                                    <span class="text-pink">609</span>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-12 text-center">
+                                                    <h2 class="text-secondary label-font-Bold m-0"
+                                                        style="font-size: 24px">Oops!</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 text-center">
+                                                    <h2 class="text-secondary label-font-Condensed-Thin mb-0"
+                                                        style="font-size: 20px">No notification yet.</h2>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,9 +208,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -442,11 +505,27 @@
             var url = '/getPlayerMember/'+idTeam+'/game/'+idGame
 
             xhttp.onreadystatechange = function() {
+                var arr = [];
+                var render = [];
                 if (this.readyState == 4 && this.status == 200) {
                     var obj = JSON.parse(this.responseText);
                     console.log(obj,"getPlayerList")
 
-                    arrInvite = obj;
+                    arrInvite = obj['data'];
+
+                    obj['warning'].forEach(function (item) {
+                        render += "<h5><span class=\"badge text-white mx-2\" style='background-color: "+item['color']+"'>"+item['title']+"</span></h5>"
+                    });
+
+                    document.getElementById('warning-box').innerHTML = render;
+                    // obj.forEach(function (item) {
+                    //     item['role'].forEach(function (value) {
+                    //         arr.push(value['role_name'])
+                    //     })
+                    // })
+                    //
+                    // console.log(arr,"role")
+
                     if (teamOwner) {
                         renderMyMember()
                     }else{

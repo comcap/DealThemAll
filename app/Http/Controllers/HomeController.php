@@ -71,6 +71,18 @@ class HomeController extends Controller
                 ->orderBy('tbl_feed.created_at','desc')
                 ->get();
 
+            $asset = Asset::get();
+
+            $result = $feeds->map(function ($item,$key) use ($asset){
+                $orders = $asset->filter(function ($value, $key) use ($item){
+                    return $value->post_ID == $item->post_ID;
+                });
+
+                $item->imagePath = $orders->values();
+
+                return $item;
+            });
+
             return view('pages.home',compact('feeds'));
         }
 

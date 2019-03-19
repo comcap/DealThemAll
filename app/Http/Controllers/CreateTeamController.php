@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\Notification;
+use App\NotificationDetail;
 use App\StatsPlayer;
 use App\Team;
 use App\TeamManager;
@@ -65,6 +67,8 @@ class CreateTeamController extends Controller
         $invitePlayer = $request->invitePlayer;
         $imageFile = $request->file;
 
+        $gameList = Game::get();
+
         $getLanguage = DB::table('tbl_language')->whereIn('languageID',[$language1,$language2,$language3])->get();
         $strLanguage = "";
         foreach ($getLanguage as $key => $item){
@@ -72,7 +76,7 @@ class CreateTeamController extends Controller
         }
         $invitePlayer = explode(",",$invitePlayer);
 
-        $timedata = Carbon::now()->toTimeString();
+        $timedata = Carbon::now()->timestamp;
 
         $Team = new Team();
         $Team->team_name = $nameTeam;
@@ -98,10 +102,48 @@ class CreateTeamController extends Controller
             $TeamManager->teamID = $Team->team_ID;
             $TeamManager->game_ID = $game;
             $TeamManager->user_ID = $value;
-            $TeamManager->user_verify = 0;
+            if ($value == Auth::user()->user_ID){
+                $TeamManager->user_verify = 1;
+            }else{
+                $TeamManager->user_verify = 0;
+            }
             $TeamManager->expired_invite = Carbon::now()->addMinutes(5)->toDateTimeString();
             $TeamManager->save();
+
+            if ($value != Auth::user()->user_ID){
+                $notification = new Notification();
+                $notification->notification_User = $value;
+                $notification->notification_isRead = 0;
+                $notification->notification_type = 1;
+                $notification->notificaiton_state = 0;
+                $notification->save();
+
+                $notificationDetail = new NotificationDetail();
+                $notificationDetail->notificaitonID = $notification->notificationID;
+                $notificationDetail->teamID = $Team->team_ID;
+                $notificationDetail->senderID = Auth::user()->user_ID;
+                $notificationDetail->gameID = $game;
+                $notificationDetail->save();
+            }
+        };
+
+        $gameList = Game::get();
+
+        foreach ($gameList as $item){
+            if ($item->game_ID == $game){
+                continue;
+            }
+            for ($i=1;$i<=6;$i++){
+                $TeamManager = new TeamManager();
+                $TeamManager->teamID = $Team->team_ID;
+                $TeamManager->game_ID = $item->game_ID;
+                $TeamManager->user_ID = null;
+                $TeamManager->user_verify = 0;
+                $TeamManager->expired_invite = "9999-12-31";
+                $TeamManager->save();
+            }
         }
+
 //        return $strLanguage;
 
         return redirect('team');

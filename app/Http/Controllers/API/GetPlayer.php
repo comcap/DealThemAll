@@ -64,7 +64,7 @@ class GetPlayer extends Controller
                 ->get();
         }
 
-        $userRole = UserRole::select('tbl_User_Role.user_ID', 'tbl_Role.role_name', 'tbl_User_Role.stateRole')
+        $userRole = UserRole::select('tbl_User_Role.user_ID', 'tbl_Role.role_name','tbl_Role.role_color','tbl_User_Role.stateRole')
             ->join('tbl_User', 'tbl_User.user_ID', '=', 'tbl_User_Role.user_ID')
             ->join('tbl_Role', 'tbl_User_Role.role_ID', '=', 'tbl_Role.role_ID')
             ->where('tbl_User_Role.stateRole', '>', 0)

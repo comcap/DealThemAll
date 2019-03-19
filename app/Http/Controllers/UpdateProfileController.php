@@ -103,21 +103,54 @@ class UpdateProfileController extends Controller
         } else {
             $json = json_decode($response, true);
         }
-        $card = $json['competitiveStats']['awards']['cards'];
 
-        return $card;
-        $topHeroes = $json['competitiveStats']['topHeroes'];
+        if (isset($json['competitiveStats']['awards']['cards'])){
+            $card = $json['competitiveStats']['awards']['cards'];
+        }else{
+            $card = "";
+        }
+
+        if (count($json['competitiveStats']['topHeroes']) > 0 || $json['competitiveStats']['topHeroes'] != []){
+            $topHeroes = $json['competitiveStats']['topHeroes'];
+        }else{
+            $topHeroes = $json['quickPlayStats']['topHeroes'];
+        }
+
         $arr = [];
         foreach ($topHeroes as $item){
             array_push($arr,$item['weaponAccuracy']);
         }
-        $icon = $json['icon'];
-        $name = $json['name'];
-        $rating = $json['rating'];
-        $gamesWon = $json['gamesWon'];
-        $weaponAccuracy = max($arr);
-        $timePlayed = $json['quickPlayStats']['careerStats']['allHeroes']['game']['timePlayed'];
-        $eliminations = $json['competitiveStats']['careerStats']['allHeroes']['combat']['eliminations'];
+
+        if (isset($json['icon'])){
+            $icon = $json['icon'];
+        }
+
+        if ($json['name']){
+            $name = $json['name'];
+        }
+
+        if (isset($json['rating'])){
+            $rating = $json['rating'];
+        }
+
+        if (isset($json['gamesWon'])){
+            $gamesWon = $json['gamesWon'];
+        }
+
+        if (count($arr)>0){
+            $weaponAccuracy = max($arr);
+        }
+
+
+        if (isset($json['quickPlayStats']['careerStats']['allHeroes']['game']['timePlayed'])){
+            $timePlayed = $json['quickPlayStats']['careerStats']['allHeroes']['game']['timePlayed'];
+        }
+
+        if (isset($json['competitiveStats']['careerStats']['allHeroes']['combat']['eliminations'])){
+            $eliminations = $json['competitiveStats']['careerStats']['allHeroes']['combat']['eliminations'];
+        }else{
+            $eliminations = $json['quickPlayStats']['careerStats']['allHeroes']['combat']['eliminations'];
+        }
 
         $StatsPlayer = StatsPlayer::where('user_ID','=',$userID)->where('game_ID','=',$id)->first();
 
@@ -141,7 +174,6 @@ class UpdateProfileController extends Controller
 
         $resultRole = [];
         $subResultRole = [];
-
 
         $role->each(function ($subItem) use (&$resultRole,&$subResultRole){
             if ($subItem->stateRole == 1 || $subItem->stateRole == 2){

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\GameRole;
 use App\StatsPlayer;
 use App\TeamManager;
 use App\UserRole;
@@ -52,6 +53,7 @@ class GetPlayerMember extends Controller
             ->where('tbl_team_manager.teamID','=',$id)
             ->where('tbl_team_manager.game_ID','=',$game)
             ->where('tbl_stats_player.game_ID','=',$game)
+            ->orderby('tbl_team_manager.user_verify','desc')
             ->orderby('tbl_stats_player.rank_total','desc')
             ->get();
 
@@ -60,17 +62,17 @@ class GetPlayerMember extends Controller
             return $item;
         });
 
-//        $dt = Carbon::now();
 //        $teamManager = TeamManager::where('user_verify','=',0)
 //            ->where('expired_invite','<=',$dt)
 //            ->get();
 //
 //        return $teamManager;
-//        TeamManager::where('user_verify','=',0)
-//            ->where('expired_invite','<=',$dt)
-//            ->delete();
+        $dt = Carbon::now();
+        TeamManager::where('user_verify','=',0)
+            ->where('expired_invite','<=',$dt)
+            ->update(['user_ID' => null,'expired_invite' => "9999-12-31"]);
 
-        $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_name','tbl_User_Role.stateRole','tbl_Role.role_name','tbl_Game.game_logo','tbl_Role.role_color')
+        $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_ID','tbl_Role.role_name','tbl_User_Role.stateRole','tbl_Role.role_name','tbl_Game.game_logo','tbl_Role.role_color')
             ->join('tbl_User','tbl_User.user_ID','=','tbl_User_Role.user_ID')
             ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
             ->join('tbl_team_manager','tbl_team_manager.user_ID','=','tbl_User_Role.user_ID')
@@ -91,8 +93,29 @@ class GetPlayerMember extends Controller
             return $item;
         });
 
+        $gameRole = GameRole::join('tbl_Role_type','tbl_Role_type.typeID','=','tbl_Game_role.typeID')
+                                ->where('game_ID','=',$game)
+                                ->get();
+        $arrGameRole = [];
+        $userGameRole = [];
 
-        return $result;
+        foreach ($userRole as $item){
+            array_push($userGameRole,$item['role_ID']);
+//            if (in_array($item['role_ID'],$arrGameRole)){
+//                array_push($userGameRole,$item['role_name']);
+//            }else{
+//                array_push($userGameRole,false);
+//            }
+        }
+
+        foreach ($gameRole as $item){
+//            array_push($arrGameRole,$item['typeID']);
+            if (!in_array($item['typeID'],$userGameRole)){
+                array_push($arrGameRole,["title" => "NO ".$item['typeName']." PLAYER","color" => $item['color']]);
+            }
+        }
+
+        return ["data"=>$result,"warning"=>$arrGameRole];
     }
 
     /**

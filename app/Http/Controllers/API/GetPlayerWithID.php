@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\GameRole;
 use App\StatsPlayer;
 use App\UserRole;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class GetPlayerWithID extends Controller
             ->orderby('tbl_stats_player.rank_total','desc')
             ->get();
 
-        $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_name','tbl_User_Role.stateRole')
+        $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_ID','tbl_Role.role_name','tbl_Role.role_color','tbl_User_Role.stateRole')
             ->join('tbl_User','tbl_User.user_ID','=','tbl_User_Role.user_ID')
             ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
             ->where('tbl_User_Role.stateRole','>',0)
@@ -85,5 +86,24 @@ class GetPlayerWithID extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function checkRole($arr,$game){
+        $gameRole = GameRole::join('tbl_Role_type','tbl_Role_type.typeID','=','tbl_Game_role.typeID')
+            ->where('game_ID','=',$game)
+            ->get();
+        $arrGameRole = [];
+        $userGameRole = [];
+
+        foreach (json_decode($arr) as $item){
+            array_push($userGameRole,$item);
+        }
+
+        foreach ($gameRole as $item){
+            if (!in_array($item['typeID'],$userGameRole)){
+                array_push($arrGameRole,["title" => "NO ".$item['typeName']." PLAYER","color" => $item['color']]);
+            }
+        }
+        return $arrGameRole;
     }
 }

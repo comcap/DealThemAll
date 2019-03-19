@@ -41,7 +41,8 @@ class UpdateNoti extends Controller
 
                         TeamManager::where('user_verify','=',0)
                             ->where('expired_invite','<=',$dt)
-                            ->delete();
+                            ->update(['user_ID' => null,'user_verify' => 0,'expired_invite' => "9999-12-31"]);
+
                     }
                 }
             }

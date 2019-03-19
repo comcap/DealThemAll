@@ -93,9 +93,14 @@
                                 <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
                                     <div class="col-12 p-4">
                                         <div class="row mx-0 align-items-center">
-                                            <img src="{{asset('data-image/userImage/'.$item->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                            <a href="profile/{{$item->user_ID}}">
+                                                <img src="{{asset('data-image/userImage/'.$item->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                            </a>
                                             <div>
-                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">{{$item->user_name}}
+                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">
+                                                    <a class="label-font-Bold text-white" href="profile/{{$item->user_ID}}">
+                                                        {{$item->user_name}}
+                                                    </a>
                                                     <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a {{$item->game_name}}.</span>
                                                 </h3>
                                                 <span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">{{$item->created_at}}</span>
@@ -425,7 +430,6 @@
                                     <input type="password" name="password" placeholder="••••••••••••••" class="text-input pl-3">
                                 </div>
                                 <p class="mt-1" style="color: #ffffff; font-weight: lighter">Forgot your password ?</p>
-
                                 <button type="submit" class="btn btn-primary red-btn" >LOGIN</button>
                             </form>
                             {{--<a href="/register"><button class="light-btn mt-3">SIGN UP</button></a>--}}

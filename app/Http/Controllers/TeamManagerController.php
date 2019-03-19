@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Asset;
+use App\Feed;
 use App\Game;
+use App\GameRole;
 use App\Notification;
 use App\NotificationDetail;
 use App\Team;
@@ -60,13 +63,19 @@ class TeamManagerController extends Controller
         $gameID = $request->gameID;
         $userID = Auth::user()->user_ID;
 
-        $TeamManager = new TeamManager();
-        $TeamManager->teamID = $teamID;
-        $TeamManager->game_ID = $gameID;
-        $TeamManager->user_ID = $playerID;
-        $TeamManager->user_verify = 0;
-        $TeamManager->expired_invite = Carbon::now()->addMinutes(5)->toDateTimeString();
-        $TeamManager->save();
+        TeamManager::where('tbl_team_manager.teamID','=',$teamID)
+            ->where('tbl_team_manager.game_ID','=',$gameID)
+            ->whereNull('tbl_team_manager.user_ID')
+            ->first()
+            ->update(['user_ID' => $playerID,'user_verify' => 0,'expired_invite' => Carbon::now()->addMinutes(5)->toDateTimeString()]);
+
+//        $TeamManager = new TeamManager();
+//        $TeamManager->teamID = $teamID;
+//        $TeamManager->game_ID = $gameID;
+//        $TeamManager->user_ID = $playerID;
+//        $TeamManager->user_verify = 0;
+//        $TeamManager->expired_invite = Carbon::now()->addMinutes(5)->toDateTimeString();
+//        $TeamManager->save();
 
         $notification = new Notification();
         $notification->notification_User = $playerID;
@@ -128,7 +137,27 @@ class TeamManagerController extends Controller
         });
         $language = DB::table('tbl_language')->get();
 
-        return view('pages.team',compact('TeamOwner','language','teamManager','gameList','result','getTeam'));
+        $feeds = Feed::select('*','tbl_feed.updated_at','tbl_feed.created_at')
+            ->join('tbl_User','tbl_User.user_ID','=','tbl_feed.user_ID')
+            ->join('tbl_Game','tbl_Game.game_ID','=','tbl_feed.game_ID')
+            ->join('tbl_team_manager','tbl_team_manager.user_ID','=','tbl_feed.user_ID')
+            ->where('tbl_team_manager.teamID','=',$teamManager)
+            ->orderBy('tbl_feed.created_at','desc')
+            ->get();
+
+        $asset = Asset::get();
+
+        $feeds->map(function ($item,$key) use ($asset){
+            $orders = $asset->filter(function ($value, $key) use ($item){
+                return $value->post_ID == $item->post_ID;
+            });
+
+            $item->imagePath = $orders->values();
+
+            return $item;
+        });
+
+        return view('pages.team',compact('feeds','TeamOwner','language','teamManager','gameList','result','getTeam'));
     }
 
     /**
@@ -207,7 +236,7 @@ class TeamManagerController extends Controller
 
             TeamManager::where('teamID','=',$teamManager)
                 ->where('user_ID','=',$kickID)
-                ->delete();
+                ->update(['user_ID' => null,'user_verify' => 0,'expired_invite' => "9999-12-31"]);
 
 //        return $kickID;
         return redirect('team');

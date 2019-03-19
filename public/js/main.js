@@ -226,7 +226,36 @@ function selectGameTeam(id, idTeam) {
     xhttp2.send();
 }
 
-function renderPlayerList(user_id, user_name, user_image, rank_total, role1, role2) {
+function selectGameCreate(id, idGame) {
+    // var url = window.location.hostname+"getGameList"
+    console.log(idGame.value)
+
+    document.getElementById('boxManagerTeam').innerHTML = "<div id=\"LoadPlayer\" class=\"col\">\n" +
+        "        <div class=\"row py-4 justify-content-center\">\n" +
+        "        <div class='loader'></div>\n" +
+        "        </div>\n" +
+        "        </div>";
+
+    var url2 = '/getGameList/' + idGame.value
+
+    console.log(url2)
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var obj = JSON.parse(this.responseText);
+
+            document.getElementById('gameLogo').src = obj['game_logo']
+
+            arrInvite = []
+            InvitePlayer(id)
+            renderInviteList()
+        }
+    };
+    xhttp.open("GET", url2, true);
+    xhttp.send();
+}
+
+function renderPlayerList(user_id, user_name, user_image, rank_total, role1, role2, color1, color2) {
     if (role1 && role2) {
         var render = "<div class=\"col-6\">\n" +
             "    <div class=\"col-12 p-2 \">\n" +
@@ -240,11 +269,11 @@ function renderPlayerList(user_id, user_name, user_image, rank_total, role1, rol
             "                        <div class=\"col-8 pt-2\" style=\"height: 24px\">\n" +
             "                            <p class=\"text-white label-font-Bold\" style=\"font-size: 16px; word-wrap: break-word;\">" + user_name + "</p>\n" +
             "                            <div class=\"row pl-3\">\n" +
-            "                                <div class=\"box-role mr-2\">\n" +
-            "                                    <label class=\"text-white\">" + role1 + "</label>\n" +
+            "                                <div class=\"box-role mr-2\" style=\"background-color: "+color1+" \">\n" +
+            "                                    <label class=\"text-white m-0\">" + role1 + "</label>\n" +
             "                                </div>\n" +
-            "                                <div class=\"box-role mr-2\">\n" +
-            "                                    <label class=\"text-white\">" + role2 + "</label>\n" +
+            "                                <div class=\"box-role mr-2\" style=\"background-color: "+color2+" \">\n" +
+            "                                    <label class=\"text-white m-0\">" + role2 + "</label>\n" +
             "                                </div>\n" +
             "                            </div>\n" +
             "                        </div>\n" +
@@ -284,8 +313,8 @@ function renderPlayerList(user_id, user_name, user_image, rank_total, role1, rol
             "                        <div class=\"col-8 pt-2\" style=\"height: 24px\">\n" +
             "                            <p class=\"text-white label-font-Bold\" style=\"font-size: 16px; word-wrap: break-word;\">" + user_name + "</p>\n" +
             "                            <div class=\"row pl-3\">\n" +
-            "                                <div class=\"box-role mr-2\">\n" +
-            "                                    <label class=\"text-white\">" + role1 + "</label>\n" +
+            "                                <div class=\"box-role mr-2\" style=\"background-color: "+color1+" \">\n" +
+            "                                    <label class=\"text-white m-0\">" + role1 + "</label>\n" +
             "                                </div>\n" +
             "                            </div>\n" +
             "                        </div>\n" +
@@ -357,7 +386,7 @@ function renderPlayerList(user_id, user_name, user_image, rank_total, role1, rol
 
 function selectRolePlayer(id) {
     var idGame = document.getElementById('gameList').value
-    var url = 'getPlayerListRole/' + idGame + '/role/' + id
+    var url = '/getPlayerListRole/' + idGame + '/role/' + id
 
     console.log(url);
     var xhttp = new XMLHttpRequest();
@@ -372,18 +401,18 @@ function selectRolePlayer(id) {
 
                 if (id == 'all') {
                     if (item['role'][0] && item['role'][1]) {
-                        document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'], item['user_name'], image_user, item['rank_total'], item['role'][0]['role_name'], item['role'][1]['role_name'])
+                        document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'], item['user_name'], image_user, item['rank_total'], item['role'][0]['role_name'], item['role'][1]['role_name'],item['role'][0]['role_color'],item['role'][1]['role_color'])
 
                         console.log(item['role'][0]['role_name'], "name")
                     } else if (item['role'][0]) {
-                        document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'], item['user_name'], image_user, item['rank_total'], item['role'][0]['role_name'], "")
+                        document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'], item['user_name'], image_user, item['rank_total'], item['role'][0]['role_name'], "",item['role'][0]['role_color'],"")
                     } else {
-                        document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'], item['user_name'], image_user, item['rank_total'], "", "")
+                        document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'], item['user_name'], image_user, item['rank_total'], "", "","","")
 
                         console.log("none role")
                     }
                 } else {
-                    document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'], item['user_name'], image_user, item['rank_total'], item['role_name'], "")
+                    document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'], item['user_name'], image_user, item['rank_total'], item['role_name'], "",item['role_color'],"")
                 }
             })
         }
@@ -438,6 +467,7 @@ function renderInviteList() {
 
     checkComplertTeam();
 
+
     arrInvite.forEach(function (item) {
         var image_user = "http://" + window.location.hostname + ":" + window.location.port + "/data-image/userImage/" + item['user_image']
 
@@ -456,12 +486,24 @@ function renderInviteList() {
             "        </div>\n" +
             "        <div class=\"row mx-0 mb-2 justify-content-center\">\n"
 
-        item['role'].forEach(function (role) {
+        if (item['role'].length > 0) {
+            item['role'].forEach(function (role, index, array) {
+                if (index !== array.length - 1) {
+                    render +=
+                        "            <div class=\"box-role d-flex align-items-center mr-2\" style=\"background-color: " + role['role_color'] + "\">\n" +
+                        "                <label class=\"text-white mx-1 m-0\">" + role['role_name'] + "</label>\n" +
+                        "            </div>\n"
+                } else {
+                    render +=
+                        "            <div class=\"box-role d-flex align-items-center\" style=\"background-color: " + role['role_color'] + "\">\n" +
+                        "                <label class=\"text-white mx-1 m-0\">" + role['role_name'] + "</label>\n" +
+                        "            </div>\n"
+                }
+            })
+        } else {
             render +=
-                "            <div class=\"box-role mr-2\">\n" +
-                "                <label class=\"text-white\">" + role['role_name'] + "</label>\n" +
-                "            </div>\n"
-        })
+                "            <div style=\"height: 24px\"></div>\n"
+        }
 
         render += "</div>" +
             "        <div class=\"row pt-0\">\n" +
@@ -538,18 +580,42 @@ function renderInviteList() {
 
 function checkComplertTeam() {
     var arr = []
+    var arrRoleID = []
     var arrId = []
     var idGame = document.getElementById('gameList').value
 
     arrInvite.forEach(function (item, index) {
         item['role'].forEach(function (role) {
             arr.push(role['role_name']);
+            arrRoleID.push(role['role_ID']);
         })
         arrId.push(item['user_ID']);
     })
 
     $('[name=invitePlayer]').val(arrId);
-    console.log(document.getElementById('invitePlayer').value);
+    // console.log(document.getElementById('invitePlayer').value);
+
+    console.log(arrRoleID,"checkComplertTeam");
+
+
+    var url = '/checkRole/' + JSON.stringify(arrRoleID) + '/' + idGame
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        var render = []
+        if (this.readyState == 4 && this.status == 200) {
+            var obj = JSON.parse(this.responseText);
+            console.log(obj,"checkRole");
+
+            obj.forEach(function (item) {
+                render += "<h5><span class=\"badge text-white mx-2\" style='background-color: "+item['color']+"'>"+item['title']+"</span></h5>"
+            });
+
+            document.getElementById('warning-box').innerHTML = render;
+        }
+    };
+    xhttp.open("GET", url, true);
+    xhttp.send();
+
 
     if (idGame == 1) {
         if (arrInvite.length == 6 && arr.includes('TANK') && arr.includes('SUPPORT') && arr.includes('DPS')) {
@@ -984,7 +1050,6 @@ function renderMemberList() {
                 "        <div class=\"row pt-4\">\n" +
                 "            <div class=\"col d-flex justify-content-center\">\n" +
                 "                <img src=" + image_user + " height=\"100px\" style=\"border-radius: 50px\">\n" +
-                "                <img id=\"kickMember\" data-article-id=" + item['user_ID'] + " data-player-name=" + item['user_name'] + " data-player-img=" + image_user + " data-toggle=\"modal\" data-target=\"#kickPlayer\"  src=" + image_cancel + " width=\"18px\" height=\"18px\" style=\"cursor: pointer;position: absolute;right: 25px;top: -3px;\">\n" +
                 "            </div>\n" +
                 "        </div>\n" +
                 "        <div class=\"row mx-0 pt-2\">\n" +

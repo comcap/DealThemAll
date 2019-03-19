@@ -162,11 +162,11 @@
                     <div class="row border-bottom">
                         <div class="col-12 mt-3 ">
                             <div class="row mb-0 align-items-end">
-                                <div class="col-10 p-0" style="height:50px">
+                                <div class="col-5 p-0" style="height:50px">
                                     <div class="row">
                                         <img class="pl-3" id="gameLogo" src="{{asset('data-image/game_logo/overwatch/logo.svg')}}" height="40px">
-                                        <div class="col-5 pl-0">
-                                            <select class="pl-3 selectGameTeam label-font-Bold ml-3" onchange="selectGameTeam({{\Illuminate\Support\Facades\Auth::user()->user_ID}},'null')" name="game" id="gameList" style="font-size: 24px">
+                                        <div class="col-10 pl-0">
+                                            <select class="pl-3 selectGameTeam label-font-Bold ml-3" onchange="selectGameCreate({{\Illuminate\Support\Facades\Auth::user()->user_ID}},this)" name="game" id="gameList" style="font-size: 24px">
                                                 @foreach($gameList as $item)
                                                     <option value="{{$item->game_ID}}">{{$item->game_name}}</option>
                                                 @endforeach
@@ -174,7 +174,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
+                                <div class="col-5 " style="height:50px">
+                                    <div id="warning-box" class="row align-items-end justify-content-end pb-1 h-100">
+                                        {{--<div class="col">--}}
+                                        {{--<h4><span class="badge badge-warning">Warning</span></h4>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col">--}}
+                                        {{--<h4><span class="badge badge-warning">Warning</span></h4>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col">--}}
+                                        {{--<h4><span class="badge badge-warning">Warning</span></h4>--}}
+                                        {{--</div>--}}
+                                    </div>
+                                </div>
+                                <div class="col-2">
                                     <div class="row p-0" style="height: 60px">
                                         <div class="col-9 d-flex justify-content-end">
                                             <div class="row">
@@ -293,13 +306,12 @@
                         var image_user = "http://"+window.location.hostname+":"+window.location.port+"/data-image/userImage/"+item['user_image']
 
                         if(item['role'][0] && item['role'][1]){
-                            document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'],item['user_name'],image_user,item['rank_total'],item['role'][0]['role_name'],item['role'][1]['role_name'])
-
+                            document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'],item['user_name'],image_user,item['rank_total'],item['role'][0]['role_name'],item['role'][1]['role_name'],item['role'][0]['role_color'],item['role'][1]['role_color'])
                             // console.log(item['role'][0]['role_name'],"name")
                         }else if (item['role'][0]){
-                            document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'],item['user_name'],image_user,item['rank_total'],item['role'][0]['role_name'],"")
+                            document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'],item['user_name'],image_user,item['rank_total'],item['role'][0]['role_name'],"",item['role'][0]['role_color'],"")
                         }else{
-                            document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'],item['user_name'],image_user,item['rank_total'],"","")
+                            document.getElementById('listPlayerModal').innerHTML += renderPlayerList(item['user_ID'],item['user_name'],image_user,item['rank_total'],"","","","")
 
                             // console.log("none role")
                         }
