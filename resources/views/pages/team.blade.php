@@ -115,7 +115,7 @@
 
             <div class="col-9 pl-4">
                 <div class="row">
-                    @if(!isset($feeds))
+                    @if(count($feeds) > 0)
                         @foreach($feeds as $key => $item)
                             <div class="col-12 pl-4 mb-3">
                                 <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
@@ -183,12 +183,12 @@
                     @else
                         <div class="col-12">
                             <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
-                                <div class="col-12 p-5 mb-3">
-                                    <div class="row mt-4 mx-0 " style="height: 300px">
-                                        <div class="col-12 px-4 py-3  ">
+                                <div class="col-12 p-5">
+                                    <div class="row mx-0 " style="height: auto">
+                                        <div class="col-12">
                                             <div class="row">
-                                                <div class="col-12 ">
-                                                    <img src="{{asset('/data-image/nullFeed.svg')}}" height="200px" width="auto">
+                                                <div class="col-12 text-center">
+                                                    <img src="{{asset('/data-image/nullFeed.svg')}}" height="160px" width="auto">
                                                 </div>
                                             </div>
                                             <div class="row mt-2">
@@ -200,7 +200,7 @@
                                             <div class="row">
                                                 <div class="col-12 text-center">
                                                     <h2 class="text-secondary label-font-Condensed-Thin mb-0"
-                                                        style="font-size: 20px">No notification yet.</h2>
+                                                        style="font-size: 20px">No feed yet.</h2>
                                                 </div>
                                             </div>
                                         </div>

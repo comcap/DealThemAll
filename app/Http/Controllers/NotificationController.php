@@ -95,7 +95,7 @@ class NotificationController extends Controller
             }else{
                 TeamManager::where('teamID','=',$notification->teamID)
                     ->where('user_ID','=',$notification->notification_User)
-                    ->delete();
+                    ->update(['user_ID' => null,'user_verify' => 0,'expired_invite' => "9999-12-31"]);
             }
         }else{
 

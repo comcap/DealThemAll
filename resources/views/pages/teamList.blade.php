@@ -410,8 +410,8 @@
                 <div class="row mx-0 mt-3" style="height: auto;">
                     @foreach($fillter as $item)
                         <div class="col-6 h-100 mb-3 pr-0">
-                            <a href="/team/{{$item->team_ID}}" target="_blank" >
-                                <div class="row mx-0 team-box" style=" border-radius: 8px;height: 130px;">
+                            <a href="/team/{{$item->team_ID}}" >
+                                <div class="row mx-0 team-box" style=" border-radius: 8px;height: auto;">
                                     <div class="col-12">
                                         <div class="row h-100 align-items-center">
                                             <div class="col-4">
@@ -429,21 +429,29 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row mr-0 align-items-end" style="height: 50px;">
+                                                <div class="row mr-0 align-items-end pt-1" style="height: 50px;">
                                                     @foreach($item->role as $role)
                                                         @if($role->user_ID != null)
                                                             <div class="col p-0 text-center">
-                                                                <img src="{{asset('/data-image/role/'.$role->type_Image)}}" width="auto" height="100%" style="max-height: 36px">
-                                                                <p class="text-white" style="font-size: 10px">{{$role->typeName}}</p>
+                                                                <img src="{{asset('/data-image/role/'.$role->type_image_active)}}" width="auto" height="100%" style="max-height: 30px">
+                                                                <p style="color: {{$role->color}};font-size: 10px">{{$role->typeName}}</p>
                                                             </div>
                                                         @else
                                                             <div class="col p-0 text-center">
-                                                                <img src="https://dummyimage.com/80x80/000/fff" width="auto" height="100%" style="max-height: 40px">
+                                                                <img src="{{asset('/data-image/nullRole.svg')}}" width="auto" height="100%" style="max-height: 30px">
                                                                 <p class="text-white" style="font-size: 10px">NONE</p>
                                                             </div>
                                                         @endif
                                                     @endforeach
                                                 </div>
+                                                @if(isset($item->warning))
+                                                    <div class="row mr-0" style="height: 50px;">
+                                                        @foreach($item->warning as $warning)
+                                                            <h6><span class="badge text-white mx-1" style="background-color: {{$warning->color}}">NO {{$warning->typeName}}</span></h6>
+                                                        @endforeach
+                                                    </div>
+                                                @endif
+
                                             </div>
                                         </div>
                                     </div>

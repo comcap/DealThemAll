@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Asset;
+use App\Feed;
 use App\Game;
 use App\StatsPlayer;
 use App\Team;
@@ -113,8 +115,26 @@ class ProfileController extends Controller
 
         $gameList = Game::get();
 
+        $feeds = Feed::select('*','tbl_feed.updated_at','tbl_feed.created_at')
+            ->join('tbl_User','tbl_User.user_ID','=','tbl_feed.user_ID')
+            ->join('tbl_Game','tbl_Game.game_ID','=','tbl_feed.game_ID')
+            ->where('tbl_feed.user_ID','=',$id)
+            ->orderBy('tbl_feed.created_at','desc')
+            ->get();
 
-        return view("pages.profile",compact('myTeam','myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList'));
+        $asset = Asset::get();
+
+        $feeds->map(function ($item,$key) use ($asset){
+            $orders = $asset->filter(function ($value, $key) use ($item){
+                return $value->post_ID == $item->post_ID;
+            });
+
+            $item->imagePath = $orders->values();
+
+            return $item;
+        });
+
+        return view("pages.profile",compact('feeds','myTeam','myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList'));
     }
 
     /**

@@ -74,16 +74,14 @@ class TeamListController extends Controller
             ->get();
 
         $team = Team::get();
-//        DB::connection()->enableQueryLog();
-//        return DB::getQueryLog();
 
-        $getTeamMember = TeamManager::select('tbl_team_manager.user_ID','teamID','role_ID','typeName','type_Image','color')
-                                ->leftjoin('tbl_User_Role','tbl_User_Role.user_ID','=','tbl_team_manager.user_ID')
+        $getTeamMember = TeamManager::leftjoin('tbl_User_Role','tbl_User_Role.user_ID','=','tbl_team_manager.user_ID')
                                 ->leftjoin('tbl_Role_type','tbl_User_Role.role_ID','=','tbl_Role_type.typeID')
                                 ->where('tbl_team_manager.game_ID','=',$teamList)
-                                ->where(function ($query) {
+                                ->where(function ($query) use ($teamList) {
                                     $query->whereNull('tbl_User_Role.stateRole')
-                                        ->orWhere('tbl_User_Role.stateRole','!=',0);
+                                        ->orWhere('tbl_User_Role.stateRole','=',1)
+                                        ->where('tbl_User_Role.game_ID','=',$teamList);
                                 })
                                 ->groupBy('tbl_team_manager.managerID')
                                 ->get();
@@ -122,12 +120,19 @@ class TeamListController extends Controller
             array_push($arrGameRole,$arrManager);
         }
 
-        $fillter = $result->map(function ($item,$key) use ($arrGameRole){
+        $i=[];
+        foreach ($userGameRole as $index => $value){
+            array_push($i,count(array_filter($value)));
+        }
+
+        $fillter = $result->map(function ($item,$key) use ($arrGameRole,$i){
             foreach ($arrGameRole as $index => $value){
                 if ($key == $index){
                     $item->warning = $value;
+                    $item->count = $i[$index];
                 }
             }
+
             return $item;
         });
 

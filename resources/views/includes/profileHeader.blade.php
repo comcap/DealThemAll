@@ -46,11 +46,11 @@
                                         </div>
                                         @if(isset($getTeam))
                                             <div class="row mt-2">
-                                                <label class="text-white">Team: <span style="color: #CCCCCC;">{{$getTeam->team_name}}</span></label>
+                                                <label class="text-white">Team: <a href="/team/{{$getTeam->team_ID}}" style="color: #CCCCCC;">{{$getTeam->team_name}}</a></label>
                                             </div>
                                         @elseif(isset($myTeam))
                                             <div class="row mt-2">
-                                                <label class="text-white">Team: <span style="color: #CCCCCC;">{{$myTeam->team_name}}</span></label>
+                                                <label class="text-white">Team: <a href="/team/{{$myTeam->team_ID}}" style="color: #CCCCCC;">{{$myTeam->team_name}}</a></label>
                                             </div>
                                         @else
                                             <div class="row" style="margin-top: 8px">
@@ -131,11 +131,15 @@
                                     <div class="col-2">
                                         @if(isset($getTeam))
                                             <div class="row mt-2">
-                                                <img src="{{asset("/data-image/teamLogos/".$getTeam->team_logo)}}" height="70px" width="70px">
+                                                <a href="/team/{{$getTeam->team_ID}}">
+                                                    <img src="{{asset("/data-image/teamLogos/".$getTeam->team_logo)}}" height="70px" width="70px">
+                                                </a>
                                             </div>
                                         @elseif(isset($myTeam))
                                             <div class="row mt-2">
-                                                <img src="{{asset("/data-image/teamLogos/".$myTeam->team_logo)}}" height="70px" width="70px">
+                                                <a href="/team/{{$myTeam->team_ID}}">
+                                                    <img src="{{asset("/data-image/teamLogos/".$myTeam->team_logo)}}" height="70px" width="70px">
+                                                </a>
                                             </div>
                                         @else
                                             <div class="row mt-2"></div>
