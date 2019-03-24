@@ -282,7 +282,7 @@ class UpdateProfileController extends Controller
         $username = $request->username;
         $file = $request->file;
         $language1 = $request->language1;
-        $language2 = $request->language2;
+//        $language2 = $request->language2;
         $birthday = $request->birthday;
         $gender = $request->gender;
         $timeStart = $request->timeStart;
@@ -307,7 +307,7 @@ class UpdateProfileController extends Controller
         $getUser->user_time_start = $timeStart;
         $getUser->user_time_end = $timeEnd;
 
-//        $getUser->save();
+        $getUser->save();
 
         $arr = [];
         $userLanguage = DB::table('tbl_User_language')
@@ -320,7 +320,7 @@ class UpdateProfileController extends Controller
         }
 
         DB::table('tbl_User_language')->where('languageID', $arr[0])->update(['languageID' => $language1]);
-        DB::table('tbl_User_language')->where('languageID', $arr[1])->update(['languageID' => $language2]);
+//        DB::table('tbl_User_language')->where('languageID', $arr[1])->update(['languageID' => $language2]);
 
 //            return [$username,$file,$language1,$language2,$language3,$birthday,$timeStart,$timeEnd,$gender];
         return redirect('profile/'.$id);

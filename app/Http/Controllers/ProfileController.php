@@ -10,6 +10,7 @@ use App\Team;
 use App\TeamManager;
 use App\User;
 use App\UserRole;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -133,6 +134,10 @@ class ProfileController extends Controller
 
             return $item;
         });
+
+        if (isset($userProfile->user_birthday)){
+            $userProfile->user_birthday = Carbon::parse($userProfile->user_birthday)->age;
+        }
 
         return view("pages.profile",compact('feeds','myTeam','myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList'));
     }

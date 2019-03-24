@@ -27,7 +27,7 @@
                                         </div>
                                         <div class="row mt-2">
                                             @if($getTeam)
-                                                <label class="text-white">Owner: <span style="color:#aaaaaa;">{{$getTeam->user_name}}</span></label>
+                                                <label class="text-white">Owner: <a href="/profile/{{$getTeam->user_ID}}" style="color:#aaaaaa;">{{$getTeam->user_name}}</a></label>
                                             @else
                                                 <label class="text-white">Owner: <span style="color:#aaaaaa;">ไม่ระบุ</span></label>
                                             @endif

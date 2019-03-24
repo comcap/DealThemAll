@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 39.891 40">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f11d72;
+      }
+
+      .cls-2 {
+        filter: url(#Path_1090);
+      }
+
+      .cls-3 {
+        filter: url(#Path_1076);
+      }
+    </style>
+    <filter id="Path_1076" x="6.213" y="0" width="33.677" height="39.49" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_1090" x="0" y="10" width="24" height="30" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#f11d72"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1598" data-name="Group 1598" transform="translate(1930 802)">
+    <g class="cls-3" transform="matrix(1, 0, 0, 1, -1930, -802)">
+      <path id="Path_1076-2" data-name="Path 1076" class="cls-1" d="M26.94,14.611a2.67,2.67,0,0,0,.625-1.784,2.741,2.741,0,0,0-.584-1.546,2.4,2.4,0,0,0-.571-2.764,4.963,4.963,0,0,0-3.61-.863,14.1,14.1,0,0,0-2.211.283h0c-.225.04-.463.09-.706.144a7.841,7.841,0,0,1,.562-2.611c.629-1.915.593-3.38-.117-4.36A2.857,2.857,0,0,0,18.037,0a1.129,1.129,0,0,0-.867.4,3.024,3.024,0,0,0-.378,2.144C16.2,4.13,14.536,8.032,13.129,9.115a.481.481,0,0,0-.072.063,4.828,4.828,0,0,0-.881,1.321s-.2.182-.27,1.083c0,0-.039,7.264,0,8.264s.266.978.46,1.126a4.742,4.742,0,0,0,1.047.328s4,.149,6,.126c.535.04,1.038.063,1.506.063a10.084,10.084,0,0,0,2.09-.189A3.908,3.908,0,0,0,25.8,19.569a2.751,2.751,0,0,0,.306-1.721,2.867,2.867,0,0,0,1.02-2.333,3.036,3.036,0,0,0-.186-.9Z" transform="translate(3.32 9)"/>
+    </g>
+    <g class="cls-2" transform="matrix(1, 0, 0, 1, -1930, -802)">
+      <path id="Path_1090-2" data-name="Path 1090" class="cls-1" d="M2,0H4A2,2,0,0,1,6,2v8a2,2,0,0,1-2,2H2a2,2,0,0,1-2-2V2A2,2,0,0,1,2,0Z" transform="translate(9 19)"/>
+    </g>
+  </g>
+</svg>

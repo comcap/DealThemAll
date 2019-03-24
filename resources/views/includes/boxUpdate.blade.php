@@ -12,7 +12,7 @@
                                     <form action="/deleteProfile" method="post">
                                         @csrf
                                         <button style="background-color: rgba(0,0,0,0);border: none">
-                                            <i class="fas fa-times-circle text-danger"></i>
+                                            <i class="fas fa-times-circle text-danger" style="cursor: pointer"></i>
                                         </button>
                                         <input type="text" name="stats_playerID" value="{{$StatsPlayer->stats_playerID}}" hidden>
                                         <input type="text" name="gameSelect" value="{{$id}}" hidden>
@@ -20,29 +20,40 @@
                                 </div>
                             @endif
                             <form class="row px-3" action="/Apiupdate" method="post">
-                                @if(!isset($StatsPlayer))
-                                    <div class="mb-2">
-                                        <span class="label-font-Bold text-white" style="font-size: 18px">Sync player profile</span>
+                                    <div class="col">
+                                        @if(!isset($StatsPlayer))
+                                            <div class="row">
+                                                <div class="mb-2">
+                                                    <span class="label-font-Bold text-white" style="font-size: 18px">Sync player profile</span>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @csrf
+                                        <div class="row">
+                                            <button type="submit" class="text-center"
+                                                    style="width: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px 0px 0px 20px;border-color: transparent;cursor: pointer">
+                                                <i class="fas fa-search text-white"
+                                                   style="font-size: 16px;position: relative;left: -1px;bottom: 3px;"></i>
+                                            </button>
+                                            <input type="text" name="gameSelect" value="{{$id}}" hidden>
+
+                                            @if(isset($StatsPlayer))
+                                                <input type="text" name="username" value="{{$StatsPlayer->userPath}}" placeholder="Your battletag. Example: test-12345" class="text-input pl-3" style="width: 95%;border-radius: 0px 20px 20px 0px;">
+                                            @else
+                                                @switch($id)
+                                                    @case(1)
+                                                    <input type="text" name="username" placeholder="Your battletag / Example : test-12345" class="text-input pl-3" style="width: 95%;border-radius: 0px 20px 20px 0px;">
+                                                    @break
+                                                    @case(2)
+                                                    <input type="text" name="username" placeholder="Your playernames in game pubg. / Example : test1234" class="text-input pl-3" style="width: 95%;border-radius: 0px 20px 20px 0px;">
+                                                    @break
+                                                    @case(4)
+                                                    <input type="text" name="username" placeholder="Your battletag / Example : test-12345" class="text-input pl-3" style="width: 95%;border-radius: 0px 20px 20px 0px;">
+                                                    @break
+                                                @endswitch
+                                            @endif
+                                        </div>
                                     </div>
-                                @endif
-                                @csrf
-                                <input type="text" name="gameSelect" value="{{$id}}" hidden>
-                                @if(isset($StatsPlayer))
-                                    <input type="text" name="username" value="{{$StatsPlayer->userPath}}" placeholder="Your battletag. Example: test-12345" class="text-input pl-3">
-                                @else
-                                        @switch($id)
-                                            @case(1)
-                                            <input type="text" name="username" placeholder="Your battletag / Example : test-12345" class="text-input pl-3">
-                                            @break
-                                            @case(2)
-                                            <input type="text" name="username" placeholder="Your playernames in game pubg. / Example : test1234" class="text-input pl-3">
-                                            @break
-                                            @case(4)
-                                            <input type="text" name="username" placeholder="Your battletag / Example : test-12345" class="text-input pl-3">
-                                            @break
-                                        @endswitch
-                                @endif
-                                <button type="submit" hidden></button>
                             </form>
                         </div>
                     </div>
@@ -174,18 +185,15 @@
                             </div>
                         </div>
                     @endif
-
-
-
                 </div>
-                <div class="row">
+                <div class="row d-none">
                     <div class="col p-0 mt-4">
                         <h5 class="label-font-Bold text-white" style="font-size: 18px">Your skills
                             <span class="label-font-Condensed-Thin" style="color: #aaaaaa;font-size: 14px">maximum 5</span>
                         </h5>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row d-none">
                     <div class="col-4 p-0">
                         <div class="form-group">
                             <input type="text" name="email" placeholder="Type you skill." class="text-input pl-3">
@@ -244,7 +252,6 @@
                                     <label class="text-white">SNIPER</label><span class="text-white" style="margin-left: 6px"> ⏤</span>
                                 </div>
                             @endif
-
                         </div>
                     </div>
                 </div>

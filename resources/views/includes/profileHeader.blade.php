@@ -152,7 +152,7 @@
                     <div class="col-4 p-0" style="height: 130px;">
                         <div class="row px-4" style="margin-top: 10%">
                             <div class="col-6">
-                                <div class="row text-white pl-4">Birthday: </div>
+                                <div class="row text-white pl-4">Age: </div>
                                 <div class="row text-white pl-4">Gender: </div>
                                 <div class="row text-white pl-4">Language: </div>
                             </div>

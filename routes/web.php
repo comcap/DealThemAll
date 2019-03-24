@@ -18,7 +18,7 @@ Route::get('contact', function()
 });
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::resource('/', 'HomeController');
 
 Route::get('/register', function()
 {
@@ -35,6 +35,8 @@ Route::resource('/createteam','CreateTeamController')->middleware('auth');
 Route::resource('/notifications','NotificationController')->middleware('auth');
 Route::resource('/teamList','TeamListController')->middleware('auth');
 Route::resource('/post','FeedController')->middleware('auth');
+Route::get('/ApiSearchTeam','TeamListController@ApiSearchTeam');
+
 
 Route::resource('/team','TeamManagerController')->middleware('auth');
 
@@ -43,6 +45,7 @@ Route::resource('/ApiRegister','RegisterSignUpController');
 Route::resource('/ApiLogin','LoginHomeController');
 Route::get('/ApiLogout','LoginHomeController@logout');
 Route::resource('/ApiCreateTeam','CreateTeamController');
+
 
 Route::apiResource('/getGameList', 'API\GetGameList');
 Route::apiResource('/getPlayerList.team', 'API\GetPlayer');

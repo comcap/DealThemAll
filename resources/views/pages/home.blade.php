@@ -135,73 +135,120 @@
                                                     <div class="offset-6"></div>
                                                     <div class="col-6">
                                                         <div class="row align-items-center justify-content-end" style="height: 40px">
-                                                            <div class="">
-                                                                <img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">
-                                                                <span class="text-pink">609</span>
-                                                            </div>
-                                                            <div class="ml-4">
-                                                                <img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">
-                                                                <span class="text-pink">609</span>
+                                                            @if(\Illuminate\Support\Facades\Auth::User())
+                                                                <div class="col-4">
+                                                                    <div class="btn row align-items-center p-0 d-flex border-0 justify-content-end @if(isset($stateLike[$item->post_ID][0]['state'])) active @endif" onclick="like(this)" data-post-id="{{ $item->post_ID }}" data-user-id="{{\Illuminate\Support\Facades\Auth::User()->user_ID}}" data-toggle="button" @if(isset($stateLike[$item->post_ID][0]['state'])) aria-pressed="true" @else aria-pressed="false" @endif style="cursor: pointer;">
+                                                                        <div class="like"></div>
+                                                                        <span id="likeCount{{$item->post_ID}}" class="text-pink">
+                                                                            @if(isset($getLike['data'][$item->post_ID]))
+                                                                                {{$getLike['data'][$item->post_ID]['total']}}
+                                                                            @else
+                                                                                0
+                                                                            @endif
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-4">
+                                                                    <div class="btn row align-items-center p-0 d-flex border-0 justify-content-end" style="cursor: pointer;">
+                                                                        <div class="like"></div>
+                                                                        <span id="likeCount{{$item->post_ID}}" class="text-pink">
+                                                                            @if(isset($getLike['data'][$item->post_ID]))
+                                                                                {{$getLike['data'][$item->post_ID]['total']}}
+                                                                            @else
+                                                                                0
+                                                                            @endif
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                            <div class="col-4">
+                                                                <div class="row justify-content-end">
+                                                                    <div class="" data-toggle="collapse" data-target="#collapse{{$key}}" style="cursor: pointer">
+                                                                        <img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">
+                                                                        <span id="commentCount{{$item->post_ID}}" class="text-pink">
+                                                                            @if(isset($listComment['data'][$item->post_ID]))
+                                                                                {{count($listComment['data'][$item->post_ID])}}
+                                                                            @else
+                                                                                0
+                                                                            @endif
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="row mt-4">
+                                            <div class="col collapse" id="collapse{{$key}}">
+                                                <div class="row">
+                                                    <div class="col" style="border: 1px solid rgba(255,255,255,0.1)"></div>
+                                                </div>
+
+                                                <div id="postID{{$item->post_ID}}">
+                                                    @foreach($listComment['data'] as $key => $value)
+                                                        @if($key == $item->post_ID)
+                                                            @foreach($value as $comment)
+                                                                <div class="row mt-3">
+                                                                    <div class="col-12">
+                                                                        <div class="row mx-0 ">
+                                                                            <div class="col-1 pl-0">
+                                                                                <a href="profile/{{$comment->user_ID}}">
+                                                                                    <img src="{{asset('data-image/userImage/'.$comment->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col-11 px-0">
+                                                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">
+                                                                                    <a class="label-font-Bold text-white" href="profile/{{$comment->user_ID}}">
+                                                                                        {{$comment->user_name}}
+                                                                                    </a>
+                                                                                    <span class="label-font-Condensed-Thin ml-1" style="color: #999999;font-size: 12px">{{$comment->created_at}}</span>
+                                                                                </h3>
+                                                                                <p class="label-font-Condensed-Regular ml-3" style="color: #999999;font-size: 14px">{{$comment->textMessage}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+
+                                                @if(\Illuminate\Support\Facades\Auth::User())
+                                                    <div class="row mt-3">
+                                                        <div class="col-12">
+                                                            <div class="row mx-0 ">
+                                                                <div class="col-1 pl-0">
+                                                                    <a href="/profile">
+                                                                        <img src="{{asset('data-image/userImage/'.Auth::User()->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-11 px-0">
+                                                                    <div class="row mx-0">
+                                                                        <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">
+                                                                            <a class="label-font-Bold text-white" href="/profile">
+                                                                                {{Auth::User()->user_name}}
+                                                                            </a>
+                                                                            <span class="label-font-Condensed-Thin ml-1" style="color: #999999;font-size: 12px">{{date("Y-m-d H:i:s")}}</span>
+                                                                        </h3>
+                                                                        <div class="col-12 mt-2">
+                                                                            <input id="commentInput" type="text" name="comment" onkeydown="comment(this)" data-post-id="{{ $item->post_ID }}" data-user-id="{{\Illuminate\Support\Facades\Auth::User()->user_ID}}" placeholder="Write a comment..." class="text-input pl-3" style="height: 34px">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-
-
-                        {{--<div class="col-12 mb-3">--}}
-                            {{--<div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">--}}
-                                {{--<div class="col-12 p-5">--}}
-                                    {{--<div class="row mx-0 align-items-center">--}}
-                                        {{--<img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">--}}
-                                        {{--<div>--}}
-                                            {{--<h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix--}}
-                                                {{--<span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>--}}
-                                            {{--</h3>--}}
-                                            {{--<span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="row mt-4 mx-0">--}}
-                                        {{--<p class="text-white label-font-Condensed-Regular" style="font-size: 14px">ผลไม้ บอยคอต แม็กกาซีนกราวนด์ปาสกาลบู๊พล็อต มวลชนสติ๊กเกอร์วืดรีสอร์ตนิวส์ พรีเซ็นเตอร์สไตล์อิออนดีมานด์ดาวน์ มาร์ชราชบัณฑิตยสถานสตาร์ คอร์รัปชั่น เรซินอุรังคธาตุลิมูซีนฟลุก วานิลา ชนะเลิศ ซานตาคลอสระโงกไทเฮาเซ็กส์ซีน โฮมศิรินทร์ภควัมปติ คาร์โก้ เซาท์โยเกิร์ตแพนดา จอหงวนสลัม แคป--}}
-
-                                        {{--</p>--}}
-                                    {{--</div>--}}
-
-                                    {{--@include('includes.imageContentHome')--}}
-
-                                    {{--<div class="row mt-4 mx-0">--}}
-                                        {{--<div class="col-6">--}}
-                                            {{--<div class="row align-items-center">--}}
-                                                {{--<img src="https://dummyimage.com/40x40/000/fff">--}}
-                                                {{--<h3 class="label-font-Light ml-3 mb-0" style="font-size: 16px;color: #AAAAAA">Playerunknown’s Battlegrounds</h3>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-6">--}}
-                                            {{--<div class="row">--}}
-                                                {{--<div class="offset-6"></div>--}}
-                                                {{--<div class="col-6">--}}
-                                                    {{--<div class="row align-items-center justify-content-end" style="height: 40px">--}}
-                                                        {{--<div class="">--}}
-                                                            {{--<img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">--}}
-                                                            {{--<span class="text-pink">609</span>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="ml-4">--}}
-                                                            {{--<img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">--}}
-                                                            {{--<span class="text-pink">609</span>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
                 </div>
             </div>
             <div class="col-3 p-2 ">
@@ -211,7 +258,7 @@
                             <div class="col-12 pl-3 pr-3 pt-3" style="background-color: rgba(255,255,255,0.1); height: auto;border-radius: 8px">
                                 <div class="row" style="height: 60px">
                                     <div class="col-3">
-                                        <a href="profile/">
+                                        <a href="/profile/">
                                             <img src="{{asset('data-image/userImage/'.Auth::User()->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
                                         </a>
                                     </div>
@@ -412,8 +459,6 @@
                         {{--<p class="text-input-label">user_email : {{Auth::User()->user_email}}</p>--}}
                         {{--<p class="text-input-label">created_at : {{Auth::User()->created_at}}</p>--}}
                     </div>
-
-
                 @else
                     <div class="row mx-0">
                         <div class="col-12 pl-3 pr-3 pt-3" style="background-color: rgba(255,255,255,0.1); height: 500px">
@@ -444,10 +489,13 @@
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="background-color: rgba(255,255,255,0.1);">
+            <div class="modal-content" style="background-color: #212529;border: none">
                 <div class="d-flex justify-content-center">
                     <form action="/ApiRegister" method="post" class="col-12 pt-3" style=" height: 100%;">
                         @csrf
+                        <div class="form-group">
+                            <h3 class="label-font-Bold text-white text-center">Sign Up</h3>
+                        </div>
                         <div class="form-group">
                             <label class="text-input-label">User name</label>
                             <input name="userName" type="text" class="form-control text-input" aria-describedby="emailHelp" placeholder="User name">
@@ -464,8 +512,8 @@
                             <label class="text-input-label">Confirm Password</label>
                             <input type="password" class="form-control text-input" placeholder="••••••••••••••">
                         </div>
-                        <div class="row d-flex justify-content-center pt-3">
-                            <button type="submit" class="btn btn-primary red-btn col-6 mr-4 mb-5">Sign up</button>
+                        <div class="row d-flex justify-content-center pt-2 mb-3">
+                            <button type="submit" class="btn btn-primary red-btn col-6 mr-4">Sign up</button>
                             <button type="reset" class="btn btn-secondary light-btn col-4 ml-4">Reset</button>
                         </div>
 
@@ -530,5 +578,100 @@
                 }
             }
         }
+
+        function comment(e) {
+            var token = $("meta[name='csrf-token']").attr("content");
+
+            if (event.keyCode === 13) {
+                // alert(e.value)
+                // alert(e.getAttribute("data-post-id"))
+                // alert(e.getAttribute("data-user-id"))
+
+                var text = e.value;
+                var postID = e.getAttribute("data-post-id");
+                var userID = e.getAttribute("data-user-id");
+                var params = "text="+text+"&postID="+postID+"&userID="+userID;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    var render = ""
+                    if (this.readyState == 4 && this.status == 200) {
+                        if (this.responseText != ""){
+                            var obj = JSON.parse(this.responseText);
+                            obj.forEach(function (comment) {
+                                render += "<div class=\"row mt-3\">\n" +
+                                    "                                                                <div class=\"col-12\">\n" +
+                                    "                                                                    <div class=\"row mx-0 \">\n" +
+                                    "                                                                        <div class=\"col-1 pl-0\">\n" +
+                                    "                                                                            <a href=&quot;profile/"+comment['user_ID']+"&quot;>\n" +
+                                    "                                                                                <img src=data-image/userImage/"+comment['user_image']+" width=\"60px\" height=\"60px\" style=\"border-radius: 30px\">\n" +
+                                    "                                                                            </a>\n" +
+                                    "                                                                        </div>\n" +
+                                    "                                                                        <div class=\"col-11 px-0\">\n" +
+                                    "                                                                            <h3 class=\"label-font-Bold text-white ml-3 mb-0\" style=\"font-size: 16px\">\n" +
+                                    "                                                                                <a class=\"label-font-Bold text-white\" href='/profile/"+comment['user_ID']+"'>\n" +
+                                    "                                                                                    "+comment['user_name']+"\n" +
+                                    "                                                                                </a>\n" +
+                                    "                                                                                <span class=\"label-font-Condensed-Thin ml-1\" style=\"color: #999999;font-size: 12px\">"+comment['created_at']+"</span>\n" +
+                                    "                                                                            </h3>\n" +
+                                    "                                                                            <p class=\"label-font-Condensed-Regular ml-3\" style=\"color: #999999;font-size: 14px\">"+comment['textMessage']+"</p>\n" +
+                                    "                                                                        </div>\n" +
+                                    "                                                                    </div>\n" +
+                                    "                                                                </div>\n" +
+                                    "                                                            </div>"
+                            })
+                            console.log(obj)
+                            document.getElementById('commentCount'+obj[0]['post_ID']).innerText = obj.length
+                            document.getElementById('postID'+obj[0]['post_ID']).innerHTML = render;
+                        }
+                    }
+                };
+
+                xhttp.open("POST", "/", true);
+                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhttp.setRequestHeader("x-csrf-token", token);
+                xhttp.send(params);
+
+                e.value = ""
+            }
+        }
+
+        function like(e) {
+            var token = $("meta[name='csrf-token']").attr("content");
+
+            // alert(e.getAttribute("data-post-id"))
+            // alert(e.getAttribute("data-user-id"))
+
+            var postID = e.getAttribute("data-post-id");
+            var userID = e.getAttribute("data-user-id");
+            var params = "&postID="+postID+"&userID="+userID;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('likeCount'+postID).innerText = ""
+                    if (this.responseText != ""){
+                        var obj = JSON.parse(this.responseText);
+                        console.log(obj,"likeCount")
+                        document.getElementById('likeCount'+postID).innerText = obj
+                    }
+                }
+            };
+
+            xhttp.open("POST", "/", true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.setRequestHeader("x-csrf-token", token);
+            xhttp.send(params);
+        }
+
+        // document.getElementById('commentInput').addEventListener("keydown", function(event) {
+        //     if (event.keyCode === 13) {
+        //         event.preventDefault();
+        //         alert(document.getElementById('commentInput').value)
+        //         alert(document.getElementById('commentInput').getAttribute("data-post-id"))
+        //         alert(document.getElementById('commentInput').getAttribute("data-user-id"))
+        //         // document.getElementById("commentBtn").click();
+        //     }
+        // });
     </script>
 @stop

@@ -5,8 +5,8 @@
                 <div class="sticky-top">
                     <div class="row mt-2">
                         <div class="col-12 p-2">
-                            <form action="/ApiSearchTeam" method="POST">
-                                @csrf
+                            <form action="/ApiSearchTeam" method="GET">
+                                {{--@csrf--}}
                                 <div class="row py-4" style="background-color: rgba(255,255,255,0.1); height: auto; border-radius: 8px">
                                     <div class="d-flex col-12 justify-content-between" style="height: 100%;flex-direction: column">
                                         <div class="row">
@@ -44,7 +44,8 @@
                                                 <div class="form-group m-0" style="height: 60px;">
                                                     <p class="text-input-label">Time Played</p>
                                                     <div class="row px-3 justify-content-between">
-                                                        <select name="gameTimeStart" id="game" class="col-4 text-select">
+                                                        <select name="gameTimeStart" id="game" class="col-5 text-select">
+                                                            <option value="" selected disabled>Select time</option>
                                                             <option value="00:00">00:00</option>
                                                             <option value="01:00">01:00</option>
                                                             <option value="02:00">02:00</option>
@@ -70,10 +71,11 @@
                                                             <option value="22:00">22:00</option>
                                                             <option value="23:00">23:00</option>
                                                         </select>
-                                                        <div class="col-4">
+                                                        <div class="col-2">
                                                             <p class="text-white" style="text-align: center; padding-top: 10px">To</p>
                                                         </div>
-                                                        <select name="gameTimeEnd" id="game" class="col-4 text-select">
+                                                        <select name="gameTimeEnd" id="game" class="col-5 text-select">
+                                                            <option value="" selected disabled>Select time</option>
                                                             <option value="00:00">00:00</option>
                                                             <option value="01:00">01:00</option>
                                                             <option value="02:00">02:00</option>
@@ -171,20 +173,21 @@
                                                 <span class="member-only pt-2 pl-2">Member</span>
                                             </div>
                                             <select name="age" id="game" class="text-select pl-3">
-                                                <option value="18-25">18 - 25</option>
-                                                <option value="26-30">26 - 30</option>
-                                                <option value="31 +">31 +</option>
+                                                <option value="">Select age</option>
+                                                <option value="18-25" @if($age == "18-25") selected @endif>18 - 25</option>
+                                                <option value="26-30" @if($age == "26-30") selected @endif>26 - 30</option>
+                                                <option value="31 +" @if($age == "31 +") selected @endif>31 +</option>
                                             </select>
                                         </div>
                                         <div class="form-group" style="height: 60px;">
                                             <div class="row">
-                                                <h7 class="text-input-label pl-3">Kill</h7>
+                                                <h7 class="text-input-label pl-3">Member</h7>
                                                 <span class="member-only pt-2 pl-2">Member</span>
                                             </div>
                                             <div class="row px-3 justify-content-between">
                                                 @for($i=0;$i<3;$i++)
-                                                    @if(isset($kill))
-                                                        @if($kill==$i)
+                                                    @if(isset($member))
+                                                        @if($member==$i)
                                                             <label class="text-white d-flex justify-content-center align-items-center label-font-Thin fillter-box radio-active" id="kill{{$i}}">
                                                                 @if($i==0)
                                                                     High
@@ -193,7 +196,7 @@
                                                                 @elseif($i==2)
                                                                     None
                                                                 @endif
-                                                                <input id="killRadio{{$i}}" type="radio" name="kill" value="{{$i}}" onclick="killRadio()" hidden checked>
+                                                                <input id="killRadio{{$i}}" type="radio" name="member" value="{{$i}}" onclick="killRadio()" hidden checked>
                                                             </label>
                                                         @else
                                                             <label class="text-white d-flex justify-content-center align-items-center label-font-Thin fillter-box" id="kill{{$i}}">
@@ -204,7 +207,7 @@
                                                                 @elseif($i==2)
                                                                     None
                                                                 @endif
-                                                                <input id="killRadio{{$i}}" type="radio" name="kill" value="{{$i}}" onclick="killRadio()" hidden>
+                                                                <input id="killRadio{{$i}}" type="radio" name="member" value="{{$i}}" onclick="killRadio()" hidden>
                                                             </label>
                                                         @endif
                                                     @else
@@ -217,7 +220,7 @@
                                                                 @elseif($i==2)
                                                                     None
                                                                 @endif
-                                                                <input id="killRadio{{$i}}" type="radio" name="kill" value="{{$i}}" onclick="killRadio()" hidden checked>
+                                                                <input id="killRadio{{$i}}" type="radio" name="member" value="{{$i}}" onclick="killRadio()" hidden checked>
                                                             </label>
                                                         @else
                                                             <label class="text-white d-flex justify-content-center align-items-center label-font-Thin fillter-box" id="kill{{$i}}">
@@ -228,7 +231,7 @@
                                                                 @elseif($i==2)
                                                                     None
                                                                 @endif
-                                                                <input id="killRadio{{$i}}" type="radio" name="kill" value="{{$i}}" onclick="killRadio()" hidden>
+                                                                <input id="killRadio{{$i}}" type="radio" name="member" value="{{$i}}" onclick="killRadio()" hidden>
                                                             </label>
                                                         @endif
                                                     @endif
@@ -237,126 +240,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex col-12 justify-content-between" style="height: 100%;flex-direction: column">
-                                        <div class="form-group" style="height: 60px;">
-                                            <div class="row">
-                                                <h7 class="text-input-label pl-3">Accuracy</h7>
-                                                <span class="member-only pt-2 pl-2">Member</span>
-                                            </div>
-                                            <div class="row px-3 justify-content-between">
-                                                @for($i=0;$i<3;$i++)
-                                                    @if(isset($accuracy))
-                                                        @if($accuracy==$i)
-                                                            <label class="text-white d-flex justify-content-center align-items-center fillter-box radio-active" id="accuracy{{$i}}">
-                                                                @if($i==0)
-                                                                    High
-                                                                @elseif($i==1)
-                                                                    Low
-                                                                @elseif($i==2)
-                                                                    None
-                                                                @endif
-                                                                <input id="accuracyRadio{{$i}}" type="radio" name="accuracy" value="{{$i}}" onclick="accuracyRadio()" hidden checked>
-                                                            </label>
-                                                        @else
-                                                            <label class="text-white d-flex justify-content-center align-items-center fillter-box" id="accuracy{{$i}}">
-                                                                @if($i==0)
-                                                                    High
-                                                                @elseif($i==1)
-                                                                    Low
-                                                                @elseif($i==2)
-                                                                    None
-                                                                @endif
-                                                                <input id="accuracyRadio{{$i}}" type="radio" name="accuracy" value="{{$i}}" onclick="accuracyRadio()" hidden>
-                                                            </label>
-                                                        @endif
-                                                    @else
-                                                        @if($i==2)
-                                                            <label class="text-white d-flex justify-content-center align-items-center fillter-box radio-active" id="accuracy{{$i}}">
-                                                                @if($i==0)
-                                                                    High
-                                                                @elseif($i==1)
-                                                                    Low
-                                                                @elseif($i==2)
-                                                                    None
-                                                                @endif
-                                                                <input id="accuracyRadio{{$i}}" type="radio" name="accuracy" value="{{$i}}" onclick="accuracyRadio()" hidden checked>
-                                                            </label>
-                                                        @else
-                                                            <label class="text-white d-flex justify-content-center align-items-center fillter-box" id="accuracy{{$i}}">
-                                                                @if($i==0)
-                                                                    High
-                                                                @elseif($i==1)
-                                                                    Low
-                                                                @elseif($i==2)
-                                                                    None
-                                                                @endif
-                                                                <input id="accuracyRadio{{$i}}" type="radio" name="accuracy" value="{{$i}}" onclick="accuracyRadio()" hidden>
-                                                            </label>
-                                                        @endif
-                                                    @endif
-                                                @endfor
-                                            </div>
-                                        </div>
-                                        <div class="form-group background-color: rgba(255,255,255,0.1); height: auto; border-radius: 8px" style="height: 60px;">
-                                            <div class="row">
-                                                <h7 class="text-input-label pl-3">Game Won</h7>
-                                                <span class="member-only pt-2 pl-2">Member</span>
-                                            </div>
-                                            <div class="row px-3 justify-content-between">
-                                                @for($i=0;$i<3;$i++)
-                                                    @if(isset($won))
-                                                        @if($won==$i)
-                                                            <label class="text-white d-flex justify-content-center align-items-center fillter-box radio-active" id="won{{$i}}">
-                                                                @if($i==0)
-                                                                    High
-                                                                @elseif($i==1)
-                                                                    Low
-                                                                @elseif($i==2)
-                                                                    None
-                                                                @endif
-                                                                <input id="wonRadio{{$i}}" type="radio" name="won" value="{{$i}}" onclick="wonRadio()" hidden checked>
-                                                            </label>
-                                                        @else
-                                                            <label class="text-white d-flex justify-content-center align-items-center fillter-box" id="won{{$i}}">
-                                                                @if($i==0)
-                                                                    High
-                                                                @elseif($i==1)
-                                                                    Low
-                                                                @elseif($i==2)
-                                                                    None
-                                                                @endif
-                                                                <input id="wonRadio{{$i}}" type="radio" name="won" value="{{$i}}" onclick="wonRadio()" hidden>
-                                                            </label>
-                                                        @endif
-                                                    @else
-                                                        @if($i==2)
-                                                            <label class="text-white d-flex justify-content-center align-items-center fillter-box radio-active" id="won{{$i}}">
-                                                                @if($i==0)
-                                                                    High
-                                                                @elseif($i==1)
-                                                                    Low
-                                                                @elseif($i==2)
-                                                                    None
-                                                                @endif
-                                                                <input id="wonRadio{{$i}}" type="radio" name="won" value="{{$i}}" onclick="wonRadio()" hidden checked>
-                                                            </label>
-                                                        @else
-                                                            <label class="text-white d-flex justify-content-center align-items-center fillter-box" id="won{{$i}}">
-                                                                @if($i==0)
-                                                                    High
-                                                                @elseif($i==1)
-                                                                    Low
-                                                                @elseif($i==2)
-                                                                    None
-                                                                @endif
-                                                                <input id="wonRadio{{$i}}" type="radio" name="won" value="{{$i}}" onclick="wonRadio()" hidden>
-                                                            </label>
-                                                        @endif
-                                                    @endif
-                                                @endfor
-                                            </div>
-                                        </div>
-
-                                        <button type="submit" class="btn btn-primary red-btn label-font-Bold " style="font-size: 16px">Find a Player</button>
+                                        <button type="submit" class="btn btn-primary red-btn label-font-Bold " style="font-size: 16px">Find Team</button>
                                     </div>
                                 </div>
                             </form>
@@ -399,7 +283,7 @@
                     <div class="col-5">
                         <div class="row align-items-center">
                             <div class="col-12 pt-3 text-right">
-                                <p class="text-white label-font-Bold" style="font-size: 13px">234 Result</p>
+                                <p class="text-white label-font-Bold" style="font-size: 13px">{{count($fillter)}} Result</p>
                             </div>
                             <div class="col-6 px-0 d-none">
                                 <button type="submit" class="btn btn-primary red-btn label-font-Bold " style="font-size: 12px">Create Announce</button>
@@ -407,6 +291,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row mx-0 mt-3" style="height: auto;">
                     @foreach($fillter as $item)
                         <div class="col-6 h-100 mb-3 pr-0">
@@ -425,7 +310,7 @@
                                                     <div class="col-4 p-0">
                                                         <div class="row align-items-center justify-content-end mx-0 pb-2">
                                                             <img id="teamManReady" class="mr-2" src="{{asset('data-image/standing-up-man.svg')}}" height="24px">
-                                                            <p class="label-font-Condensed-Bold text-pink m-0 p-0" id="countInvite" style="font-size: 24px;line-height:0px;">0/6</p>
+                                                            <p class="label-font-Condensed-Bold text-pink m-0 p-0" id="countInvite" style="font-size: 24px;line-height:0px;">{{$item->count}}/6</p>
                                                         </div>
                                                     </div>
                                                 </div>

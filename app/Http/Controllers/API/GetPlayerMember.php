@@ -77,10 +77,11 @@ class GetPlayerMember extends Controller
             ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
             ->join('tbl_team_manager','tbl_team_manager.user_ID','=','tbl_User_Role.user_ID')
             ->join('tbl_Game','tbl_Game.game_ID','=','tbl_User_Role.game_ID')
-            ->where('tbl_User_Role.stateRole','>',0)
+            ->where('tbl_User_Role.stateRole','!=',0)
             ->where('tbl_team_manager.game_ID','=',$game)
             ->where('tbl_User_Role.game_ID','=',$game)
             ->where('tbl_team_manager.teamID','=',$id)
+            ->orderBy('tbl_User_Role.stateRole','asc')
             ->get();
 
         $result = $listPlayer->map(function ($item,$key) use ($userRole){

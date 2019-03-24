@@ -9,14 +9,14 @@
         </div>
         <div class="col-10">
             <div class="row position-relative" style="width: 107%;height: 40px;right: 17px">
-                <div class="col-4 border-bottom  border-danger text-center pt-2" id="post_action_1"
-                     onclick="selectPost(1)">
+                <div class="col-4 border-bottom border-danger text-center pt-2" id="post_action_1"
+                     onclick="selectPost(1)" style="cursor: pointer">
                     <a href="#" class="text-pink" id="text_focus_1">STATUS</a>
                 </div>
-                <div class="col-4 border-bottom text-center pt-2" id="post_action_2" onclick="selectPost(2)">
+                <div class="col-4 border-bottom text-center pt-2" id="post_action_2" onclick="selectPost(2)" style="cursor: pointer">
                     <a href="#" class="text-white" id="text_focus_2">PHOTO</a>
                 </div>
-                <div class="col-4 border-bottom text-center pt-2" id="post_action_3" onclick="selectPost(3)">
+                <div class="col-4 border-bottom text-center pt-2" id="post_action_3" onclick="selectPost(3)" style="cursor: pointer">
                     <a href="#" class="text-white" id="text_focus_3">VIDEO</a>
                 </div>
             </div>

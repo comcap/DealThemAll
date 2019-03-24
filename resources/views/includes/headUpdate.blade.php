@@ -14,7 +14,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 p-0" style="height: auto;">
-                        <form action="{{$userProfile->user_ID}}" method="post" enctype="multipart/form-data">
+                        <form action="{{$userProfile->user_ID}}" id="formInput" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row px-4">
@@ -55,22 +55,22 @@
                                                 {{--<input type="password" name="password" placeholder="••••••••••••••" class="text-input pl-3">--}}
                                             </div>
 
-                                            <div class="form-group">
-                                                <select name="language2" id="game" class="text-select pl-3" style="height: 40px;">
-                                                    @if(isset($userLanguage[1]))
-                                                        <option value="{{$userLanguage[1]->languageID}}">{{$userLanguage[1]->language_name}}</option>
-                                                        @foreach($language as $item)
-                                                            <option value="{{$item->languageID}}">{{$item->language_name}}</option>
-                                                        @endforeach
-                                                    @else
-                                                        <option value="null">Select Language</option>
-                                                        @foreach($language as $item)
-                                                            <option value="{{$item->languageID}}">{{$item->language_name}}</option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
+                                            {{--<div class="form-group">--}}
+                                                {{--<select name="language2" id="game" class="text-select pl-3" style="height: 40px;">--}}
+                                                    {{--@if(isset($userLanguage[1]))--}}
+                                                        {{--<option value="{{$userLanguage[1]->languageID}}">{{$userLanguage[1]->language_name}}</option>--}}
+                                                        {{--@foreach($language as $item)--}}
+                                                            {{--<option value="{{$item->languageID}}">{{$item->language_name}}</option>--}}
+                                                        {{--@endforeach--}}
+                                                    {{--@else--}}
+                                                        {{--<option value="null">Select Language</option>--}}
+                                                        {{--@foreach($language as $item)--}}
+                                                            {{--<option value="{{$item->languageID}}">{{$item->language_name}}</option>--}}
+                                                        {{--@endforeach--}}
+                                                    {{--@endif--}}
+                                                {{--</select>--}}
                                                 {{--<input type="password" name="password" placeholder="••••••••••••••" class="text-input pl-3">--}}
-                                            </div>
+                                            {{--</div>--}}
 
                                             <div class="form-group mt-2">
                                                 <p class="text-input-label pl-0">Practice time</p>
@@ -172,9 +172,13 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary red-btn" style="height: 40px;font-size: 14px;font-weight: bold">Update Profile</button>
-                                                <button class="light-btn mt-3" style="height: 40px;font-size: 14px;font-weight: bold">Reset</button>
+                                            <div class="row align-items-end">
+                                                <div class="col-6">
+                                                    <button type="submit" class="btn btn-primary red-btn" style="height: 40px;font-size: 14px;font-weight: bold">Update Profile</button>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button onclick="reset()" type="reset" class="btn light-btn mt-3" style="height: 40px;font-size: 14px;font-weight: bold">Reset</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -193,4 +197,8 @@
         uiLibrary: 'bootstrap4',
         format: 'yyyy-mm-dd'
     });
+
+    function reset() {
+        document.getElementById('formInput').reset()
+    }
 </script>
