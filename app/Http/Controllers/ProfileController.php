@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Asset;
+use App\Comment;
 use App\Feed;
+use App\Follow;
 use App\Game;
+use App\Like;
 use App\StatsPlayer;
 use App\Team;
 use App\TeamManager;
@@ -52,32 +55,53 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
+//        return $request;
         $userID = Auth::user()->user_ID;
         $teamManager = TeamManager::where('user_ID','=',$userID)->get();
 
-        $invilte = $request->invilte;
-        $follow = $request->follow;
+        $state = $request->state;
         $userInvite = $request->userInvite;
+        $gameID = $request->gameID;
 
-        if ($invilte="1"){
+        if ($state=="1"){
             if ($teamManager->count() <= 0){
                 return redirect('createteam');
             }else{
-                $TeamManager = new TeamManager();
-                $TeamManager->teamID = $teamManager->team_ID;
-                $TeamManager->user_ID = $userInvite;
-                $TeamManager->user_verify = 0;
+                TeamManager::where('tbl_team_manager.teamID','=',$teamManager->team_ID)
+                    ->where('tbl_team_manager.game_ID','=',$gameID)
+                    ->whereNull('tbl_team_manager.user_ID')
+                    ->first()
+                    ->update(['user_ID' => $userInvite,'user_verify' => 0,'expired_invite' => Carbon::now()->addMinutes(5)->toDateTimeString()]);
 
-                $TeamManager->save();
+                $notification = new Notification();
+                $notification->notification_User = $userInvite;
+                $notification->notification_isRead = 0;
+                $notification->notification_type = 1;
+                $notification->notificaiton_state = 0;
+                $notification->save();
 
-                return redirect('profile/'.$userInvite);
+                $notificationDetail = new NotificationDetail();
+                $notificationDetail->notificaitonID = $notification->notificationID;
+                $notificationDetail->teamID = $teamManager->team_ID;
+                $notificationDetail->senderID = $userInvite;
+                $notificationDetail->gameID = $gameID;
+                $notificationDetail->save();
+
+                return redirect('/profile/'.$userInvite);
             }
         }else{
-            if ($follow="1"){
+            $getFollow = Follow::where('user_ID','=',$userID)->where('user_follower_ID','=',$userInvite)->first();
 
+            if (isset($getFollow)){
+                Follow::where('user_ID','=',$userID)->where('user_follower_ID','=',$userInvite)->delete();
             }else{
-
+                $follow = new Follow();
+                $follow->user_ID = $userID;
+                $follow->user_follower_ID = $userInvite;
+                $follow->save();
             }
+
+            return redirect('/profile/'.$userInvite);
         }
     }
 
@@ -139,7 +163,68 @@ class ProfileController extends Controller
             $userProfile->user_birthday = Carbon::parse($userProfile->user_birthday)->age;
         }
 
-        return view("pages.profile",compact('feeds','myTeam','myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList'));
+        $listComment = Comment::select('*','tbl_comment.created_at')->join('tbl_User','tbl_User.user_ID','=','tbl_comment.user_ID')
+            ->get()->groupBy('post_ID');
+        $listComment = ['data'=>$listComment];
+
+        $getLike = Like::select('post_ID',DB::raw('count(post_ID) as total'))->where('state','=',1)->groupBy('post_ID')->get()->keyBy('post_ID');
+        $getLike = ['data'=>$getLike];
+
+        $stateLike = Like::select('post_ID','state')->where('user_ID','=',1)->where('state','=',1)->get()->groupBy('post_ID');
+
+        $stateFollow = Follow::where('user_ID','=',$myUser->user_ID)->where('user_follower_ID','=',$id)->first();
+
+        $getFollower = Follow::join('tbl_User','tbl_User.user_ID','=','tbl_Follow.user_ID')
+            ->where('tbl_Follow.user_follower_ID','=',$id)->get();
+        $roleFollower = Follow::join('tbl_User_Role','tbl_User_Role.user_ID','=','tbl_Follow.user_ID')
+            ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
+            ->join('tbl_Game','tbl_Game.game_ID','=','tbl_User_Role.game_ID')
+            ->where('tbl_Follow.user_follower_ID','=',$id)->get();
+
+
+        $roleFollower = $roleFollower->mapToGroups(function ($item, $key) {
+            return [$item['user_ID'] => ["role_name"=>$item['role_name'],"role_color"=>$item['role_color'],"game_logo"=>$item['game_logo']]];
+        });
+
+        $getFollower->map(function ($item) use($roleFollower){
+            foreach ($roleFollower as $key => $role){
+                if ($key == $item->user_ID){
+                    $item->role = $role;
+                }
+            }
+           return $item;
+        });
+
+
+        $getFollowing = Follow::join('tbl_User','tbl_User.user_ID','=','tbl_Follow.user_follower_ID')
+            ->where('tbl_Follow.user_ID','=',$id)->get();
+
+        $roleFollowing = Follow::join('tbl_User_Role','tbl_User_Role.user_ID','=','tbl_Follow.user_follower_ID')
+            ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
+            ->join('tbl_Game','tbl_Game.game_ID','=','tbl_User_Role.game_ID')
+            ->where('tbl_Follow.user_ID','=',$id)->get();
+
+//        return $roleFollowing;
+
+        $roleFollowing = $roleFollowing->mapToGroups(function ($item, $key) {
+            return [$item['user_follower_ID'] => ["role_name"=>$item['role_name'],"role_color"=>$item['role_color'],"game_logo"=>$item['game_logo']]];
+        });
+
+//        return $roleFollowing;
+        $getFollowing->map(function ($item) use($roleFollowing){
+            foreach ($roleFollowing as $key => $role){
+                if ($key == $item->user_follower_ID){
+                    $item->role = $role;
+                }else{
+                    $item->role = [];
+                }
+            }
+
+            return $item;
+        });
+
+//        return $getFollowing;
+        return view("pages.profile",compact('feeds','listComment','getLike','stateLike','stateFollow','getFollow','getFollower','getFollowing','myTeam','myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList'));
     }
 
     /**

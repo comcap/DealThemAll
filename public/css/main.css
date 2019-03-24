@@ -117,6 +117,14 @@ svg.active circle{
     height: 40px;
 }
 
+.followBtn.active{
+    background-color: #F11D72;
+}
+
+.followBtn.active:after{
+    content: "ed";
+}
+
 .nav-text{
     color: #CCCCCC;
 }
@@ -365,8 +373,13 @@ svg.active circle{
     -o-transition: box-shadow 0.2s linear; /* Opera 10.5 */
     transition: box-shadow 0.2s linear;
 }
-.team-active{
+.team-active.active{
+    color: #ffffff!important;
+    border-right: none!important;
+    text-shadow: none!important;
+
     background: rgba(255,129,75,1);
+    background-color: transparent!important;
     background: -moz-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
     background: -webkit-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);
     background: -o-linear-gradient(top, rgba(255,129,75,1) 0%, rgba(255,0,108,1) 100%);

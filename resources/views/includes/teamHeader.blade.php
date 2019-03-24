@@ -34,8 +34,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if($TeamOwner)
-                                    <div class="row">
+                                <div class="row">
+                                    @if($TeamOwner)
                                         <div class="col-4 pl-0" style="height: 30px">
                                             <a href="#" data-toggle="modal" data-target="#editTeam">
                                                 <div class="light-btn text-center pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">
@@ -43,8 +43,15 @@
                                                 </div>
                                             </a>
                                         </div>
-                                    </div>
-                                @endif
+                                    @else
+                                        <form class="w-100" style="height: auto" action="/followTeam" method="post">
+                                            @csrf
+                                            <div class="col-4 pl-0">
+                                                <button type="submit" class="btn light-btn pt-2 followBtn @if($stateFollow) active @endif" name="teamFollow" value="{{$teamManager}}" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">Follow</button>
+                                            </div>
+                                        </form>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>

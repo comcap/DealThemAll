@@ -72,42 +72,91 @@
             <div class="col-3 pr-4" >
                 <div class="row">
                     <div class="col-12 pb-3" style="height: auto; background-color: rgba(255,255,255,0.1); border-radius: 8px">
-                        <div class="row" style="border-bottom: 1px #CCCCCC77 solid">
-                            <button class="col-6 member-btn team-active label-font-Light">Member <span>{{count($result)}}</span></button>
-                            <button class="col-6 following-btn label-font-Light">Following <span>231</span></button>
-                        </div>
-                        <div class="row mx-0">
-                            @foreach($result as $item)
-                                    <div class="col-12 pt-4 px-3" style="height: auto;">
-                                        <div class="row" style="height: 60px;">
-                                            <div class="col-3 px-0">
-                                                <a href="/profile/{{$item->user_ID}}" >
-                                                    <img src="{{asset('data-image/userImage/'.$item->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
-                                                </a>
-                                            </div>
-                                            <div class="col-9 pt-1">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <a href="/profile/{{$item->user_ID}}" >
-                                                            <h3 class="label-font-Bold text-white" style="font-size: 16px">{{$item->user_name}}</h3>
-                                                        </a>
-                                                    </div>
+                        <ul class="row nav nav-tabs" id="myTab" role="tablist" style="border-bottom: 1px #CCCCCC77 solid">
+                            <li class="nav-item w-100 col-6 px-0">
+                                <a class="nav-link border-0 member-btn team-active label-font-Light text-white text-center pt-3 active" data-toggle="tab" href="#member" role="tab" aria-controls="member" aria-selected="true">
+                                    Member <span>{{count($result)}}</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item w-100 col-6 px-0">
+                                <a class="nav-link border-0 following-btn team-active label-font-Light text-white text-center pt-3" data-toggle="tab" href="#follower" role="tab" aria-controls="follower" aria-selected="false">
+                                    Follower <span>{{count($getFollower)}}</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" >
+                            <div class="tab-pane fade show active" id="member" role="tabpanel">
+                                <div class="row mx-0">
+                                    @foreach($result as $item)
+                                        <div class="col-12 pt-4 px-3" style="height: auto;">
+                                            <div class="row" style="height: 60px;">
+                                                <div class="col-3 px-0">
+                                                    <a href="/profile/{{$item->user_ID}}" >
+                                                        <img src="{{asset('data-image/userImage/'.$item->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                                    </a>
                                                 </div>
-                                                <div class="row px-3">
-                                                    @foreach($item->role as $key => $role)
-                                                        <div class="box-role d-flex align-items-center mr-2" style="background-color: {{$role['role_color']}}">
-                                                            <img src="{{asset($role->game_logo)}}" height="14px" width="14px">
-                                                            <label class="text-white ml-1 m-0">{{$role->role_name}}</label>
+                                                <div class="col-9 pt-1">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a href="/profile/{{$item->user_ID}}" >
+                                                                <h3 class="label-font-Bold text-white" style="font-size: 16px">{{$item->user_name}}</h3>
+                                                            </a>
                                                         </div>
-                                                        @if ($key == 1)
-                                                            @break
-                                                        @endif
-                                                    @endforeach
+                                                    </div>
+                                                    <div class="row px-3">
+                                                        @foreach($item->role as $key => $role)
+                                                            <div class="box-role d-flex align-items-center mr-2" style="background-color: {{$role['role_color']}}">
+                                                                <img src="{{asset($role->game_logo)}}" height="14px" width="14px">
+                                                                <label class="text-white ml-1 m-0">{{$role->role_name}}</label>
+                                                            </div>
+                                                            @if ($key == 1)
+                                                                @break
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                            @endforeach
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="follower" role="tabpanel">
+                                <div class="row mx-0">
+                                    @foreach($getFollower as $item)
+                                        <div class="col-12 pt-4 px-3" style="height: auto;">
+                                            <div class="row" style="height: 60px;">
+                                                <div class="col-3 px-0">
+                                                    <a href="/profile/{{$item->user_ID}}" >
+                                                        <img src="{{asset('/data-image/userImage/'.$item->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                                    </a>
+                                                </div>
+                                                <div class="col-9 pt-1">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <a href="/profile/{{$item->user_ID}}" >
+                                                                <h3 class="label-font-Bold text-white" style="font-size: 16px">{{$item->user_name}}</h3>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pl-3">
+                                                        @foreach($item->role as $key => $role)
+                                                            <div class="box-role d-flex align-items-center mr-2" style="background-color: {{$role['role_color']}}">
+                                                                <img src="{{asset($role['game_logo'])}}" height="14px" width="14px">
+                                                                <label class="text-white ml-1 m-0">{{$role['role_name']}}</label>
+                                                            </div>
+                                                            @if ($key == 1)
+                                                                @break
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -121,12 +170,12 @@
                                 <div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
                                     <div class="col-12 p-4">
                                         <div class="row mx-0 align-items-center">
-                                            <a href="profile/{{$item->user_ID}}">
+                                            <a href="/profile/{{$item->user_ID}}">
                                                 <img src="{{asset('data-image/userImage/'.$item->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
                                             </a>
                                             <div>
                                                 <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">
-                                                    <a class="label-font-Bold text-white" href="profile/{{$item->user_ID}}">
+                                                    <a class="label-font-Bold text-white" href="/profile/{{$item->user_ID}}">
                                                         {{$item->user_name}}
                                                     </a>
                                                     <span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a {{$item->game_name}}.</span>
@@ -163,17 +212,114 @@
                                                     <div class="offset-6"></div>
                                                     <div class="col-6">
                                                         <div class="row align-items-center justify-content-end" style="height: 40px">
-                                                            <div class="">
-                                                                <img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">
-                                                                <span class="text-pink">609</span>
-                                                            </div>
-                                                            <div class="ml-4">
-                                                                <img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">
-                                                                <span class="text-pink">609</span>
+                                                            @if(\Illuminate\Support\Facades\Auth::User())
+                                                                <div class="col-4">
+                                                                    <div class="btn row align-items-center p-0 d-flex border-0 justify-content-end @if(isset($stateLike[$item->post_ID][0]['state'])) active @endif" onclick="like(this)" data-post-id="{{ $item->post_ID }}" data-user-id="{{\Illuminate\Support\Facades\Auth::User()->user_ID}}" data-toggle="button" @if(isset($stateLike[$item->post_ID][0]['state'])) aria-pressed="true" @else aria-pressed="false" @endif style="cursor: pointer;">
+                                                                        <div class="like"></div>
+                                                                        <span id="likeCount{{$item->post_ID}}" class="text-pink">
+                                                                            @if(isset($getLike['data'][$item->post_ID]))
+                                                                                {{$getLike['data'][$item->post_ID]['total']}}
+                                                                            @else
+                                                                                0
+                                                                            @endif
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-4">
+                                                                    <div class="btn row align-items-center p-0 d-flex border-0 justify-content-end" style="cursor: pointer;">
+                                                                        <div class="like"></div>
+                                                                        <span id="likeCount{{$item->post_ID}}" class="text-pink">
+                                                                            @if(isset($getLike['data'][$item->post_ID]))
+                                                                                {{$getLike['data'][$item->post_ID]['total']}}
+                                                                            @else
+                                                                                0
+                                                                            @endif
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                            <div class="col-4">
+                                                                <div class="row justify-content-end">
+                                                                    <div class="" data-toggle="collapse" data-target="#collapse{{$key}}" style="cursor: pointer">
+                                                                        <img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">
+                                                                        <span id="commentCount{{$item->post_ID}}" class="text-pink">
+                                                                            @if(isset($listComment['data'][$item->post_ID]))
+                                                                                {{count($listComment['data'][$item->post_ID])}}
+                                                                            @else
+                                                                                0
+                                                                            @endif
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-4">
+                                            <div class="col collapse" id="collapse{{$key}}">
+                                                <div class="row">
+                                                    <div class="col" style="border: 1px solid rgba(255,255,255,0.1)"></div>
+                                                </div>
+
+                                                <div id="postID{{$item->post_ID}}">
+                                                    @foreach($listComment['data'] as $key => $value)
+                                                        @if($key == $item->post_ID)
+                                                            @foreach($value as $comment)
+                                                                <div class="row mt-3">
+                                                                    <div class="col-12">
+                                                                        <div class="row mx-0 ">
+                                                                            <div class="col-1 pl-0">
+                                                                                <a href="/profile/{{$comment->user_ID}}">
+                                                                                    <img src="{{asset('data-image/userImage/'.$comment->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="col-11 px-0">
+                                                                                <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">
+                                                                                    <a class="label-font-Bold text-white" href="/profile/{{$comment->user_ID}}">
+                                                                                        {{$comment->user_name}}
+                                                                                    </a>
+                                                                                    <span class="label-font-Condensed-Thin ml-1" style="color: #999999;font-size: 12px">{{$comment->created_at}}</span>
+                                                                                </h3>
+                                                                                <p class="label-font-Condensed-Regular ml-3" style="color: #999999;font-size: 14px">{{$comment->textMessage}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+
+                                                @if(\Illuminate\Support\Facades\Auth::User())
+                                                    <div class="row mt-3">
+                                                        <div class="col-12">
+                                                            <div class="row mx-0 ">
+                                                                <div class="col-1 pl-0">
+                                                                    <a href="/profile">
+                                                                        <img src="{{asset('data-image/userImage/'.Auth::User()->user_image)}}" width="60px" height="60px" style="border-radius: 30px">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-11 px-0">
+                                                                    <div class="row mx-0">
+                                                                        <h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">
+                                                                            <a class="label-font-Bold text-white" href="/profile">
+                                                                                {{Auth::User()->user_name}}
+                                                                            </a>
+                                                                            <span class="label-font-Condensed-Thin ml-1" style="color: #999999;font-size: 12px">{{date("Y-m-d H:i:s")}}</span>
+                                                                        </h3>
+                                                                        <div class="col-12 mt-2">
+                                                                            <input id="commentInput" type="text" name="comment" onkeydown="comment(this)" data-post-id="{{ $item->post_ID }}" data-user-id="{{\Illuminate\Support\Facades\Auth::User()->user_ID}}" placeholder="Write a comment..." class="text-input pl-3" style="height: 34px">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -588,6 +734,91 @@
             };
             xhttp3.open("GET", url3, true);
             xhttp3.send();
+        }
+
+        function comment(e) {
+            var token = $("meta[name='csrf-token']").attr("content");
+
+            if (event.keyCode === 13) {
+                // alert(e.value)
+                // alert(e.getAttribute("data-post-id"))
+                // alert(e.getAttribute("data-user-id"))
+
+                var text = e.value;
+                var postID = e.getAttribute("data-post-id");
+                var userID = e.getAttribute("data-user-id");
+                var params = "text="+text+"&postID="+postID+"&userID="+userID;
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    var render = ""
+                    if (this.readyState == 4 && this.status == 200) {
+                        if (this.responseText != ""){
+                            var obj = JSON.parse(this.responseText);
+                            obj.forEach(function (comment) {
+                                render += "<div class=\"row mt-3\">\n" +
+                                    "                                                                <div class=\"col-12\">\n" +
+                                    "                                                                    <div class=\"row mx-0 \">\n" +
+                                    "                                                                        <div class=\"col-1 pl-0\">\n" +
+                                    "                                                                            <a href=&quot;profile/"+comment['user_ID']+"&quot;>\n" +
+                                    "                                                                                <img src=data-image/userImage/"+comment['user_image']+" width=\"60px\" height=\"60px\" style=\"border-radius: 30px\">\n" +
+                                    "                                                                            </a>\n" +
+                                    "                                                                        </div>\n" +
+                                    "                                                                        <div class=\"col-11 px-0\">\n" +
+                                    "                                                                            <h3 class=\"label-font-Bold text-white ml-3 mb-0\" style=\"font-size: 16px\">\n" +
+                                    "                                                                                <a class=\"label-font-Bold text-white\" href='/profile/"+comment['user_ID']+"'>\n" +
+                                    "                                                                                    "+comment['user_name']+"\n" +
+                                    "                                                                                </a>\n" +
+                                    "                                                                                <span class=\"label-font-Condensed-Thin ml-1\" style=\"color: #999999;font-size: 12px\">"+comment['created_at']+"</span>\n" +
+                                    "                                                                            </h3>\n" +
+                                    "                                                                            <p class=\"label-font-Condensed-Regular ml-3\" style=\"color: #999999;font-size: 14px\">"+comment['textMessage']+"</p>\n" +
+                                    "                                                                        </div>\n" +
+                                    "                                                                    </div>\n" +
+                                    "                                                                </div>\n" +
+                                    "                                                            </div>"
+                            })
+                            console.log(obj)
+                            document.getElementById('commentCount'+obj[0]['post_ID']).innerText = obj.length
+                            document.getElementById('postID'+obj[0]['post_ID']).innerHTML = render;
+                        }
+                    }
+                };
+
+                xhttp.open("POST", "/", true);
+                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhttp.setRequestHeader("x-csrf-token", token);
+                xhttp.send(params);
+
+                e.value = ""
+            }
+        }
+
+        function like(e) {
+            var token = $("meta[name='csrf-token']").attr("content");
+
+            // alert(e.getAttribute("data-post-id"))
+            // alert(e.getAttribute("data-user-id"))
+
+            var postID = e.getAttribute("data-post-id");
+            var userID = e.getAttribute("data-user-id");
+            var params = "&postID="+postID+"&userID="+userID;
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById('likeCount'+postID).innerText = ""
+                    if (this.responseText != ""){
+                        var obj = JSON.parse(this.responseText);
+                        console.log(obj,"likeCount")
+                        document.getElementById('likeCount'+postID).innerText = obj
+                    }
+                }
+            };
+
+            xhttp.open("POST", "/", true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.setRequestHeader("x-csrf-token", token);
+            xhttp.send(params);
         }
     </script>
 @stop

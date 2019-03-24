@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Asset;
+use App\Comment;
 use App\Feed;
+use App\FollowTeam;
 use App\Game;
 use App\GameRole;
+use App\Like;
 use App\Notification;
 use App\NotificationDetail;
 use App\Team;
@@ -103,7 +106,7 @@ class TeamManagerController extends Controller
     public function show($teamManager)
     {
         $userID = Auth::user()->user_ID;
-        $TeamOwner = Team::where('team_owner','=',$userID)->first();
+        $TeamOwner = Team::where('team_owner','=',$userID)->where('team_ID','=',$teamManager)->first();
 
         $gameList = Game::get();
 
@@ -157,7 +160,38 @@ class TeamManagerController extends Controller
             return $item;
         });
 
-        return view('pages.team',compact('feeds','TeamOwner','language','teamManager','gameList','result','getTeam'));
+        $listComment = Comment::select('*','tbl_comment.created_at')->join('tbl_User','tbl_User.user_ID','=','tbl_comment.user_ID')
+            ->get()->groupBy('post_ID');
+        $listComment = ['data'=>$listComment];
+
+        $getLike = Like::select('post_ID',DB::raw('count(post_ID) as total'))->where('state','=',1)->groupBy('post_ID')->get()->keyBy('post_ID');
+        $getLike = ['data'=>$getLike];
+
+        $stateLike = Like::select('post_ID','state')->where('user_ID','=',1)->where('state','=',1)->get()->groupBy('post_ID');
+
+        $stateFollow = FollowTeam::where('teamID','=',$teamManager)->where('userID','=',$userID)->first();
+
+        $getFollower = FollowTeam::join('tbl_User','tbl_User.user_ID','=','tbl_team_follow.userID')
+            ->where('tbl_team_follow.teamID','=',$teamManager)->get();
+        $roleFollower = FollowTeam::join('tbl_User_Role','tbl_User_Role.user_ID','=','tbl_team_follow.userID')
+            ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
+            ->join('tbl_Game','tbl_Game.game_ID','=','tbl_User_Role.game_ID')
+            ->where('tbl_team_follow.teamID','=',$teamManager)->get();
+
+        $roleFollower = $roleFollower->mapToGroups(function ($item, $key) {
+            return [$item['userID'] => ["role_name"=>$item['role_name'],"role_color"=>$item['role_color'],"game_logo"=>$item['game_logo']]];
+        });
+
+        $getFollower->map(function ($item) use($roleFollower){
+            foreach ($roleFollower as $key => $role){
+                if ($key == $item->user_ID){
+                    $item->role = $role;
+                }
+            }
+            return $item;
+        });
+
+        return view('pages.team',compact('feeds','listComment','getFollower','getLike','stateLike','stateFollow','TeamOwner','language','teamManager','gameList','result','getTeam'));
     }
 
     /**
@@ -245,5 +279,23 @@ class TeamManagerController extends Controller
     function logSQL(){
         $queries = DB::getQueryLog();
         return $queries;
+    }
+
+    function followTeam(Request $request){
+        $user_ID = Auth::user()->user_ID;
+        $teamFollow = $request->teamFollow;
+
+        $getFollow = FollowTeam::where('teamID','=',$teamFollow)->where('userID','=',$user_ID)->first();
+
+        if (isset($getFollow)){
+            FollowTeam::where('teamID','=',$teamFollow)->where('userID','=',$user_ID)->delete();
+        }else{
+            $FollowTeam = new FollowTeam();
+            $FollowTeam->teamID = $teamFollow;
+            $FollowTeam->userID = $user_ID;
+            $FollowTeam->save();
+        }
+
+        return redirect('team/'.$teamFollow);
     }
 }

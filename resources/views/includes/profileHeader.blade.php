@@ -98,33 +98,21 @@
                                                     <form class="col-12 " style="height: auto" action="/profile" method="post">
                                                         @csrf
                                                         <div class="row">
+                                                            @if(!isset($myTeam->team_ID))
+                                                                <div class="col-4 pl-0">
+                                                                    <a href="#" data-toggle="modal" data-target="#invilteModal">
+                                                                        <button class="btn red-btn pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">INVITE</button>
+                                                                    </a>
+                                                                </div>
+                                                            @endif
                                                             <div class="col-4 pl-0">
-                                                                <a href="#" data-toggle="modal" data-target="#invilteModal">
-                                                                    <button name="invilte" value=1 class="btn red-btn pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">INVITE</button>
-                                                                </a>
+                                                                <button type="submit" class="btn light-btn pt-2 followBtn @if($stateFollow) active @endif" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">Follow</button>
                                                             </div>
-                                                            <div class="col-4">
-                                                                <button type="submit" name="follow" value=1 class="btn light-btn pt-2" style="width: 100%;height: 30px;font-size: 12px;font-weight: bold;">Follow</button>
-                                                            </div>
-                                                            <input type="text" name="userInvite" hidden value={{$id}}>
+                                                                <input type="text" name="userInvite" hidden value={{$id}}/>
+                                                                <input type="text" name="state" value="2" hidden/>
                                                         </div>
                                                     </form>
                                                 @endif
-                                            @else
-                                                <div class="col-6 pl-0 pr-4" style="height: 30px">
-                                                    <a href="#">
-                                                        <div class="red-btn text-center pt-2" style="width: 100%;height: 30px">
-                                                            <p>INVITE</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="col-6 pr-4" style="height: 30px">
-                                                    <a href="#">
-                                                        <div class="light-btn text-center pt-2" style="width: 100%;height: 30px;">
-                                                            <p>Follow</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
                                             @endif
                                         </div>
                                     </div>

@@ -36,7 +36,7 @@ Route::resource('/notifications','NotificationController')->middleware('auth');
 Route::resource('/teamList','TeamListController')->middleware('auth');
 Route::resource('/post','FeedController')->middleware('auth');
 Route::get('/ApiSearchTeam','TeamListController@ApiSearchTeam');
-
+Route::post('/followTeam','TeamManagerController@followTeam');
 
 Route::resource('/team','TeamManagerController')->middleware('auth');
 
