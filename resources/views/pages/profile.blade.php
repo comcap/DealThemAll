@@ -50,7 +50,7 @@
                             @if(count($statsPlayer)>0)
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/three-stars.svg")}}" height="40px">
+                                        <img id="imgRank" src="{{asset("/data-image/stats_icon/three-stars.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
                                                 <h7>RANKING</h7>
@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/trophy.svg")}}" height="40px">
+                                        <img id="imgWon" src="{{asset("/data-image/stats_icon/trophy.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
                                                 <h7>GAME WON</h7>
@@ -76,10 +76,10 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/target.svg")}}" height="40px">
+                                        <img id="imgAcc" src="{{asset("/data-image/stats_icon/target.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
-                                                <h7>ACCURACY</h7>
+                                                <h7 id="labelAcc">ACCURACY</h7>
                                             </div>
                                             <div class="text-white label-font-Condensed-Bold pl-2" style="font-size: 18px">
                                                 <p id="accuracy_total">{{$statsPlayer->accuracy_total}} %</p>
@@ -89,10 +89,10 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/clock.svg")}}" height="40px">
+                                        <img id="imgTime" src="{{asset("/data-image/stats_icon/clock.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
-                                                <h7>TIME PLAYED</h7>
+                                                <h7 id="labelTime">TIME PLAYED</h7>
                                             </div>
                                             <div class="text-white label-font-Condensed-Bold pl-2" style="font-size: 18px">
                                                 <p id="time_total">{{$statsPlayer->time_total}}</p>
@@ -102,10 +102,10 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/skull.svg")}}" height="40px">
+                                        <img id="imgKill" src="{{asset("/data-image/stats_icon/skull.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
-                                                <h7>KILL</h7>
+                                                <h7 id="labelKill">KILL</h7>
                                             </div>
                                             <div class="text-white label-font-Condensed-Bold pl-2" style="font-size: 18px">
                                                 <p id="kill_total">{{$statsPlayer->kill_total}}</p>
@@ -115,10 +115,10 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/headshot.svg")}}" height="40px">
+                                        <img id="imgHead" src="{{asset("/data-image/stats_icon/headshot.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
-                                                <h7>HEADSHOT ACCURACY</h7>
+                                                <h7 id="labelHead">HEADSHOT ACCURACY</h7>
                                             </div>
                                             <div class="text-white label-font-Condensed-Bold pl-2" style="font-size: 18px">
                                                 <p id="headshot_total">{{$statsPlayer->headshot_total}} %</p>
@@ -505,57 +505,6 @@
                     @endif
                 </div>
             </div>
-
-            {{--<div class="col-9 pl-4">--}}
-                {{--<div class="row" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">--}}
-                    {{--<div class="col-12 p-4 mb-3">--}}
-                        {{--<div class="row mx-0 align-items-center">--}}
-                            {{--<img src="https://dummyimage.com/60x60/000/fff" style="border-radius: 30px">--}}
-                            {{--<div>--}}
-                                {{--<h3 class="label-font-Bold text-white ml-3 mb-0" style="font-size: 16px">xLapisLazulix--}}
-                                    {{--<span class="label-font-Condensed-Regular" style="color: #AAAAAA">played a Playerunknown’s Battlegrounds.</span>--}}
-                                {{--</h3>--}}
-                                {{--<span class="label-font-Condensed-Thin ml-3" style="color: #999999;font-size: 12px">2018-03-06 02:30</span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="row mt-4 mx-0">--}}
-                            {{--<p class="text-white label-font-Condensed-Regular" style="font-size: 14px">ผลไม้ บอยคอต แม็กกาซีนกราวนด์ปาสกาลบู๊พล็อต มวลชนสติ๊กเกอร์วืดรีสอร์ตนิวส์ พรีเซ็นเตอร์สไตล์อิออนดีมานด์ดาวน์ มาร์ชราชบัณฑิตยสถานสตาร์ คอร์รัปชั่น เรซินอุรังคธาตุลิมูซีนฟลุก วานิลา ชนะเลิศ ซานตาคลอสระโงกไทเฮาเซ็กส์ซีน โฮมศิรินทร์ภควัมปติ คาร์โก้ เซาท์โยเกิร์ตแพนดา จอหงวนสลัม แคป--}}
-
-                            {{--</p>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="row mt-4 mx-0 bg-secondary" style="height: 400px"></div>--}}
-
-                        {{--<div class="row mt-4 mx-0">--}}
-                            {{--<div class="col-6">--}}
-                                {{--<div class="row align-items-center">--}}
-                                    {{--<img src="https://dummyimage.com/40x40/000/fff">--}}
-                                    {{--<h3 class="label-font-Light ml-3 mb-0" style="font-size: 16px;color: #AAAAAA">Playerunknown’s Battlegrounds</h3>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-6">--}}
-                                {{--<div class="row mx-0">--}}
-                                    {{--<div class="offset-6"></div>--}}
-                                    {{--<div class="col-6">--}}
-                                        {{--<div class="row align-items-center justify-content-end" style="height: 40px">--}}
-                                            {{--<div class="row align-items-center justify-content-end" style="height: 40px">--}}
-                                                {{--<div class="">--}}
-                                                    {{--<img src="{{asset('/data-image/like.svg') }}" width="auto" height="40px">--}}
-                                                    {{--<span class="text-pink">609</span>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="ml-4">--}}
-                                                    {{--<img src="{{asset('/data-image/comment.svg')}}" width="auto" height="40px">--}}
-                                                    {{--<span class="text-pink">609</span>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
         </div>
     </div>
 
@@ -616,20 +565,83 @@
             var url = '/getPlayerWithID/'+id+'/game/'+idGame;
             var urlGetGame = '/getGameList/'+idGame;
 
-            console.log(url)
+            // alert(idGame)
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     if (this.responseText != ""){
                         var obj = JSON.parse(this.responseText);
+                        console.log(obj,"profileSelectGame")
+                        switch (idGame) {
+                            case "1":
+                                // $('#imgRank').src =
+                                //     $('#imgRank').src =
 
-                        document.getElementById('rank_total').innerText = obj['rank_total']
-                        document.getElementById('won_total').innerText = obj['won_total']
-                        document.getElementById('accuracy_total').innerText = obj['accuracy_total']+" %"
-                        document.getElementById('time_total').innerText = obj['time_total']
-                        document.getElementById('kill_total').innerText = obj['kill_total']
-                        document.getElementById('headshot_total').innerText = obj['headshot_total']+" %"
+                                document.getElementById('imgAcc').src = "/data-image/stats_icon/target.svg"
+                                document.getElementById('labelAcc').innerText = "ACCURACY"
+
+                                document.getElementById('imgTime').src = "/data-image/stats_icon/clock.svg"
+                                document.getElementById('labelTime').innerText = "TIME PLAYED"
+
+                                document.getElementById('imgKill').src = "/data-image/stats_icon/skull.svg"
+                                document.getElementById('labelKill').innerText = "KILL"
+
+                                document.getElementById('imgHead').src = "/data-image/stats_icon/headshot.svg"
+                                document.getElementById('labelHead').innerText = "HEADSHOT"
+
+                                document.getElementById('rank_total').innerText = obj['rank_total']
+                                document.getElementById('won_total').innerText = obj['won_total']
+                                document.getElementById('accuracy_total').innerText = obj['accuracy_total']+" %"
+                                document.getElementById('time_total').innerText = obj['time_total']
+                                document.getElementById('kill_total').innerText = obj['kill_total']
+                                document.getElementById('headshot_total').innerText = obj['headshot_total']+" %"
+                                break;
+                            case "2":
+
+                                document.getElementById('imgAcc').src = "/data-image/stats_icon/top10.svg"
+                                document.getElementById('labelAcc').innerText = "WIN TOP 10"
+
+                                document.getElementById('imgTime').src = "/data-image/stats_icon/dmg.png"
+                                document.getElementById('labelTime').innerText = "DAMAGE DEALT"
+
+                                document.getElementById('imgKill').src = "/data-image/stats_icon/skull.svg"
+                                document.getElementById('labelKill').innerText = "KILL"
+
+                                document.getElementById('imgHead').src = "/data-image/stats_icon/headshot.svg"
+                                document.getElementById('labelHead').innerText = "HEADSHOT TOTAL"
+
+                                document.getElementById('rank_total').innerText = obj['rank_total']
+                                document.getElementById('won_total').innerText = obj['won_total']
+                                document.getElementById('accuracy_total').innerText = obj['topten']
+                                document.getElementById('time_total').innerText = obj['dmgDealt']
+                                document.getElementById('kill_total').innerText = obj['kill_total']
+                                document.getElementById('headshot_total').innerText = obj['headshot_total']
+                                break;
+                            case "4":
+                                document.getElementById('imgAcc').src = "/data-image/stats_icon/loss.svg"
+                                document.getElementById('labelAcc').innerText = "GAME LOSS"
+
+                                document.getElementById('imgTime').src = "/data-image/stats_icon/eye.svg"
+                                document.getElementById('labelTime').innerText = "PURCHASE WARD"
+
+                                document.getElementById('imgKill').src = "/data-image/stats_icon/skull.svg"
+                                document.getElementById('labelKill').innerText = "KILL/DEAD/ASSISTS"
+
+                                document.getElementById('imgHead').src = "/data-image/stats_icon/like.svg"
+                                document.getElementById('labelHead').innerText = "FAVORITE HERO"
+
+                                document.getElementById('rank_total').innerText = obj['rank_total']
+                                document.getElementById('won_total').innerText = obj['won_total']
+                                document.getElementById('accuracy_total').innerText = obj['loss_total']
+                                document.getElementById('time_total').innerText = obj['ward_sentry']
+                                document.getElementById('kill_total').innerText = obj['kill_total']+"/"+obj['death_total']+"/"+obj['assists_total']
+                                document.getElementById('headshot_total').innerText = obj['favoriteHero']
+                                break;
+                            default:
+                                alert('error')
+                        }
+
                     } else{
 
                         document.getElementById('rank_total').innerText = "0"

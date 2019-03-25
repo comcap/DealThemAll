@@ -23,10 +23,18 @@ class StatsPlayer extends Model
         'iconPlayer',
         'rank_total',
         'won_total',
+        'loss_total',
         'accuracy_total',
         'time_total',
         'kill_total',
+        'death_total',
+        'assists_total',
         'headshot_total',
+        'topten',
+        'dmgDealt',
+        'favoriteHero',
+        'ward_sentry',
+        'ward_observer',
         'created_at',
         'updated_at'
     ];
