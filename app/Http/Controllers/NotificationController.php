@@ -10,6 +10,7 @@ use App\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class NotificationController extends Controller
 {
@@ -41,11 +42,11 @@ class NotificationController extends Controller
 //            ->where('tbl_notificaiton.notification_User','=',Auth::user()->user_ID)
 //            ->get();
 
-        $notication = Notification::select('tbl_notificaiton.notificationID','tbl_notificaiton.notification_type','tbl_notificaiton.notificaiton_state','tbl_notificaiton_type.typeName','tbl_notificaiton.created_at','teamID','team_name','team_logo','user_ID','user_name','user_image','typeDetail')
+        $notication = Notification::select('tbl_notificaiton.notificationID','tbl_notificaiton.notification_type','tbl_notificaiton.notificaiton_state','tbl_notificaiton_type.typeName','tbl_notificaiton.created_at','notificationText','teamID','team_name','team_logo','user_ID','user_name','user_image','typeDetail')
             ->join('tbl_notificaiton_detail','tbl_notificaiton_detail.notificaitonID','=','tbl_notificaiton.notificationID')
             ->join('tbl_notificaiton_type','tbl_notificaiton_type.typeID','=','tbl_notificaiton.notification_type')
             ->join('tbl_User','tbl_User.user_ID','=','tbl_notificaiton_detail.senderID')
-            ->join('tbl_team','tbl_team.team_ID','=','tbl_notificaiton_detail.teamID')
+            ->leftjoin('tbl_team','tbl_team.team_ID','=','tbl_notificaiton_detail.teamID')
 //            ->whereDate('tbl_notificaiton.created_at','<',$now)
             ->where('tbl_notificaiton.notification_User','=',Auth::user()->user_ID)
             ->orderby('tbl_notificaiton.created_at','desc')

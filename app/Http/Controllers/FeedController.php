@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Asset;
 use App\Feed;
+use App\Follow;
+use App\Notification;
+use App\NotificationDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +48,8 @@ class FeedController extends Controller
         $postImage = $request->postImage;
         $postVideo = $request->postVideo;
 
+        $getFollow = Follow::where('user_follower_ID','=',Auth::user()->user_ID)->get();
+
         switch ($stateID){
             case 1:
                 $post = new Feed();
@@ -53,6 +58,7 @@ class FeedController extends Controller
                 $post->post_detail = $postDetail;
                 $post->postType_ID = $stateID;
                 $post->save();
+
                 break;
             case 2:
                 $post = new Feed();
@@ -107,6 +113,23 @@ class FeedController extends Controller
                 break;
             default:
                 return "error";
+        }
+
+        foreach ($getFollow as $item){
+            $notification = new Notification();
+            $notification->notification_User = $item->user_ID;
+            $notification->notification_isRead = 0;
+            $notification->notification_type = 4;
+            $notification->notificaiton_state = 0;
+            $notification->save();
+
+            $notificationDetail = new NotificationDetail();
+            $notificationDetail->notificaitonID = $notification->notificationID;
+            $notificationDetail->teamID = null;
+            $notificationDetail->senderID = Auth::user()->user_ID;
+            $notificationDetail->gameID = $gameID;
+            $notificationDetail->notificationText = $postDetail;
+            $notificationDetail->save();
         }
 
         return redirect("/");

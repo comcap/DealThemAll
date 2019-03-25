@@ -317,16 +317,26 @@
                                                                             width="60px" height="60px"
                                                                             style="border-radius: 30px"></a>
                                                             </div>
-                                                            <div class="col-7 py-2 px-4 ">
+                                                            <div class="col-11 py-2 px-4 ">
                                                                 <div class="row mx-0">
                                                                     <div class="col p-0">
                                                                         <div class="row align-items-center">
-                                                                            <a href="profile/{{$item->user_ID}}"><h3
-                                                                                        class="text-white label-font-Bold ml-3 mb-0"
-                                                                                        style="font-size: 16px">{{$item->user_name}}</h3>
-                                                                            </a>
-                                                                            <span class="label-font-Condensed-Regular mx-1"
-                                                                                  style="color: #AAAAAA">{{$item->typeDetail}}</span>
+                                                                            <div class="col-3">
+                                                                                <div class="row">
+                                                                                    <a href="profile/{{$item->user_ID}}"><h3
+                                                                                                class="text-white label-font-Bold ml-3 mb-0"
+                                                                                                style="font-size: 16px">{{$item->user_name}}</h3>
+                                                                                    </a>
+                                                                                    <span class="label-font-Condensed-Regular mx-1 text-secondary">{{$item->typeDetail}} </span>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-9 pl-0">
+                                                                                <div class="row mr-0">
+                                                                                    <span class=" threeDot" style="color: #AAAAAA"> {{$item->notificationText}}</span>
+                                                                                </div>
+                                                                            </div>
+
                                                                         </div>
                                                                         <div class="row">
                                                                 <span class="label-font-Condensed-Thin ml-3"

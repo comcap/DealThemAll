@@ -99,6 +99,20 @@ class ProfileController extends Controller
                 $follow->user_ID = $userID;
                 $follow->user_follower_ID = $userInvite;
                 $follow->save();
+
+                $notification = new Notification();
+                $notification->notification_User = $userInvite;
+                $notification->notification_isRead = 0;
+                $notification->notification_type = 5;
+                $notification->notificaiton_state = 0;
+                $notification->save();
+
+                $notificationDetail = new NotificationDetail();
+                $notificationDetail->notificaitonID = $notification->notificationID;
+                $notificationDetail->teamID = "";
+                $notificationDetail->senderID = Auth::user()->user_ID;
+                $notificationDetail->gameID = $gameID;
+                $notificationDetail->save();
             }
 
             return redirect('/profile/'.$userInvite);
