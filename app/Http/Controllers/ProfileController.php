@@ -263,56 +263,42 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->state == "link"){
-            $tw_username = $request->tw_username;
+        switch ($request->state){
+            case "tw_link":
+                $this->linkTW($request->tw_username,$id);
+                break;
+            case "steam_link":
+                $this->linkSteam($request->tw_username,$id);
+//                return $dd;
+                break;
+            case "battlenet_link":
+                if (preg_match("/^[\p{L}\p{Mn}][\p{L}\p{Mn}0-9]{2,11}#[0-9]{4,5}+$/u", $request->tw_username) > 0)
+                {
+                    $tw_username = str_replace("#","-",$request->tw_username);
 
-            if (filter_var($tw_username, FILTER_VALIDATE_URL) !== false) {
-                $tw_username = basename($tw_username);
-            }
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.twitch.tv/kraken/users?login=".$tw_username,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => "",
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 30,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "GET",
-                CURLOPT_HTTPHEADER => array(
-                    "Accept: application/vnd.twitchtv.v5+json",
-                    "Client-ID: nzrv6yapvtsrkp1nv4v1287hrbxs74",
-                    "Postman-Token: 55879291-e73d-4c88-8aa8-b1e0aa38eed6",
-                    "cache-control: no-cache"
-                ),
-            ));
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-                echo "cURL Error #:" . $err;
-            } else {
-                $response = json_decode($response,true);
-                if (!isset($response['error'])){
-                    $user = User::find($id);
-                    $user->tw_username = $response['users'][0]['name'];
-                    $user->tw_ID = $response['users'][0]['_id'];
-                    $user->tw_logo = $response['users'][0]['logo'];
-                    $user->save();
+                    $this->linkBattle($tw_username,$id);
                 }else{
-                    return "error";
+                    return redirect('/profile/'.$id);
                 }
-            }
-        }else{
-            $user = User::find($id);
-            $user->tw_username = null;
-            $user->tw_ID = null;
-            $user->tw_logo = null;
-            $user->save();
+                break;
+            case "tw_unlink":
+                $user = User::find($id);
+                $user->tw_username = null;
+                $user->tw_ID = null;
+                $user->tw_logo = null;
+                $user->save();
+                break;
+            case "steam_unlink":
+                $user = User::find($id);
+                $user->steam_ID = null;
+                $user->save();
+                break;
+            case "battlenet_unlink":
+                $user = User::find($id);
+                $user->battlenet_ID = null;
+                $user->save();
+                break;
+            default:
         }
 
         return redirect('/profile/'.$id);
@@ -327,5 +313,103 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function linkTW($tw_username,$id){
+        if (filter_var($tw_username, FILTER_VALIDATE_URL) !== false) {
+            $tw_username = basename($tw_username);
+        }
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.twitch.tv/kraken/users?login=".$tw_username,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "Accept: application/vnd.twitchtv.v5+json",
+                "Client-ID: nzrv6yapvtsrkp1nv4v1287hrbxs74",
+                "Postman-Token: 55879291-e73d-4c88-8aa8-b1e0aa38eed6",
+                "cache-control: no-cache"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $response = json_decode($response,true);
+            if (!isset($response['error'])){
+                $user = User::find($id);
+                $user->tw_username = $response['users'][0]['name'];
+                $user->tw_ID = $response['users'][0]['_id'];
+                $user->tw_logo = $response['users'][0]['logo'];
+                $user->save();
+            }else{
+                return "error";
+            }
+        }
+        return true;
+    }
+
+    function linkSteam($usernameInGame,$id){
+        $usernameInGame = filter_var($usernameInGame, FILTER_SANITIZE_URL);
+
+        if (filter_var($usernameInGame, FILTER_VALIDATE_URL) !== false) {
+            $usernameInGame = basename($usernameInGame);
+        }
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/?key=EBAC31D270D905749D75BEB0536CD423&vanityurl=".$usernameInGame,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_POSTFIELDS => "",
+            CURLOPT_HTTPHEADER => [
+                "Postman-Token: 23c33d82-f4ae-4bbc-9377-6fce8f56c659",
+                "cache-control: no-cache"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $json = json_decode($response, true);
+            if (isset($json['response']['message'])){
+                return $json;
+            }else{
+                $user = User::find($id);
+                $user->steam_ID = $json['response']['steamid'];
+                $user->save();
+            }
+        }
+
+        return true;
+    }
+
+    function linkBattle($battleTag,$id){
+        $user = User::find($id);
+        $user->battlenet_ID = $battleTag;
+        $user->save();
+
+        return true;
     }
 }

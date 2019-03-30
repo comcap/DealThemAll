@@ -96,23 +96,58 @@
                                                     @endif
 
                                                     @if($myUser->tw_username != "")
-                                                        <div class="row">
+                                                        <div class="row mx-0">
                                                             <a href="#" data-toggle="modal" data-target="#unlink_tw">
-                                                                <div class="col">
+                                                                <div class="col px-1">
                                                                     <i class="fab fa-twitch" style="color: #b38aff;font-size: 30px"></i>
                                                                 </div>
                                                             </a>
                                                         </div>
                                                     @else
-                                                        <div class="row">
+                                                        <div class="row mx-0">
                                                             <a href="#" data-toggle="modal" data-target="#link_tw">
-                                                                <div class="col">
-                                                                    <i class="fab fa-twitch faa-tada animated" style="color: #FFFFFF;font-size: 30px"></i>
+                                                                <div class="col px-1">
+                                                                    <i class="fab fa-twitch faa-tada animated" style="color: #666666;font-size: 30px"></i>
                                                                 </div>
                                                             </a>
                                                         </div>
                                                     @endif
 
+                                                    @if($myUser->steam_ID != "")
+                                                        <div class="row mx-0">
+                                                            <a href="#" data-toggle="modal" data-target="#unlink_steam">
+                                                                <div class="col px-1">
+                                                                    <i class="fab fa-steam" style="color: #FFFFFF;font-size: 30px"></i>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="row mx-0">
+                                                            <a href="#" data-toggle="modal" data-target="#link_steam">
+                                                                <div class="col px-1">
+                                                                    <i class="fab fa-steam" style="color: #666666;font-size: 30px"></i>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
+
+                                                    @if($myUser->battlenet_ID != "")
+                                                        <div class="row mx-0">
+                                                            <a href="#" data-toggle="modal" data-target="#unlink_battle">
+                                                                <div class="col px-1">
+                                                                    <i class="fab fa-battle-net" style="color: #3e98ff;font-size: 30px"></i>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="row mx-0">
+                                                            <a href="#" data-toggle="modal" data-target="#link_battle">
+                                                                <div class="col px-1">
+                                                                    <i class="fab fa-battle-net" style="color: #666666;font-size: 30px"></i>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
                                                 @else
                                                     <form class="col-12 " style="height: auto" action="/profile" method="post">
                                                         @csrf

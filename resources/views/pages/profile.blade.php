@@ -1,5 +1,29 @@
 @extends('layouts.sidebar')
 @section('content')
+    <style>
+        .carousel-indicators .active{
+            background-color: rgba(241,29,114,1);
+        }
+        .carousel-indicators li {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            background-color: rgba(255,255,255,.8);
+        }
+        .carousel{
+            width:300px;
+        }
+        .item img{
+            object-fit:cover;
+            height:400px !important;
+            width:350px;
+        }
+        .content-image-center{
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
     <div id="box-item" class="container-fluid mt-2">
         @include('includes.profileHeader')
         <div class="row">
@@ -582,7 +606,7 @@
                             @csrf
                             @method("PUT")
                             <div class="row mx-0">
-                                <button type="submit" name="state" value="link" class="text-center"
+                                <button type="submit" name="state" value="tw_link" class="text-center"
                                         style="width: 5%;height: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px 0px 0px 20px;border-color: transparent;cursor: pointer">
                                     <i class="fas fa-link text-white"
                                        style="font-size: 16px;position: relative;left: 2px;bottom: 2px;"></i>
@@ -595,7 +619,6 @@
             </div>
         </div>
     </div>
-
     <!-- UNLINKTW -->
     <div class="modal fade" id="unlink_tw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -619,7 +642,7 @@
                             @method("PUT")
                             <div class="row mx-0">
                                 <div class="col-6">
-                                    <button type="submit" name="state" value="unlink" class="btn red-btn text-center pt-2">
+                                    <button type="submit" name="state" value="tw_unlink" class="btn red-btn text-center pt-2">
                                         <i class="fas fa-unlink text-white"
                                            style="font-size: 16px;position: relative;left: 2px;bottom: 2px;"></i>
                                         <label class="ml-1 mb-0 label-font-Condensed-Bold" for="" style="font-size: 18px">UNLINK</label>
@@ -638,10 +661,165 @@
             </div>
         </div>
     </div>
+
+    <!-- LINKSTEAM -->
+    <div class="modal fade" id="link_steam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="background-color: rgba(0,0,0,0.85);">
+                <div class="d-flex justify-content-center">
+                    <div class="col-12 p-4">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h3 class="text-white label-font-Bold m-0">LINK YOUR STEAM</h3>
+                                <img data-dismiss="modal" src="{{asset('data-image/cancel.svg')}}" width="18px" height="18px" style="cursor: pointer;position: absolute;right: 7px; top: -11px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white label-font-Regular m-0" style="font-size: 20px">Enter you steam account url.</h2>
+                                <span class="text-white">Your steam profile must be pubilc only. </span><a class="text-pink" href="https://steamcommunity.com/id/xxxxxx/edit/settings">Click here to set pubilc!!</a>
+                            </div>
+                        </div>
+                        <form action="/profile/{{$id}}" method="post">
+                            @csrf
+                            @method("PUT")
+                            <div class="row mt-2 mx-0">
+                                <button type="submit" name="state" value="steam_link" class="text-center"
+                                        style="width: 5%;height: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px 0px 0px 20px;border-color: transparent;cursor: pointer">
+                                    <i class="fas fa-link text-white"
+                                       style="font-size: 16px;position: relative;left: 2px;bottom: 2px;"></i>
+                                </button>
+                                <input type="text" name="tw_username" placeholder="Your steam account url. / Example : https://steamcommunity.com/id/test1234" class="text-input px-3" style="background-color: rgba(255,255,255,0.1);width: 95%;border-radius: 0px 20px 20px 0px;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- UNLINKSTEAM -->
+    <div class="modal fade" id="unlink_steam" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content" style="background-color: rgba(0,0,0,0.85);">
+                <div class="d-flex justify-content-center">
+                    <div class="col-12 p-4">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h3 class="text-white label-font-Bold m-0">UNLINK STEAM</h3>
+                                <img data-dismiss="modal" src="{{asset('data-image/cancel.svg')}}" width="18px" height="18px" style="cursor: pointer;position: absolute;right: 7px; top: -11px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white label-font-Regular" style="font-size: 20px">Do you want to unlink</h2>
+                            </div>
+                        </div>
+                        <form action="/profile/{{$id}}" method="post">
+                            @csrf
+                            @method("PUT")
+                            <div class="row mx-0">
+                                <div class="col-6">
+                                    <button type="submit" name="state" value="steam_unlink" class="btn red-btn text-center pt-2">
+                                        <i class="fas fa-unlink text-white"
+                                           style="font-size: 16px;position: relative;left: 2px;bottom: 2px;"></i>
+                                        <label class="ml-1 mb-0 label-font-Condensed-Bold" for="" style="font-size: 18px">UNLINK</label>
+                                    </button>
+                                </div>
+
+                                <div class="col-6">
+                                    <button data-dismiss="modal" class="btn light-btn text-center pt-2">
+                                        <label class="mb-0 label-font-Condensed-Bold" for="" style="font-size: 18px">CANCEL</label>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LINKBATTLENET -->
+    <div class="modal fade" id="link_battle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="background-color: rgba(0,0,0,0.85);">
+                <div class="d-flex justify-content-center">
+                    <div class="col-12 p-4">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h3 class="text-white label-font-Bold m-0">LINK YOUR BATTLENET</h3>
+                                <img data-dismiss="modal" src="{{asset('data-image/cancel.svg')}}" width="18px" height="18px" style="cursor: pointer;position: absolute;right: 7px; top: -11px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white label-font-Regular" style="font-size: 20px">Enter you battletag account.</h2>
+                            </div>
+                        </div>
+                        <form action="/profile/{{$id}}" method="post">
+                            @csrf
+                            @method("PUT")
+                            <div class="row mx-0">
+                                <button type="submit" name="state" value="battlenet_link" class="text-center"
+                                        style="width: 5%;height: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px 0px 0px 20px;border-color: transparent;cursor: pointer">
+                                    <i class="fas fa-link text-white"
+                                       style="font-size: 16px;position: relative;left: 2px;bottom: 2px;"></i>
+                                </button>
+                                <input type="text" name="tw_username" placeholder="Your battletag account. / Example : test#1234" class="text-input px-3" style="background-color: rgba(255,255,255,0.1);width: 95%;border-radius: 0px 20px 20px 0px;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- UNLINKBATTLENET -->
+    <div class="modal fade" id="unlink_battle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content" style="background-color: rgba(0,0,0,0.85);">
+                <div class="d-flex justify-content-center">
+                    <div class="col-12 p-4">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h3 class="text-white label-font-Bold m-0">UNLINK BATTLENET</h3>
+                                <img data-dismiss="modal" src="{{asset('data-image/cancel.svg')}}" width="18px" height="18px" style="cursor: pointer;position: absolute;right: 7px; top: -11px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white label-font-Regular" style="font-size: 20px">Do you want to unlink</h2>
+                            </div>
+                        </div>
+                        <form action="/profile/{{$id}}" method="post">
+                            @csrf
+                            @method("PUT")
+                            <div class="row mx-0">
+                                <div class="col-6">
+                                    <button type="submit" name="state" value="battlenet_unlink" class="btn red-btn text-center pt-2">
+                                        <i class="fas fa-unlink text-white"
+                                           style="font-size: 16px;position: relative;left: 2px;bottom: 2px;"></i>
+                                        <label class="ml-1 mb-0 label-font-Condensed-Bold" for="" style="font-size: 18px">UNLINK</label>
+                                    </button>
+                                </div>
+
+                                <div class="col-6">
+                                    <button data-dismiss="modal" class="btn light-btn text-center pt-2">
+                                        <label class="mb-0 label-font-Condensed-Bold" for="" style="font-size: 18px">CANCEL</label>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        $(document).ready(function () {
-            profileSelectGame({{$id}})
-        })
         function profileSelectGame(id) {
 
             var idGame = document.getElementById('gameSelect').value
@@ -859,6 +1037,10 @@
             xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             xhttp.setRequestHeader("x-csrf-token", token);
             xhttp.send(params);
+        }
+
+        function checkBattleTag() {
+
         }
     </script>
 @stop
