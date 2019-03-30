@@ -102,6 +102,8 @@ class HomeController extends Controller
             $getLike = Like::select('post_ID',DB::raw('count(post_ID) as total'))->where('state','=',1)->groupBy('post_ID')->get()->keyBy('post_ID');
             $getLike = ['data'=>$getLike];
 
+
+
             return view('pages.home',compact('getLike','listComment','feeds'));
         }
 

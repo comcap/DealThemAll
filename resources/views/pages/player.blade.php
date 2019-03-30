@@ -1,6 +1,6 @@
 @extends('layouts.sidebar')
 @section('content')
-    <div id="box-item" class="container-fluid">
+    <div id="box-item" class="container-fluid" style="margin-bottom: 80px">
 
         <div class="row mt-2">
             <div class="col-9 p-2">
@@ -383,54 +383,56 @@
             </a>
             <a href="#" class="ml-2">
                 <p class="text-white label-font-Bold" style="font-size: 16px">
-                    <img src="{{asset('/data-image/game_logo/overwatch/logo.svg')}}"width="30px" height="30px">
+                    <img src="{{asset($gameSelect->game_logo)}}"width="30px" height="30px">
                     {{$gameSelect->game_name}}
                 </p>
             </a>
         </div>
-        <div class="row">
-            <div class="col-12 p-2">
-                <div class="row p-4" style="background-color: rgba(255,255,255,0.1); height: 400px; border-radius: 8px">
-                    <p class="text-white label-font-Bold">Recommended</p>
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    @for($i=0;$i<3;$i++)
-                                        @include('includes.recommentItem')
-                                    @endfor
-                                </div>
+        @if(count($arrLive) > 0)
+            <div class="row">
+                <div class="col-12 p-2">
+                    <div class="row p-4" style="background-color: rgba(255,255,255,0.1); height: 400px; border-radius: 8px">
+                        <p class="text-white label-font-Bold">Recommended</p>
+                        <div id="carouselExampleControls" class="carousel slide w-100" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach($arrLive as $key => $list)
+                                    @if($key == 0)
+                                        <div class="carousel-item active">
+                                            <div class="row">
+                                                @foreach($list as $item)
+                                                    @include('includes.recommentItem')
+                                                @endforeach
+                                            </div>
+
+                                        </div>
+                                        @continue
+                                    @endif
+                                    <div class="carousel-item">
+                                        <div class="row">
+                                            @foreach($list as $item)
+                                                @include('includes.recommentItem')
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    @for($i=0;$i<3;$i++)
-                                        @include('includes.recommentItem')
-                                    @endfor
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    @for($i=0;$i<3;$i++)
-                                        @include('includes.recommentItem')
-                                    @endfor
-                                </div>
-                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" style="width: 5%" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" style="width: 5%" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" style="width: 5%" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" style="width: 5%" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
         <div class="row mt-2">
-            <div class="col align-self-end"></div>
-            <p class="text-white label-font-Bold" style="font-size: 13px">{{count($listPlayer)}} Result</p>
+            <div class="col">
+                <p class="text-white label-font-Bold" style="font-size: 13px">{{count($listPlayer)}} Result</p>
+            </div>
         </div>
         <div class="row">
                 @include('includes.playerList')

@@ -28,11 +28,15 @@
                             <a class="col-4 border-bottom-profile-hover text-center active" href="#">
                                 <span style="font-size: 16px;color: #F11D72;text-shadow: 0px 0px 6px #F11D72;line-height: 100%">Profile</span>
                             </a>
-                            <a class="col-4 border-bottom-profile-menu text-center text-white" href="#">
+                            <a class="col-4 border-bottom-profile-menu text-center text-white" href="/achievements">
                                 <span style="font-size: 16px;line-height: 100%">Achievements</span>
                             </a>
-                            <a class="col-4 border-bottom-profile-menu text-center" href="#">
-                                <span style="font-size: 16px;color: #FF0000;line-height: 100%">LIVE •</span>
+                            <a class="col-4 border-bottom-profile-menu text-center" href="@if($userProfile->tw_username != "")https://www.twitch.tv/{{$userProfile->tw_username}}@else#@endif">
+                                @if($userProfile->tw_username != "")
+                                    <span style="font-size: 16px;color: #FF0000;line-height: 100%">LIVE •</span>
+                                @else
+                                    <span style="font-size: 16px;color: #666666;line-height: 100%">LIVE •</span>
+                                @endif
                             </a>
                         </div>
                     </div>
@@ -129,7 +133,7 @@
                             @else
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/three-stars.svg")}}" height="40px">
+                                        <img id="imgRank" src="{{asset("/data-image/stats_icon/three-stars.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
                                                 <h7>RANKING</h7>
@@ -142,7 +146,7 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/trophy.svg")}}" height="40px">
+                                        <img id="imgWon" src="{{asset("/data-image/stats_icon/trophy.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
                                                 <h7>GAME WON</h7>
@@ -155,10 +159,10 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/target.svg")}}" height="40px">
+                                        <img id="imgAcc" src="{{asset("/data-image/stats_icon/target.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
-                                                <h7>ACCURACY</h7>
+                                                <h7 id="labelAcc">ACCURACY</h7>
                                             </div>
                                             <div class="text-white label-font-Condensed-Bold pl-2" style="font-size: 18px">
                                                 <p id="accuracy_total">0 %</p>
@@ -168,10 +172,10 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/clock.svg")}}" height="40px">
+                                        <img id="imgTime" src="{{asset("/data-image/stats_icon/clock.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
-                                                <h7>TIME PLAYED</h7>
+                                                <h7 id="labelTime">TIME PLAYED</h7>
                                             </div>
                                             <div class="text-white label-font-Condensed-Bold pl-2" style="font-size: 18px">
                                                 <p id="time_total">00:00:00</p>
@@ -181,10 +185,10 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/skull.svg")}}" height="40px">
+                                        <img id="imgKill" src="{{asset("/data-image/stats_icon/skull.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
-                                                <h7>KILL</h7>
+                                                <h7 id="labelKill">KILL</h7>
                                             </div>
                                             <div class="text-white label-font-Condensed-Bold pl-2" style="font-size: 18px">
                                                 <p id="kill_total">0</p>
@@ -194,10 +198,10 @@
                                 </div>
                                 <div class="col-2 mt-3" style="height: 40px">
                                     <div class="row p-0">
-                                        <img src="{{asset("/data-image/stats_icon/headshot.svg")}}" height="40px">
+                                        <img id="imgHead" src="{{asset("/data-image/stats_icon/headshot.svg")}}" height="40px">
                                         <div>
                                             <div class="label-font-Condensed-Bold pl-2" style="color: #9EA1A5; font-size: 10px">
-                                                <h7>HEADSHOT ACCURACY</h7>
+                                                <h7 id="labelHead">HEADSHOT ACCURACY</h7>
                                             </div>
                                             <div class="text-white label-font-Condensed-Bold pl-2" style="font-size: 18px">
                                                 <p id="headshot_total">0 %</p>
@@ -555,6 +559,85 @@
             </div>
         </div>
     </div>
+
+    <!-- LINKTW -->
+    <div class="modal fade" id="link_tw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content" style="background-color: rgba(0,0,0,0.85);">
+                <div class="d-flex justify-content-center">
+                    <div class="col-12 p-4">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h3 class="text-white label-font-Bold m-0">LINK YOUR TWITCH</h3>
+                                <img data-dismiss="modal" src="{{asset('data-image/cancel.svg')}}" width="18px" height="18px" style="cursor: pointer;position: absolute;right: 7px; top: -11px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white label-font-Regular" style="font-size: 20px">Enter you twitch account url.</h2>
+                            </div>
+                        </div>
+                        <form action="/profile/{{$id}}" method="post">
+                            @csrf
+                            @method("PUT")
+                            <div class="row mx-0">
+                                <button type="submit" name="state" value="link" class="text-center"
+                                        style="width: 5%;height: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px 0px 0px 20px;border-color: transparent;cursor: pointer">
+                                    <i class="fas fa-link text-white"
+                                       style="font-size: 16px;position: relative;left: 2px;bottom: 2px;"></i>
+                                </button>
+                                <input type="text" name="tw_username" placeholder="Your twitch account url. / Example : http://www.twitch.tv/test1234" class="text-input px-3" style="background-color: rgba(255,255,255,0.1);width: 95%;border-radius: 0px 20px 20px 0px;">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNLINKTW -->
+    <div class="modal fade" id="unlink_tw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content" style="background-color: rgba(0,0,0,0.85);">
+                <div class="d-flex justify-content-center">
+                    <div class="col-12 p-4">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h3 class="text-white label-font-Bold m-0">UNLINK TWITCH</h3>
+                                <img data-dismiss="modal" src="{{asset('data-image/cancel.svg')}}" width="18px" height="18px" style="cursor: pointer;position: absolute;right: 7px; top: -11px;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h2 class="text-white label-font-Regular" style="font-size: 20px">Do you want to unlink</h2>
+                            </div>
+                        </div>
+                        <form action="/profile/{{$id}}" method="post">
+                            @csrf
+                            @method("PUT")
+                            <div class="row mx-0">
+                                <div class="col-6">
+                                    <button type="submit" name="state" value="unlink" class="btn red-btn text-center pt-2">
+                                        <i class="fas fa-unlink text-white"
+                                           style="font-size: 16px;position: relative;left: 2px;bottom: 2px;"></i>
+                                        <label class="ml-1 mb-0 label-font-Condensed-Bold" for="" style="font-size: 18px">UNLINK</label>
+                                    </button>
+                                </div>
+
+                                <div class="col-6">
+                                    <button data-dismiss="modal" class="btn light-btn text-center pt-2">
+                                        <label class="mb-0 label-font-Condensed-Bold" for="" style="font-size: 18px">CANCEL</label>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function () {
             profileSelectGame({{$id}})
@@ -566,6 +649,75 @@
             var urlGetGame = '/getGameList/'+idGame;
 
             // alert(idGame)
+            switch (idGame) {
+                case "1":
+                    // $('#imgRank').src =
+                    //     $('#imgRank').src =
+
+                    document.getElementById('imgAcc').src = "/data-image/stats_icon/target.svg"
+                    document.getElementById('labelAcc').innerText = "ACCURACY"
+
+                    document.getElementById('imgTime').src = "/data-image/stats_icon/clock.svg"
+                    document.getElementById('labelTime').innerText = "TIME PLAYED"
+
+                    document.getElementById('imgKill').src = "/data-image/stats_icon/skull.svg"
+                    document.getElementById('labelKill').innerText = "KILL"
+
+                    document.getElementById('imgHead').src = "/data-image/stats_icon/headshot.svg"
+                    document.getElementById('labelHead').innerText = "HEADSHOT"
+
+                    document.getElementById('rank_total').innerText = "0"
+                    document.getElementById('won_total').innerText = "0"
+                    document.getElementById('accuracy_total').innerText = "0 %"
+                    document.getElementById('time_total').innerText = "0"
+                    document.getElementById('kill_total').innerText = "0"
+                    document.getElementById('headshot_total').innerText = "0 %"
+                    break;
+                case "2":
+
+                    document.getElementById('imgAcc').src = "/data-image/stats_icon/top10.svg"
+                    document.getElementById('labelAcc').innerText = "WIN TOP 10"
+
+                    document.getElementById('imgTime').src = "/data-image/stats_icon/dmg.png"
+                    document.getElementById('labelTime').innerText = "DAMAGE DEALT"
+
+                    document.getElementById('imgKill').src = "/data-image/stats_icon/skull.svg"
+                    document.getElementById('labelKill').innerText = "KILL"
+
+                    document.getElementById('imgHead').src = "/data-image/stats_icon/headshot.svg"
+                    document.getElementById('labelHead').innerText = "HEADSHOT TOTAL"
+
+                    document.getElementById('rank_total').innerText = "0"
+                    document.getElementById('won_total').innerText = "0"
+                    document.getElementById('accuracy_total').innerText = "0"
+                    document.getElementById('time_total').innerText = "0"
+                    document.getElementById('kill_total').innerText = "0"
+                    document.getElementById('headshot_total').innerText = "0"
+                    break;
+                case "4":
+                    document.getElementById('imgAcc').src = "/data-image/stats_icon/loss.svg"
+                    document.getElementById('labelAcc').innerText = "GAME LOSS"
+
+                    document.getElementById('imgTime').src = "/data-image/stats_icon/eye.svg"
+                    document.getElementById('labelTime').innerText = "PURCHASE WARD"
+
+                    document.getElementById('imgKill').src = "/data-image/stats_icon/skull.svg"
+                    document.getElementById('labelKill').innerText = "KILL/DEAD/ASSISTS"
+
+                    document.getElementById('imgHead').src = "/data-image/stats_icon/like.svg"
+                    document.getElementById('labelHead').innerText = "FAVORITE HERO"
+
+                    document.getElementById('rank_total').innerText = "0"
+                    document.getElementById('won_total').innerText = "0"
+                    document.getElementById('accuracy_total').innerText = "0"
+                    document.getElementById('time_total').innerText = "0"
+                    document.getElementById('kill_total').innerText = "0"
+                    document.getElementById('headshot_total').innerText = "Empty"
+
+                    break;
+                default:
+                    alert('error')
+            }
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -577,19 +729,6 @@
                             case "1":
                                 // $('#imgRank').src =
                                 //     $('#imgRank').src =
-
-                                document.getElementById('imgAcc').src = "/data-image/stats_icon/target.svg"
-                                document.getElementById('labelAcc').innerText = "ACCURACY"
-
-                                document.getElementById('imgTime').src = "/data-image/stats_icon/clock.svg"
-                                document.getElementById('labelTime').innerText = "TIME PLAYED"
-
-                                document.getElementById('imgKill').src = "/data-image/stats_icon/skull.svg"
-                                document.getElementById('labelKill').innerText = "KILL"
-
-                                document.getElementById('imgHead').src = "/data-image/stats_icon/headshot.svg"
-                                document.getElementById('labelHead').innerText = "HEADSHOT"
-
                                 document.getElementById('rank_total').innerText = obj['rank_total']
                                 document.getElementById('won_total').innerText = obj['won_total']
                                 document.getElementById('accuracy_total').innerText = obj['accuracy_total']+" %"
@@ -598,19 +737,6 @@
                                 document.getElementById('headshot_total').innerText = obj['headshot_total']+" %"
                                 break;
                             case "2":
-
-                                document.getElementById('imgAcc').src = "/data-image/stats_icon/top10.svg"
-                                document.getElementById('labelAcc').innerText = "WIN TOP 10"
-
-                                document.getElementById('imgTime').src = "/data-image/stats_icon/dmg.png"
-                                document.getElementById('labelTime').innerText = "DAMAGE DEALT"
-
-                                document.getElementById('imgKill').src = "/data-image/stats_icon/skull.svg"
-                                document.getElementById('labelKill').innerText = "KILL"
-
-                                document.getElementById('imgHead').src = "/data-image/stats_icon/headshot.svg"
-                                document.getElementById('labelHead').innerText = "HEADSHOT TOTAL"
-
                                 document.getElementById('rank_total').innerText = obj['rank_total']
                                 document.getElementById('won_total').innerText = obj['won_total']
                                 document.getElementById('accuracy_total').innerText = obj['topten']
@@ -619,18 +745,6 @@
                                 document.getElementById('headshot_total').innerText = obj['headshot_total']
                                 break;
                             case "4":
-                                document.getElementById('imgAcc').src = "/data-image/stats_icon/loss.svg"
-                                document.getElementById('labelAcc').innerText = "GAME LOSS"
-
-                                document.getElementById('imgTime').src = "/data-image/stats_icon/eye.svg"
-                                document.getElementById('labelTime').innerText = "PURCHASE WARD"
-
-                                document.getElementById('imgKill').src = "/data-image/stats_icon/skull.svg"
-                                document.getElementById('labelKill').innerText = "KILL/DEAD/ASSISTS"
-
-                                document.getElementById('imgHead').src = "/data-image/stats_icon/like.svg"
-                                document.getElementById('labelHead').innerText = "FAVORITE HERO"
-
                                 document.getElementById('rank_total').innerText = obj['rank_total']
                                 document.getElementById('won_total').innerText = obj['won_total']
                                 document.getElementById('accuracy_total').innerText = obj['loss_total']
@@ -642,16 +756,7 @@
                                 alert('error')
                         }
 
-                    } else{
-
-                        document.getElementById('rank_total').innerText = "0"
-                        document.getElementById('won_total').innerText = "0"
-                        document.getElementById('accuracy_total').innerText = "0 %"
-                        document.getElementById('time_total').innerText = "0"
-                        document.getElementById('kill_total').innerText = "0"
-                        document.getElementById('headshot_total').innerText = "0 %"
                     }
-
                 }
             };
 

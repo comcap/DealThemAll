@@ -321,7 +321,7 @@
             xhttp2.open("GET", url2, true);
             xhttp2.send();
 
-            var url3 = 'getRoleGame/1'
+            var url3 = '/getRoleGame/1'
             var xhttp3 = new XMLHttpRequest();
             var render = ""
             xhttp3.onreadystatechange = function() {

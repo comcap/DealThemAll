@@ -32,13 +32,13 @@
                                         <div class="row">
                                             <button type="submit" class="text-center"
                                                     style="width: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px 0px 0px 20px;border-color: transparent;cursor: pointer">
-                                                <i class="fas fa-search text-white"
+                                                <i class="fas fa-link text-white"
                                                    style="font-size: 16px;position: relative;left: -1px;bottom: 3px;"></i>
                                             </button>
                                             <input type="text" name="gameSelect" value="{{$id}}" hidden>
 
                                             @if(isset($StatsPlayer))
-                                                <input type="text" name="username" value="{{$StatsPlayer->userPath}}" placeholder="Your battletag. Example: test-12345" class="text-input pl-3" style="width: 95%;border-radius: 0px 20px 20px 0px;">
+                                                <input type="text" name="username" value="{{$StatsPlayer->userPath}}" placeholder="Your battletag or url. Example: test-12345" class="text-input pl-3" style="width: 95%;border-radius: 0px 20px 20px 0px;">
                                             @else
                                                 @switch($id)
                                                     @case(1)

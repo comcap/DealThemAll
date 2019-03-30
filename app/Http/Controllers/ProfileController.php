@@ -8,6 +8,8 @@ use App\Feed;
 use App\Follow;
 use App\Game;
 use App\Like;
+use App\Notification;
+use App\NotificationDetail;
 use App\StatsPlayer;
 use App\Team;
 use App\TeamManager;
@@ -109,7 +111,7 @@ class ProfileController extends Controller
 
                 $notificationDetail = new NotificationDetail();
                 $notificationDetail->notificaitonID = $notification->notificationID;
-                $notificationDetail->teamID = "";
+                $notificationDetail->teamID = null;
                 $notificationDetail->senderID = Auth::user()->user_ID;
                 $notificationDetail->gameID = $gameID;
                 $notificationDetail->save();
@@ -261,7 +263,59 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->state == "link"){
+            $tw_username = $request->tw_username;
+
+            if (filter_var($tw_username, FILTER_VALIDATE_URL) !== false) {
+                $tw_username = basename($tw_username);
+            }
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://api.twitch.tv/kraken/users?login=".$tw_username,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => array(
+                    "Accept: application/vnd.twitchtv.v5+json",
+                    "Client-ID: nzrv6yapvtsrkp1nv4v1287hrbxs74",
+                    "Postman-Token: 55879291-e73d-4c88-8aa8-b1e0aa38eed6",
+                    "cache-control: no-cache"
+                ),
+            ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+                echo "cURL Error #:" . $err;
+            } else {
+                $response = json_decode($response,true);
+                if (!isset($response['error'])){
+                    $user = User::find($id);
+                    $user->tw_username = $response['users'][0]['name'];
+                    $user->tw_ID = $response['users'][0]['_id'];
+                    $user->tw_logo = $response['users'][0]['logo'];
+                    $user->save();
+                }else{
+                    return "error";
+                }
+            }
+        }else{
+            $user = User::find($id);
+            $user->tw_username = null;
+            $user->tw_ID = null;
+            $user->tw_logo = null;
+            $user->save();
+        }
+
+        return redirect('/profile/'.$id);
     }
 
     /**

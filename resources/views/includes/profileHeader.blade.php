@@ -94,6 +94,25 @@
                                                             </a>
                                                         </div>
                                                     @endif
+
+                                                    @if($myUser->tw_username != "")
+                                                        <div class="row">
+                                                            <a href="#" data-toggle="modal" data-target="#unlink_tw">
+                                                                <div class="col">
+                                                                    <i class="fab fa-twitch" style="color: #b38aff;font-size: 30px"></i>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="row">
+                                                            <a href="#" data-toggle="modal" data-target="#link_tw">
+                                                                <div class="col">
+                                                                    <i class="fab fa-twitch faa-tada animated" style="color: #FFFFFF;font-size: 30px"></i>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
+
                                                 @else
                                                     <form class="col-12 " style="height: auto" action="/profile" method="post">
                                                         @csrf
@@ -114,6 +133,7 @@
                                                     </form>
                                                 @endif
                                             @endif
+
                                         </div>
                                     </div>
                                     <div class="col-2">

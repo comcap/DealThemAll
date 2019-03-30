@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="/css/main.css">
 <link href="{{asset('/css/dropzone.css')}}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/font-awesome-animation.min.css">
 
 <script src="{{asset('/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{asset('/js/bootstrap.min.js') }}" defer></script>

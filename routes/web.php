@@ -7,11 +7,7 @@ Route::get('/', function() {
 Route::get('about', function()
 {
     return View::make('pages.about');
-});
-Route::get('live', function()
-{
-    return View::make('pages.live');
-})->middleware('auth');;
+});;
 Route::get('contact', function()
 {
     return View::make('pages.contact');
@@ -35,6 +31,9 @@ Route::resource('/createteam','CreateTeamController')->middleware('auth');
 Route::resource('/notifications','NotificationController')->middleware('auth');
 Route::resource('/teamList','TeamListController')->middleware('auth');
 Route::resource('/post','FeedController')->middleware('auth');
+Route::resource('/live','LiveController')->middleware('auth');
+Route::resource('/achievements','AchievementsController')->middleware('auth');
+
 Route::get('/ApiSearchTeam','TeamListController@ApiSearchTeam');
 Route::post('/followTeam','TeamManagerController@followTeam');
 
@@ -50,9 +49,9 @@ Route::resource('/ApiCreateTeam','CreateTeamController');
 Route::apiResource('/getGameList', 'API\GetGameList');
 Route::apiResource('/getPlayerList.team', 'API\GetPlayer');
 Route::apiResource('/getRoleGame', 'API\GetRoleGame');
-Route::get('/checkRole/{arr}/{game}','API\getPlayerWithID@checkRole');
+Route::get('/checkRole/{arr}/{game}','API\GetPlayerWithID@checkRole');
 
 Route::apiResource('/getPlayerListRole.role', 'API\GetPlayerListRole');
-Route::apiResource('/getPlayerWithID.game', 'API\getPlayerWithID');
+Route::apiResource('/getPlayerWithID.game', 'API\GetPlayerWithID');
 Route::apiResource('/getPlayerMember.game', 'API\GetPlayerMember');
 Route::apiResource('/updateNoti', 'API\UpdateNoti');

@@ -424,7 +424,7 @@ function selectRolePlayer(id) {
 function InvitePlayer(id) {
     var xhttp = new XMLHttpRequest();
     var idGame = document.getElementById('gameList').value
-    var url = 'getPlayerWithID/' + id + '/game/' + idGame
+    var url = '/getPlayerWithID/' + id + '/game/' + idGame
     $('#exampleModal').modal('hide')
 
     xhttp.onreadystatechange = function () {
