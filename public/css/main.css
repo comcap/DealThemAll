@@ -85,10 +85,40 @@ body.modal-open .supreme-container{
     -ms-filter: blur(8px);
     filter: blur(8px);
 }
+select option {
+    padding: 10px;
+    background: #fff;
+    color: #000;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+select option:disabled {
+    color: #CCCCCC
+}
+@media (max-width: 922px) {
+    .home-margin-top{
+        margin-top: 80px;
+    }
+}
+.form-control:focus{
+    background-color: rgba(48,48,48,0.96);
+    color: #FFFFFF;
+}
+.form-control:focus::placeholder{
+    color: #FFFFFF;
+}
 .nav-link.active  {
     border-right: 2px #f11d72 solid;
     color: #f11d72 !important;
     text-shadow: 0px 0px 8px rgba(241,29,114,1);
+}
+.nav-link.activeSM {
+    border-bottom: 2px #f11d72 solid;
+    color: #f11d72 !important;
+    text-shadow: 0px 0px 8px rgba(241,29,114,1);
+}
+li{
+    list-style: none;
 }
 svg {width: auto; height: 20px;}
 svg path{fill: #CCCCCC !important;}

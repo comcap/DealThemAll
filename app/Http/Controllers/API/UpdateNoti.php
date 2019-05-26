@@ -7,6 +7,7 @@ use App\TeamManager;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateNoti extends Controller
 {
@@ -22,10 +23,9 @@ class UpdateNoti extends Controller
             ->where('expired_invite', '<=', $dt)
             ->get();
 
-
         $notication = Notification::join('tbl_notificaiton_detail','tbl_notificaiton_detail.notificaitonID','=','tbl_notificaiton.notificationID')
             ->get();
-
+        $userID = Auth::User()->user_ID;
         if ($teamManager != "[]"){
             foreach ($teamManager as $item){
                 foreach ($notication as $value){
@@ -46,9 +46,19 @@ class UpdateNoti extends Controller
                     }
                 }
             }
-            return "true";
+            $countNoti = Notification::where('notification_isRead','=',0)
+                ->where('notification_User','=',$userID)
+                ->get()
+                ->count();
+
+            return $countNoti;
         }else{
-            return "false";
+            $countNoti = Notification::where('notification_isRead','=',0)
+                ->where('notification_User','=',$userID)
+                ->get()
+                ->count();
+
+            return $countNoti;
         }
 
 //        TeamManager::where('user_verify','=',0)

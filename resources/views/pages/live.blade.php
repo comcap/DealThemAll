@@ -1,9 +1,8 @@
 @extends('layouts.sidebar')
 @section('content')
-
-    <div id="box-item" class="container">
-        <div class="row mt-3">
-            <div class="col-5 pl-0">
+    <div id="box-item" class="container home-margin-top">
+        <div class="row mt-md-3">
+            <div class="col-md-5 col-12 px-3 pl-0">
                 <div class="row mx-0">
                     <h4 class="label-font-Bold text-white">Select game</h4>
                 </div>
@@ -31,15 +30,9 @@
             </div>
         </div>
 
-
-
-
-
-
-
-        <div class="row mt-3 h-auto pb-3" style="background-color: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 80px">
+        <div class="row mx-0 mx-md-3 mt-3 h-auto pb-3" style="background-color: rgba(255,255,255,0.1); border-radius: 10px; margin-bottom: 80px">
             @foreach ($arrLive as $item)
-                <div class="col-4 mt-3">
+                <div class="col-12 col-md-4 mt-3">
                     <div class="row px-4" style="height: 260px;">
                         <iframe
                                 src="https://player.twitch.tv/?channel={{$item['stream']['channel']['name']}}&autoplay=false&muted=true/"
@@ -52,7 +45,7 @@
                         {{--<img class="d-block w-100 h-100" src="https://dummyimage.com/600x400/000/fff">--}}
                     </div>
 
-                    <div class="row px-4 mt-2" style="height: 50px;">
+                    <div class="row px-4 mt-2" style="height: auto;">
                         <div class="col-2 px-0">
                             <img src="{{asset("/data-image/userImage/".$item['stream']['userImage'])}}" height="50px" width="auto" style="border-radius: 25px">
                         </div>

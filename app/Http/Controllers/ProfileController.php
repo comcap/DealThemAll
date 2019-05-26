@@ -20,9 +20,14 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use TwitchProvider;
+
+require "../app/twitch.php";
+
 
 class ProfileController extends Controller
 {
+
     public function index()
     {
         if (Auth::user()){
@@ -239,8 +244,22 @@ class ProfileController extends Controller
             return $item;
         });
 
+        $listStats = StatsPlayer::join('tbl_Game','tbl_Game.game_ID','=','tbl_stats_player.game_ID')
+                        ->where('user_ID','=',Auth::user()->user_ID)
+                        ->get();
+
+        if (!isset($_GET['code'])) {
+
+            // Fetch the authorization URL from the provider, and store state in session
+            $authorizationUrl = $this->getConfig()->getAuthorizationUrl();
+            $_SESSION['oauth2state'] = $this->getConfig()->getState();
+
+            // Display link to start auth flow
+            return view("pages.profile",compact('feeds','listComment','getLike','stateLike','stateFollow','getFollow','getFollower','getFollowing','myTeam','myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList','listStats','authorizationUrl'));
+
+            // Check given state against previously stored one to mitigate CSRF attack
+        }
 //        return $getFollowing;
-        return view("pages.profile",compact('feeds','listComment','getLike','stateLike','stateFollow','getFollow','getFollower','getFollowing','myTeam','myUser','id','type','statsPlayer','userProfile','userLanguage','userRole','getTeam','gameList'));
     }
 
     /**
@@ -411,5 +430,48 @@ class ProfileController extends Controller
         $user->save();
 
         return true;
+    }
+
+    function apiTwitch(){
+            try {
+                // Get an access token using authorization code grant.
+                $accessToken = $this->getConfig()->getAccessToken('authorization_code', [
+                    'code' => $_GET['code']
+                ]);
+
+                // Using the access token, get user profile
+                $resourceOwner = $this->getConfig()->getResourceOwner($accessToken);
+                $user = $resourceOwner->toArray();
+
+                echo '<html><table>';
+                echo '<tr><th>Access Token</th><td>' . htmlspecialchars($accessToken->getToken()) . '</td></tr>';
+                echo '<tr><th>Refresh Token</th><td>' . htmlspecialchars($accessToken->getRefreshToken()) . '</td></tr>';
+                echo '<tr><th>Username</th><td>' . htmlspecialchars($user['data'][0]['display_name']) . '</td></tr>';
+                echo '<tr><th>Bio</th><td>' . htmlspecialchars($user['data'][0]['bio']) . '</td></tr>';
+                echo '<tr><th>Image</th><td><img src="' . htmlspecialchars($user['data'][0]['logo']) . '"></td></tr>';
+                echo '</table></html>';
+
+
+                // You can now create authenticated API requests through the provider.
+                $request = $this->getConfig()->getAuthenticatedRequest(
+                    'GET',
+                    'https://api.twitch.tv/kraken/user',
+                    $accessToken
+                );
+
+            } catch (Exception $e) {
+                exit('Caught exception: '.$e->getMessage());
+            }
+    }
+
+    function getConfig(){
+        $provider = new TwitchProvider([
+            'clientId'                => 'nzrv6yapvtsrkp1nv4v1287hrbxs74',     // The client ID assigned when you created your application
+            'clientSecret'            => '8iyeiavzza160ls2j7jjcnwg5w3kkr', // The client secret assigned when you created your application
+            'redirectUri'             => 'https://dealthemall.com/apiTwitch',  // Your redirect URL you specified when you created your application
+            'scopes'                  => ['user:read:email']  // The scopes you would like to request
+        ]);
+
+        return $provider;
     }
 }

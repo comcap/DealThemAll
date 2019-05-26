@@ -1,4 +1,4 @@
-<div class="col-4">
+<div class="col-md-4 col-12">
     <div class="row px-4" style="height: 260px;">
         <iframe
                 src="https://player.twitch.tv/?channel={{$item['stream']['channel']['name']}}&autoplay=false&muted=true/"

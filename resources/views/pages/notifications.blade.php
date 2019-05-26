@@ -2,7 +2,7 @@
 @section('content')
     <div id="box-item" class="container-fluid supreme-container">
         <div class="row pt-2">
-            <div class="col-9 p-2">
+            <div class="col-12 col-md-9 p-2">
                 <form action="/notifications" method="post">
                     @csrf
                     {{--------------------------curent content--------------------------}}
@@ -25,13 +25,13 @@
                                                     @if($item->notificaiton_state == 0)
                                                         <div class="col-12 mb-3">
                                                             <div class="row">
-                                                                <div class="col-1 px-4">
+                                                                <div class="col-md-1 col-4 px-4">
                                                                     <a href="profile/{{$item->user_ID}}"><img
                                                                                 src="{{asset('/data-image/userImage/'.$item->user_image)}}"
                                                                                 width="60px" height="60px"
                                                                                 style="border-radius: 30px"></a>
                                                                 </div>
-                                                                <div class="col-7 py-2 px-4 ">
+                                                                <div class="col-md-7 col-8 py-2 px-4 ">
                                                                     <div class="row mx-0">
                                                                         <div class="col p-0">
                                                                             <div class="row align-items-center">
@@ -52,7 +52,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-4 py-2 px-0 pt-3">
+                                                                <div class="col-md-4 col-12 py-2 px-0 pt-3">
                                                                     <div class="row mx-0">
                                                                         <div class="col-6">
                                                                             <button type="submit" name="choice" value="1" class="btn red-btn">ACCEPT</button>
@@ -62,6 +62,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                                 <input type="text" name="notificationID" value="{{$item->notificationID}}" hidden>
                                                                 <input type="text" name="user_ID" value="{{$item->user_ID}}" hidden>
                                                             </div>
@@ -69,13 +70,13 @@
                                                     @elseif($item->notificaiton_state == 1)
                                                         <div class="col-12 mb-3">
                                                             <div class="row">
-                                                                <div class="col-1 px-4">
+                                                                <div class="col-md-1 col-4 px-4">
                                                                     <a href="profile/{{$item->user_ID}}"><img
                                                                                 src="{{asset('/data-image/userImage/'.$item->user_image)}}"
                                                                                 width="60px" height="60px"
                                                                                 style="border-radius: 30px"></a>
                                                                 </div>
-                                                                <div class="col-7 py-2 px-4 ">
+                                                                <div class="col-md-7 col-8 py-2 px-4 ">
                                                                     <div class="row mx-0">
                                                                         <div class="col p-0">
                                                                             <div class="row align-items-center">
@@ -107,13 +108,13 @@
                                                     @else
                                                         <div class="col-12 mb-3">
                                                             <div class="row">
-                                                                <div class="col-1 px-4">
+                                                                <div class="col-md-1 col-4 px-4">
                                                                     <a href="profile/{{$item->user_ID}}"><img
                                                                                 src="{{asset('/data-image/userImage/'.$item->user_image)}}"
                                                                                 width="60px" height="60px"
                                                                                 style="border-radius: 30px"></a>
                                                                 </div>
-                                                                <div class="col-7 py-2 px-4 ">
+                                                                <div class="col-md-7 col-8 py-2 px-4 ">
                                                                     <div class="row mx-0">
                                                                         <div class="col p-0">
                                                                             <div class="row align-items-center">
@@ -178,13 +179,13 @@
                                                     @if($item->notificaiton_state == 0)
                                                         <div class="col-12 mb-3">
                                                             <div class="row">
-                                                                <div class="col-1 px-4">
+                                                                <div class="col-md-1 col-4 px-4">
                                                                     <a href="profile/{{$item->user_ID}}"><img
                                                                                 src="{{asset('/data-image/userImage/'.$item->user_image)}}"
                                                                                 width="60px" height="60px"
                                                                                 style="border-radius: 30px"></a>
                                                                 </div>
-                                                                <div class="col-7 py-2 px-4 ">
+                                                                <div class="col-md-7 col-8 py-2 px-4 ">
                                                                     <div class="row mx-0">
                                                                         <div class="col p-0">
                                                                             <div class="row align-items-center">
@@ -205,7 +206,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-4 py-2 px-0 pt-3">
+                                                                <div class="col-md-4 col-12 py-2 px-0 pt-3">
                                                                     <div class="row mx-0">
                                                                         <div class="col-6">
                                                                             <button class="btn red-btn">ACCEPT</button>
@@ -222,13 +223,13 @@
                                                     @elseif($item->notificaiton_state == 1)
                                                         <div class="col-12 mb-3">
                                                             <div class="row">
-                                                                <div class="col-1 px-4">
+                                                                <div class="col-md-1 col-4 px-4">
                                                                     <a href="profile/{{$item->user_ID}}"><img
                                                                                 src="{{asset('/data-image/userImage/'.$item->user_image)}}"
                                                                                 width="60px" height="60px"
                                                                                 style="border-radius: 30px"></a>
                                                                 </div>
-                                                                <div class="col-7 py-2 px-4 ">
+                                                                <div class="col-md-7 col-8 py-2 px-4 ">
                                                                     <div class="row mx-0">
                                                                         <div class="col p-0">
                                                                             <div class="row align-items-center">
@@ -264,13 +265,13 @@
                                                     @else
                                                         <div class="col-12 mb-3">
                                                             <div class="row">
-                                                                <div class="col-1 px-4">
+                                                                <div class="col-md-1 col-4 px-4">
                                                                     <a href="profile/{{$item->user_ID}}"><img
                                                                                 src="{{asset('/data-image/userImage/'.$item->user_image)}}"
                                                                                 width="60px" height="60px"
                                                                                 style="border-radius: 30px"></a>
                                                                 </div>
-                                                                <div class="col-7 py-2 px-4 ">
+                                                                <div class="col-md-7 col-8 py-2 px-4 ">
                                                                     <div class="row mx-0">
                                                                         <div class="col p-0">
                                                                             <div class="row align-items-center">
@@ -291,7 +292,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-4 py-2 px-0 pt-3">
+                                                                <div class="col-md-4 col-12 py-2 px-0 pt-3">
                                                                     <div class="row mx-0">
                                                                         <div class="col-6">
                                                                             <button class="btn red-btn">ACCEPT</button>
@@ -311,13 +312,13 @@
                                                     @case(4)
                                                     <div class="col-12 mb-3">
                                                         <div class="row">
-                                                            <div class="col-1 px-4">
+                                                            <div class="col-md-1 col-4 px-4">
                                                                 <a href="profile/{{$item->user_ID}}"><img
                                                                             src="{{asset('/data-image/userImage/'.$item->user_image)}}"
                                                                             width="60px" height="60px"
                                                                             style="border-radius: 30px"></a>
                                                             </div>
-                                                            <div class="col-11 py-2 px-4 ">
+                                                            <div class="col-md-11 col-8 py-2 px-4 ">
                                                                 <div class="row mx-0">
                                                                     <div class="col p-0">
                                                                         <div class="row align-items-center">
@@ -350,19 +351,19 @@
                                                     @break
 
                                                     @case(5)
-                                                    <div class="col-12 mb-3">
+                                                    <div class="col-12 mb-md-3">
                                                         <div class="row">
-                                                            <div class="col-1 px-4">
+                                                            <div class="col-md-1 col-4 px-4">
                                                                 <a href="profile/{{$item->user_ID}}"><img
                                                                             src="{{asset('/data-image/userImage/'.$item->user_image)}}"
                                                                             width="60px" height="60px"
                                                                             style="border-radius: 30px"></a>
                                                             </div>
-                                                            <div class="col-7 py-2 px-4 ">
+                                                            <div class="col-md-7 col-8 py-2 px-4 ">
                                                                 <div class="row mx-0">
                                                                     <div class="col p-0">
                                                                         <div class="row align-items-center">
-                                                                            <span class="label-font-Condensed-Regular ml-3 mx-1"
+                                                                            <span class="label-font-Condensed-Regular ml-0 ml-md-3"
                                                                                   style="color: #AAAAAA">{{$item->typeDetail}}</span>
                                                                             <a href="profile/{{$item->user_ID}}"><h3
                                                                                         class="text-white label-font-Bold mb-0"
@@ -370,7 +371,7 @@
                                                                             </a>
                                                                         </div>
                                                                         <div class="row">
-                                                                <span class="label-font-Condensed-Thin ml-3"
+                                                                <span class="label-font-Condensed-Thin ml-0 ml-md-3"
                                                                       style="color: #999999;font-size: 12px">{{$item->created_at}}</span>
                                                                         </div>
                                                                     </div>
@@ -502,7 +503,7 @@
                     {{--------------------------content--------------------------}}
                 </form>
             </div>
-            <div class="col-3 p-2 ">
+            <div class="col-3 d-none d-md-inline p-2 ">
                 @if(\Illuminate\Support\Facades\Auth::User())
                     <div class="sticky-top">
                         <div class="row mx-0">
@@ -565,7 +566,7 @@
                                                 <div class="d-flex align-items-center justify-content-center"
                                                      style="height: 96px;width: 96px;border-radius:48px;background-color: rgba(255,255,255,0.1)">
                                                     <h3 class="text-white label-font-Thin mb-0" style="font-size: 40px">
-                                                        12</h3>
+                                                        {{$count}}</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -591,144 +592,45 @@
                                           style="font-size: 12px;color: #AAAAAA">see more</span>
                                     </div>
                                 </div>
-                                <div class="row mt-3" style="height: auto;">
-                                    <div class="col-3">
-                                        <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px"
-                                             height="64px">
-                                    </div>
-                                    <div class="col-9 pt-1">
-                                        <div class="row mx-0">
-                                            <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">
-                                                Blackjack</h5>
+
+                                @foreach($result as $item)
+                                    <div class="row mt-3" style="height: auto;">
+                                        <div class="col-3">
+                                            <img src="{{$item['thumbnail']}}" width="64px" height="64px">
                                         </div>
-                                        <div class="row mr-0">
-                                            <div class="col-8" style="padding-top: 2px">
-                                                <p class="label-font-Thin threeDot mb-0"
-                                                   style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame
-                                                    cards
-                                                    in quick or competitive play.</p>
+                                        <div class="col-9 pt-1">
+                                            <div class="row mx-0">
+                                                <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">{{$item['title']}}</h5>
                                             </div>
-                                            <div class="col-4 p-0 text-right">
-                                            <span class="text-white label-font-Thin "
-                                                  style="font-size: 12px">100 / 100%</span>
+                                            <div class="row mr-0">
+                                                <div class="col-8" style="padding-top: 2px">
+                                                    <p class="label-font-Thin threeDot mb-0" style="color:#B5DEFF;font-size: 12px;height: auto">{{$item['description']}}</p>
+                                                </div>
+                                                <div class="col-4 p-0 text-right">
+                                                <span class="text-white label-font-Thin " style="font-size: 12px">
+                                                    @if($item['value'] == true)
+                                                        Complete
+                                                    @else
+                                                        Unfinished
+                                                    @endif
+                                                </span>
+
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row mx-0 pt-2">
-                                            <div id="myProgress1">
-                                                <div id="myBar1" data-progress-id="1"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3" style="height: auto;">
-                                    <div class="col-3">
-                                        <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px"
-                                             height="64px">
-                                    </div>
-                                    <div class="col-9 pt-1">
-                                        <div class="row mx-0">
-                                            <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">
-                                                Blackjack</h5>
-                                        </div>
-                                        <div class="row mr-0">
-                                            <div class="col-8" style="padding-top: 2px">
-                                                <p class="label-font-Thin threeDot mb-0"
-                                                   style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame
-                                                    cards
-                                                    in quick or competitive play.</p>
-                                            </div>
-                                            <div class="col-4 p-0 text-right">
-                                            <span class="text-white label-font-Thin "
-                                                  style="font-size: 12px">100 / 100%</span>
-                                            </div>
-                                        </div>
-                                        <div class="row mx-0 pt-2">
-                                            <div id="myProgress2">
-                                                <div id="myBar2" data-progress-id="2"></div>
-                                            </div>
+                                            {{--<div class="row mx-0 pt-2">--}}
+                                            {{--<div id="myProgress{{$i}}">--}}
+                                            {{--<div id="myBar{{$i}}" data-progress-id="{{$i}}"></div>--}}
+                                            {{--</div>--}}
+                                            {{--</div>--}}
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mt-3" style="height: auto;">
-                                    <div class="col-3">
-                                        <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px"
-                                             height="64px">
-                                    </div>
-                                    <div class="col-9 pt-1">
-                                        <div class="row mx-0">
-                                            <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">
-                                                Blackjack</h5>
-                                        </div>
-                                        <div class="row mr-0">
-                                            <div class="col-8" style="padding-top: 2px">
-                                                <p class="label-font-Thin threeDot mb-0"
-                                                   style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame
-                                                    cards
-                                                    in quick or competitive play.</p>
-                                            </div>
-                                            <div class="col-4 p-0 text-right">
-                                            <span class="text-white label-font-Thin "
-                                                  style="font-size: 12px">100 / 100%</span>
-                                            </div>
-                                        </div>
-                                        <div class="row mx-0 pt-2">
-                                            <div id="myProgress3">
-                                                <div id="myBar3" data-progress-id="2"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3" style="height: auto;">
-                                    <div class="col-3">
-                                        <img src="{{asset('/data-image/achievements/Image-60.svg')}}" width="64px"
-                                             height="64px">
-                                    </div>
-                                    <div class="col-9 pt-1">
-                                        <div class="row mx-0">
-                                            <h5 class="text-white label-font-Bold mb-1" style="font-size: 14px">
-                                                Blackjack</h5>
-                                        </div>
-                                        <div class="row mr-0">
-                                            <div class="col-8" style="padding-top: 2px">
-                                                <p class="label-font-Thin threeDot mb-0"
-                                                   style="color:#B5DEFF;font-size: 12px;height: auto">Earn 21 postgame
-                                                    cards
-                                                    in quick or competitive play.</p>
-                                            </div>
-                                            <div class="col-4 p-0 text-right">
-                                            <span class="text-white label-font-Thin "
-                                                  style="font-size: 12px">100 / 100%</span>
-                                            </div>
-                                        </div>
-                                        <div class="row mx-0 pt-2">
-                                            <div id="myProgress4">
-                                                <div id="myBar4" data-progress-id="3"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
 
                                 {{--<button onclick="move()" class="btn btn-primary red-btn" >Move</button>--}}
 
                             </div>
                         </div>
 
-                        <div class="row mt-3 mx-0">
-                            <div class="col-12" style="height:180px;">
-                                <div class="row mx-0" style="height:auto;">
-                                    <img class="col-12 p-0" src="{{asset('/data-image/null-ads.png') }}"
-                                         alt="overwatch">
-                                </div>
-                                <div class="row mt-3" style="height:auto;">
-                                    <div class="col-6">
-                                        <p class="text-white">Sponsor By </p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p class="text-white text-right">xxxxxxxxxxx</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="sticky-top">
                         {{--banner sponsor--}}

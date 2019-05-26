@@ -23,8 +23,8 @@
             </a>
         </li>
         <li class="nav-item item-menu-left">
-            <a class="nav-link nav-text pt-4 {{Request::is('teamList') ? 'active' : '' }}" href="/teamList">
-                <img class="svg {{Request::is('teamList') ? 'active' : '' }}" src="{{asset('/data-image/team.svg') }}" width="auto" height="20px">
+            <a class="nav-link nav-text pt-4 {{Request::is('teamList/*','ApiSearchTeam') ? 'active' : '' }}" href="/teamList">
+                <img class="svg {{Request::is('teamList/*','ApiSearchTeam') ? 'active' : '' }}" src="{{asset('/data-image/team.svg') }}" width="auto" height="20px">
                 <p class="pt-1 label-font-Regular" style="font-size: 10px;">TEAM</p>
             </a>
         </li>
@@ -56,10 +56,10 @@
         </li>
 
         <li class="nav-item item-menu-left">
-            <a class="nav-link nav-text pt-4 {{Request::is('notifications') ? 'active' : '' }}" href="#" id="notification">
+            <a class="nav-link nav-text pt-4 {{Request::is('notifications') ? 'active' : '' }}" href="/notifications" id="notification">
                 @if(\Illuminate\Support\Facades\Auth::User())
                     @if(\App\Notification::where('notification_isRead','=',0)->where('notification_User','=',\Illuminate\Support\Facades\Auth::User()->user_ID)->get()->count() != 0)
-                        <h6 class="position-absolute" style="left: 50px;bottom: 140px;"><span class="badge badge-pill badge-danger">{{\App\Notification::where('notification_isRead','=',0)->where('notification_User','=',\Illuminate\Support\Facades\Auth::User()->user_ID)->get()->count()}}</span></h6>
+                        <h6 class="position-absolute" style="left: 50px;bottom: 140px;"><span class="badge badge-pill badge-danger" id="notiCount"></span></h6>
                     @endif
                 @endif
                 <img class="svg {{Request::is('notifications') ? 'active' : '' }}" src="{{asset('/data-image/noti.svg') }}" width="auto" height="20px">

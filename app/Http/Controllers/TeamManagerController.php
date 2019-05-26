@@ -11,6 +11,7 @@ use App\GameRole;
 use App\Like;
 use App\Notification;
 use App\NotificationDetail;
+use App\StatsPlayer;
 use App\Team;
 use App\TeamManager;
 use App\UserRole;
@@ -191,7 +192,22 @@ class TeamManagerController extends Controller
             return $item;
         });
 
-        return view('pages.team',compact('feeds','listComment','getFollower','getLike','stateLike','stateFollow','TeamOwner','language','teamManager','gameList','result','getTeam'));
+        $listStats = StatsPlayer::join('tbl_Game','tbl_Game.game_ID','=','tbl_stats_player.game_ID')
+            ->where('user_ID','=',Auth::user()->user_ID)
+            ->get();
+
+        $statePlayer = TeamManager::join('tbl_User','tbl_User.user_ID','=','tbl_team_manager.user_ID')
+            ->where('tbl_team_manager.user_ID','=',Auth::user()->user_ID)
+            ->where('tbl_team_manager.user_verify','=',1)
+            ->get();
+
+        if (count($statePlayer) > 0){
+            $statePlayer = true;
+        }else{
+            $statePlayer = false;
+        }
+
+        return view('pages.team',compact('feeds','listComment','getFollower','getLike','stateLike','stateFollow','TeamOwner','language','teamManager','gameList','result','getTeam','listStats','statePlayer'));
     }
 
     /**
@@ -297,5 +313,9 @@ class TeamManagerController extends Controller
         }
 
         return redirect('team/'.$teamFollow);
+    }
+
+    function applyTeam(Request $request){
+
     }
 }

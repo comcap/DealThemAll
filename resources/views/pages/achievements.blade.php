@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-4">
                         <div class="row pt-3" style="height:50px">
-                            <a class="col-4 border-bottom-profile-menu text-center text-white" href="#">
+                            <a class="col-4 border-bottom-profile-menu text-center text-white" href="/profile">
                                 <span style="font-size: 16px;line-height: 100%">Profile</span>
                             </a>
                             <a class="col-4 border-bottom-profile-hover text-center active" href="/achievements">

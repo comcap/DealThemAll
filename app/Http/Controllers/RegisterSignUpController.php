@@ -49,7 +49,7 @@ class RegisterSignUpController extends Controller
 
         Auth::login($user);
 
-        return redirect('/');
+        return redirect('/updateprofile/'.$user->user_ID);
     }
 
     /**

@@ -106,11 +106,10 @@ class UpdateProfileController extends Controller
                 $StatsPlayer->game_ID = $gameSelect->game_ID;
                 $StatsPlayer->userPath = $usernameInGame;
                 $StatsPlayer->nameInGame = $usernameInGame;
-                $StatsPlayer->iconPlayer = $getResult->icon;
-                $StatsPlayer->rank_total = $getResult->rating;
+                $StatsPlayer->rank_total = round($getResult->rating);
                 $StatsPlayer->won_total = $getResult->gamesWon;
                 $StatsPlayer->topten = $getResult->top10s;
-                $StatsPlayer->dmgDealt = $getResult->damageDealt;
+                $StatsPlayer->dmgDealt = round($getResult->damageDealt);
                 $StatsPlayer->kill_total = $getResult->eliminations;
                 $StatsPlayer->headshot_total = $getResult->headshot;
 
@@ -200,7 +199,7 @@ class UpdateProfileController extends Controller
 
             $gameSelect = Game::where('game_ID', '=', $id)->first();
 
-            $StatsPlayer = StatsPlayer::where('user_ID', '=', $userProfile->user_ID)->where('game_ID', '=', $gameSelect->game_ID)->first();
+            $StatsPlayer = StatsPlayer::where('user_ID', '=', $userProfile->user_ID)->where('game_ID', '=', $id)->first();
 
             $resultRole = [];
             $subResultRole = [];
@@ -213,7 +212,6 @@ class UpdateProfileController extends Controller
                     $subResultRole[] = $subItem;
                 }
             });
-
 
             if (isset($gameSelect)) {
                 return view("pages.updateProfile", compact('id', 'userProfile', 'language', 'userLanguage', 'role', 'gameRole', 'gameList', 'gameSelect', 'StatsPlayer', 'resultRole', 'subResultRole'));

@@ -149,7 +149,7 @@ class HomeController extends Controller
 
     public function store(Request $request){
         if (isset($request)){
-            if (isset($text)){
+            if ($request->type == "comment"){
                 $postID = $request->postID;
                 $text = $request->text;
                 $userID = $request->userID;

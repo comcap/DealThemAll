@@ -1,14 +1,19 @@
 <div class="col-12 mb-3" style="background-color: rgba(255,255,255,0.1); border-radius: 8px">
     <div class="row">
-        <div class="col-2 d-flex align-items-center pl-4 triangle-div"
+        <div class="col-3 col-md-2 d-flex align-items-center triangle-div"
              style="border-radius: 8px 0 0 8px;height: auto;z-index: 1">
-            <a href="profile/">
-                <img src="{{asset('data-image/userImage/'.Auth::User()->user_image)}}" width="70px" height="70px"
-                     style="border-radius: 35px">
-            </a>
+            <div class="row">
+                <div class="col col-md-9">
+                    <a href="profile/">
+                        <img src="{{asset('data-image/userImage/'.Auth::User()->user_image)}}" width="100%" height="auto"
+                             style="border-radius: 35px">
+                    </a>
+                </div>
+            </div>
+
         </div>
-        <div class="col-10">
-            <div class="row position-relative" style="width: 107%;height: 40px;right: 17px">
+        <div class="col-9 col-md-10 p-0">
+            <div class="row position-relative mr-0" style="height: 40px;">
                 <div class="col-4 border-bottom border-danger text-center pt-2" id="post_action_1"
                      onclick="selectPost(1)" style="cursor: pointer">
                     <a href="#" class="text-pink" id="text_focus_1">STATUS</a>
@@ -24,25 +29,35 @@
                 <div class="col-md-12">
                     <form action="/post" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="col-md-12">
+                        <div class="col px-0 col-md-12">
                             <div class="row mr-0">
-                                <div class="col-8 ">
+                                <div class="col-8 pr-0 col-md-8">
                                     <input type="text" autocomplete="off" name="postDetail" placeholder="Type something…"
-                                           class="bg-transparent w-100 label-font-Light text-white port-box-input" required>
+                                           class="bg-transparent w-100 label-font-Light text-white port-box-input">
                                 </div>
-                                <div class="col-3 px-0">
+                                <div class="col-4 d-md-none d-inline col-md-3">
                                     <select name="gameID"
                                             class="w-100 border-0 uneditable-input label-font-Light text-white px-4"
-                                            style="height: 40px; background-color: #FBC226;border-radius: 20px;cursor: pointer" required>
+                                            style="height: 40px; background-color: #FBC226;border-radius: 20px;cursor: pointer">
                                         <option value="" disabled selected>Tag with game</option>
                                         @foreach($gameList as $item)
                                             <option value={{$item->game_ID}}>{{$item->game_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-1 p-0">
+                                <div class="col-4 d-none d-md-inline col-md-3">
+                                    <select name="gameID"
+                                            class="w-100 border-0 uneditable-input label-font-Light text-white px-4"
+                                            style="height: 40px; background-color: #FBC226;border-radius: 20px;cursor: pointer">
+                                        <option value="" disabled selected>Tag with game</option>
+                                        @foreach($gameList as $item)
+                                            <option value={{$item->game_ID}}>{{$item->game_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-1 d-none d-md-inline col-md-1 pl-md-1">
                                     <div class="row mx-0 h-100 justify-content-end">
-                                        <button class="text-center"
+                                        <button type="submit" class="text-center"
                                                 style="width: 40px;background-color: #ff425d; padding-top: 8px; border-radius: 20px;border-color: transparent;cursor: pointer">
                                             <i class="fas fa-paper-plane text-white"
                                                style="font-size: 16px;position: relative;left: -1px;bottom: 3px;"></i>
@@ -260,13 +275,13 @@
     });
 
     // On changing the duration dropdown, seek the video to that duration
-    document.querySelector("#set-video-seconds").addEventListener('change', function() {
-        _VIDEO.currentTime = document.querySelector("#set-video-seconds").value;
-
-        // Seeking might take a few milliseconds, so disable the dropdown and hide download link
-        document.querySelector("#set-video-seconds").disabled = true;
-        document.querySelector("#get-thumbnail").style.display = 'none';
-    });
+    // document.querySelector("#set-video-seconds").addEventListener('change', function() {
+    //     _VIDEO.currentTime = document.querySelector("#set-video-seconds").value;
+    //
+    //     // Seeking might take a few milliseconds, so disable the dropdown and hide download link
+    //     document.querySelector("#set-video-seconds").disabled = true;
+    //     document.querySelector("#get-thumbnail").style.display = 'none';
+    // });
 
     // Seeking video to the specified duration is complete
     document.querySelector("#main-video").addEventListener('timeupdate', function() {

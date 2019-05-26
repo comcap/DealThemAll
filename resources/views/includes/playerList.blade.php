@@ -1,17 +1,17 @@
 @foreach($listPlayer as $item)
-    <div class="col-4 p-2 ">
+    <div class="col-12 col-md-4 p-2 ">
         <a href="/profile/{{$item->user_ID}}">
             <div class=" player-box" style="background-color: rgba(255,255,255,0.1); height: 200px; border-radius: 8px">
                 <div class="row px-4 pt-3">
                     <div class="col-4 pl-2 ">
-                        <img src="{{asset("/data-image/userImage/$item->user_image")}}" height="100px" width="auto" style="border-radius: 50px;">
+                        <img src="{{asset("/data-image/userImage/$item->user_image")}}" height="auto" width="100%" style="border-radius: 50px;">
                     </div>
                     <div class="col-8 p-0">
                         <div class="row pr-4">
-                            <div class="col-6 pt-2" style="height: 24px">
-                                <p class="text-white label-font-Bold" style="font-size: 16px; word-wrap: break-word;">{{$item->user_name}}</p>
+                            <div class="col-4 pr-0 col-md-6 pt-2" style="height: 24px">
+                                <p class="text-white threeDot label-font-Bold" style="font-size: 16px; word-wrap: break-word;">{{$item->user_name}}</p>
                             </div>
-                            <div class="col-6 pl-0 ">
+                            <div class="col-8 col-md-6 pl-0 ">
                                 <div class="row justify-content-end">
                                     <img src="{{asset("/data-image/three-stars.svg")}}" height="50px">
                                     <div class="pt-2">

@@ -36,6 +36,7 @@ Route::resource('/achievements','AchievementsController')->middleware('auth');
 
 Route::get('/ApiSearchTeam','TeamListController@ApiSearchTeam');
 Route::post('/followTeam','TeamManagerController@followTeam');
+Route::post('/applyTeam','TeamManagerController@applyTeam');
 
 Route::resource('/team','TeamManagerController')->middleware('auth');
 
@@ -44,7 +45,6 @@ Route::resource('/ApiRegister','RegisterSignUpController');
 Route::resource('/ApiLogin','LoginHomeController');
 Route::get('/ApiLogout','LoginHomeController@logout');
 Route::resource('/ApiCreateTeam','CreateTeamController');
-
 
 Route::apiResource('/getGameList', 'API\GetGameList');
 Route::apiResource('/getPlayerList.team', 'API\GetPlayer');
@@ -55,3 +55,5 @@ Route::apiResource('/getPlayerListRole.role', 'API\GetPlayerListRole');
 Route::apiResource('/getPlayerWithID.game', 'API\GetPlayerWithID');
 Route::apiResource('/getPlayerMember.game', 'API\GetPlayerMember');
 Route::apiResource('/updateNoti', 'API\UpdateNoti');
+
+Route::get('/apiTwitch', 'ProfileController@apiTwitch');

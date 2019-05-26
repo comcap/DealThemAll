@@ -48,7 +48,7 @@ class LoginHomeController extends Controller
             Auth::login($Users);
             return redirect("/");
         }else{
-            return redirect("/");
+            return redirect("/")->with(["hint"=>"Not found user."]);
         }
     }
 

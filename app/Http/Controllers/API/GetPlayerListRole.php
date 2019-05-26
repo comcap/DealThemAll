@@ -39,10 +39,22 @@ class GetPlayerListRole extends Controller
     public function show($id,$role = null)
     {
         if ($role == "all"){
-            $listPlayer = StatsPlayer::join('tbl_User','tbl_User.user_ID','=','tbl_stats_player.user_ID')
-                ->where('game_ID','=',$id)
-                ->orderby('tbl_stats_player.rank_total','desc')
+//            $listPlayer = StatsPlayer::join('tbl_User','tbl_User.user_ID','=','tbl_stats_player.user_ID')
+//                ->where('game_ID','=',$id)
+//                ->orderby('tbl_stats_player.rank_total','desc')
+//                ->get();
+
+            $listPlayer = StatsPlayer::select('*', 'tbl_User.user_ID')
+                ->join('tbl_User', 'tbl_User.user_ID', '=', 'tbl_stats_player.user_ID')
+                ->leftjoin('tbl_team_manager', 'tbl_team_manager.user_ID', '=', 'tbl_stats_player.user_ID')
+                ->where('tbl_stats_player.game_ID', '=', $id)
+                ->where(function ($query) {
+                    $query->whereNull('tbl_team_manager.managerID')
+                        ->orWhere('tbl_team_manager.user_verify', '=', 0);
+                })
+                ->orderby('tbl_stats_player.rank_total', 'desc')
                 ->get();
+
 
             $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_color','tbl_Role.role_name','tbl_User_Role.stateRole')
                 ->join('tbl_User','tbl_User.user_ID','=','tbl_User_Role.user_ID')
@@ -63,15 +75,32 @@ class GetPlayerListRole extends Controller
 
             return $result;
         }else{
-            $listPlayer = StatsPlayer::join('tbl_User','tbl_User.user_ID','=','tbl_stats_player.user_ID')
+//            $listPlayer = StatsPlayer::join('tbl_User','tbl_User.user_ID','=','tbl_stats_player.user_ID')
+//                ->join('tbl_User_Role','tbl_User_Role.user_ID','=','tbl_stats_player.user_ID')
+//                ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
+//                ->where('tbl_User_Role.game_ID','=',$id)
+//                ->where('tbl_stats_player.game_ID','=',$id)
+//                ->where('tbl_User_Role.role_ID','=',$role)
+//                ->where('tbl_User_Role.stateRole','>',0)
+//                ->orderby('tbl_stats_player.rank_total','desc')
+//                ->get();
+
+            $listPlayer = StatsPlayer::select('*', 'tbl_User.user_ID')
+                ->join('tbl_User', 'tbl_User.user_ID', '=', 'tbl_stats_player.user_ID')
                 ->join('tbl_User_Role','tbl_User_Role.user_ID','=','tbl_stats_player.user_ID')
                 ->join('tbl_Role','tbl_User_Role.role_ID','=','tbl_Role.role_ID')
+                ->leftjoin('tbl_team_manager', 'tbl_team_manager.user_ID', '=', 'tbl_stats_player.user_ID')
                 ->where('tbl_User_Role.game_ID','=',$id)
-                ->where('tbl_stats_player.game_ID','=',$id)
+                ->where('tbl_stats_player.game_ID', '=', $id)
                 ->where('tbl_User_Role.role_ID','=',$role)
                 ->where('tbl_User_Role.stateRole','>',0)
-                ->orderby('tbl_stats_player.rank_total','desc')
+                ->where(function ($query) {
+                    $query->whereNull('tbl_team_manager.managerID')
+                        ->orWhere('tbl_team_manager.user_verify', '=', 0);
+                })
+                ->orderby('tbl_stats_player.rank_total', 'desc')
                 ->get();
+
 
             $userRole = UserRole::select('tbl_User_Role.user_ID','tbl_Role.role_color','tbl_User_Role.role_ID','tbl_Role.role_name','tbl_Role.role_color','tbl_User_Role.stateRole')
                 ->join('tbl_User','tbl_User.user_ID','=','tbl_User_Role.user_ID')
