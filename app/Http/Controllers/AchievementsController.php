@@ -11,6 +11,9 @@ use App\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use TwitchProvider;
+
+require "../app/twitch.php";
 
 class AchievementsController extends Controller
 {
@@ -89,8 +92,17 @@ class AchievementsController extends Controller
         $getPubg = $this->getPubg(76561198013601133);
         $getOverWatch = $this->getOverWatch("Chickenfree-1154");
 
+        if (!isset($_GET['code'])) {
+
+            // Fetch the authorization URL from the provider, and store state in session
+            $authorizationUrl = $this->getConfig()->getAuthorizationUrl();
+            $_SESSION['oauth2state'] = $this->getConfig()->getState();
+
+            // Display link to start auth flow
+            return view('pages.achievements',compact('id','myUser','userProfile','statsPlayer','userLanguage','userRole','myTeam','getTeam','gameList','getPubg','getOverWatch','authorizationUrl'));
+            // Check given state against previously stored one to mitigate CSRF attack
+        }
 //        return $getOverWatch;
-        return view('pages.achievements',compact('id','myUser','userProfile','statsPlayer','userLanguage','userRole','myTeam','getTeam','gameList','getPubg','getOverWatch'));
     }
 
     /**
@@ -243,5 +255,16 @@ class AchievementsController extends Controller
         }
 
         return $PlayerAchievement;
+    }
+
+    function getConfig(){
+        $provider = new TwitchProvider([
+            'clientId'                => 'nzrv6yapvtsrkp1nv4v1287hrbxs74',     // The client ID assigned when you created your application
+            'clientSecret'            => '8iyeiavzza160ls2j7jjcnwg5w3kkr', // The client secret assigned when you created your application
+            'redirectUri'             => 'https://dealthemall.com/apiTwitch',  // Your redirect URL you specified when you created your application
+            'scopes'                  => ['user:read:email']  // The scopes you would like to request
+        ]);
+
+        return $provider;
     }
 }
