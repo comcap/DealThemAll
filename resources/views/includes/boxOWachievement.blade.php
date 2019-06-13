@@ -1,7 +1,7 @@
 <div class="col-4 mt-2 h-auto">
-    <div class="row p-2">
+    <div class="row p-2 h-100">
         <div class="col-12"style="background-color: rgba(255,255,255,0.1); height: auto; border-radius: 8px">
-            <div class="row p-4">
+            <div class="row p-4 align-content-center h-100">
                 <div class="col-3">
                     <div class="row">
                         <img src="{{$item['thumbnail']}}" width="60px" height="60px">

@@ -446,11 +446,11 @@
                 </div>
             </div>
 
-            <div class="col-12 col-md-9 px-0 pl-md-4" style="padding-bottom: 80px">
-                <div class="row mx-0 mx-md-3">
+            <div class="col-12 col-md-9 px-0" style="padding-bottom: 80px">
+                <div class="row mx-0 ml-md-3">
                     @if(count($feeds) > 0)
                         @foreach($feeds as $key => $item)
-                            <div class="col-12 mb-3">
+                            <div class="col-12 px-0 mb-3">
                                 <div class="row mx-0" style="height: auto; border-radius: 8px;background-color: rgba(255,255,255,0.1);">
                                     <div class="col-12 p-md-4 p-3">
                                         <div class="row mx-0 align-items-center">

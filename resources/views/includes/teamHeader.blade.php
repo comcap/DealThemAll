@@ -1,4 +1,4 @@
-<div class="row mx-0 mx-md">
+<div class="row mx-0">
     <div class="col-12 mt-2">
         <div class="row p-4" style="background-color: rgba(255,255,255,0.1);border-radius: 8px">
             <div class="col-12 d-none d-md-inline px-4" style="height: auto">
